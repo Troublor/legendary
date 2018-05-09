@@ -1,0 +1,989 @@
+<svg id="kity_svg_6" xmlns="http://www.w3.org/2000/svg" version="1.1" width="3118" height="2022"
+     style="background: rgb(251, 251, 251); visibility: visible;" viewBox="0 0 3118 2022">
+    <defs id="kity_defs_7">
+        <linearGradient id="kity_linearGradient_17" x1="0" y1="0" x2="0" y2="1">
+            <stop id="kity_stop_18" offset="0" stop-color="rgb(255, 255, 255)"></stop>
+            <stop id="kity_stop_19" offset="1" stop-color="rgb(204, 204, 204)"></stop>
+        </linearGradient>
+        <marker id="kity_marker_2" orient="auto" refX="6" refY="0" viewBox="-7 -7 14 14" markerWidth="7"
+                markerHeight="7" markerUnits="userSpaceOnUse">
+            <path id="kity_path_3" fill="rgb(115, 161, 191)" stroke="none" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path>
+        </marker>
+    </defs>
+    <g id="kity_g_8">
+        <g id="minder1" text-rendering="geometricPrecision">
+            <g id="minder_connect_group1">
+                <path id="kity_path_31" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M101.5,1089.5h70L221.5,1039.5"></path>
+                <path id="kity_path_33" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M258.554,1013.5L1188.5,83.5"></path>
+                <path id="kity_path_35" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1208.5,94.5V135.5L1228.5,135.5"></path>
+                <path id="kity_path_37" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1208.5,94.5V187.5L1228.5,187.5"></path>
+                <path id="kity_path_39" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1208.5,94.5V239.5L1228.5,239.5"></path>
+                <path id="kity_path_41" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1208.5,94.5V291.5L1228.5,291.5"></path>
+                <path id="kity_path_43" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M258.554,1013.5L928.5,343.5"></path>
+                <path id="kity_path_45" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M948.5,354.5V395.5L968.5,395.5"></path>
+                <path id="kity_path_47" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M948.5,354.5V447.5L968.5,447.5"></path>
+                <path id="kity_path_49" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M948.5,354.5V499.5L968.5,499.5"></path>
+                <path id="kity_path_51" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M948.5,354.5V551.5L968.5,551.5"></path>
+                <path id="kity_path_53" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M258.554,1013.5L668.5,603.5"></path>
+                <path id="kity_path_55" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M688.5,614.5V655.5L708.5,655.5"></path>
+                <path id="kity_path_57" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M688.5,614.5V707.5L708.5,707.5"></path>
+                <path id="kity_path_59" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M688.5,614.5V759.5L708.5,759.5"></path>
+                <path id="kity_path_61" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M688.5,614.5V863.5L708.5,863.5"></path>
+                <path id="kity_path_63" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M728.5,874.5V915.5L748.5,915.5"></path>
+                <path id="kity_path_65" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M728.5,874.5V967.5L748.5,967.5"></path>
+                <path id="kity_path_67" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M101.5,1089.5h90L241.5,1139.5"></path>
+                <path id="kity_path_69" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M278.93600000000004,1165.5L1000.5,1887.5"></path>
+                <path id="kity_path_71" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M278.93600000000004,1165.5L1104.5,1991.5"></path>
+                <path id="kity_path_73" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M101.5,1089.5h1508L1659.5,1039.5"></path>
+                <path id="kity_path_75" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1701.52,1013.5L2683.5,31.5"></path>
+                <path id="kity_path_77" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1701.52,1013.5L2423.5,291.5"></path>
+                <path id="kity_path_231" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M728.5,770.5V811.5L748.5,811.5"></path>
+                <path id="kity_path_239" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1263.5L1040.5,1263.5"></path>
+                <path id="kity_path_247" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1211.5L1040.5,1211.5"></path>
+                <path id="kity_path_255" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1315.5L1040.5,1315.5"></path>
+                <path id="kity_path_303" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1523.5L1040.5,1523.5"></path>
+                <path id="kity_path_311" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1783.5L1040.5,1783.5"></path>
+                <path id="kity_path_319" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1060.5,1512.5V1367.5L1080.5,1367.5"></path>
+                <path id="kity_path_327" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1020.5,1876.5V1835.5L1040.5,1835.5"></path>
+                <path id="kity_path_335" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1060.5,1512.5V1419.5L1080.5,1419.5"></path>
+                <path id="kity_path_343" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1060.5,1512.5V1471.5L1080.5,1471.5"></path>
+                <path id="kity_path_351" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1060.5,1772.5V1575.5L1080.5,1575.5"></path>
+                <path id="kity_path_359" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1060.5,1772.5V1731.5L1080.5,1731.5"></path>
+                <path id="kity_path_367" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1100.5,1720.5V1627.5L1120.5,1627.5"></path>
+                <path id="kity_path_375" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1100.5,1720.5V1679.5L1120.5,1679.5"></path>
+                <path id="kity_path_383" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M1124.5,1980.5V1939.5L1144.5,1939.5"></path>
+                <path id="kity_path_391" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2443.5,302.5V343.5L2463.5,343.5"></path>
+                <path id="kity_path_399" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,354.5V395.5L2503.5,395.5"></path>
+                <path id="kity_path_415" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2443.5,302.5V551.5L2463.5,551.5"></path>
+                <path id="kity_path_423" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,562.5V603.5L2503.5,603.5"></path>
+                <path id="kity_path_431" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,562.5V655.5L2503.5,655.5"></path>
+                <path id="kity_path_439" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,562.5V707.5L2503.5,707.5"></path>
+                <path id="kity_path_447" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2443.5,302.5V811.5L2463.5,811.5"></path>
+                <path id="kity_path_455" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,822.5V863.5L2503.5,863.5"></path>
+                <path id="kity_path_463" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,822.5V915.5L2503.5,915.5"></path>
+                <path id="kity_path_471" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,822.5V967.5L2503.5,967.5"></path>
+                <path id="kity_path_479" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,354.5V447.5L2503.5,447.5"></path>
+                <path id="kity_path_487" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,562.5V759.5L2503.5,759.5"></path>
+                <path id="kity_path_495" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2483.5,354.5V499.5L2503.5,499.5"></path>
+                <path id="kity_path_503" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2703.5,42.5V83.5L2723.5,83.5"></path>
+                <path id="kity_path_511" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2703.5,42.5V135.5L2723.5,135.5"></path>
+                <path id="kity_path_535" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2703.5,42.5V239.5L2723.5,239.5"></path>
+                <path id="kity_path_543" fill="none" stroke="rgb(115, 161, 191)" stroke-width="1"
+                      d="M2703.5,42.5V187.5L2723.5,187.5"></path>
+            </g>
+            <g id="minder_node1">
+                <path id="node_outline1" fill="rgb(115, 161, 191)" stroke="rgb(115, 161, 191)"
+                      d="M25.5,1069.5h71a5,5,0,0,1,5,5v30a5,5,0,0,1,-5,5h-71a5,5,0,0,1,-5,-5v-30a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text1" fill="white">
+                    <text id="kity_text_22" text-rendering="inherit" font-size="16" dy=".8em" y="1079.0999999046326"
+                          x="44.5">需求
+                    </text>
+                </g>
+            </g>
+            <g id="kity_g_14" display="none">
+                <path id="kity_path_15" fill="none" stroke="none" d="M44.5,1089.5h0v0h0z"></path>
+                <path id="kity_path_16" fill="none" stroke="none"></path>
+            </g>
+            <g id="minder_node2">
+                <g id="node_expander18" style="cursor: pointer;">
+                    <path id="kity_path_202" fill="white" stroke="gray"
+                          d="M222.5502529144287,1044.4497470855713A6,6,0,1,1,210.5502529144287,1044.4497470855713A6,6,0,1,1,222.5502529144287,1044.4497470855713"></path>
+                    <path id="kity_path_203" fill="none" stroke="gray"
+                          d="M212.0502529144287,1044.4497470855713L221.0502529144287,1044.4497470855713"></path>
+                </g>
+                <path id="node_outline19" fill="rgb(238, 243, 246)" stroke="rgb(115, 161, 191)"
+                      d="M224.5,1013.5h91a3,3,0,0,1,3,3v20a3,3,0,0,1,-3,3h-91a3,3,0,0,1,-3,-3v-20a3,3,0,0,1,3,-3z"
+                      stroke-width="1"></path>
+                <g id="node_text19" fill="black">
+                    <text id="kity_text_113" text-rendering="inherit" font-size="14" dy=".8em" y="1017.4000000953674"
+                          x="241.5">编辑功能
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node3">
+                <g id="node_expander5" style="cursor: pointer;">
+                    <path id="kity_path_163" fill="white" stroke="gray"
+                          d="M1188.5,83.5A6,6,0,1,1,1176.5,83.5A6,6,0,1,1,1188.5,83.5"></path>
+                    <path id="kity_path_164" fill="none" stroke="gray" d="M1178,83.5L1187,83.5"></path>
+                </g>
+                <path id="node_outline6" fill="none" stroke="none"
+                      d="M1193.5,72.5h84a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-84a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text6" fill="black">
+                    <text id="kity_text_87" text-rendering="inherit" font-size="12" dy=".8em" y="75.70000004768372"
+                          x="1198.5">项目文件管理
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node4">
+                <g id="node_expander1" style="cursor: pointer;" display="none">
+                    <path id="kity_path_151" fill="white" stroke="gray"
+                          d="M1228.5,135.5A6,6,0,1,1,1216.5,135.5A6,6,0,1,1,1228.5,135.5"></path>
+                    <path id="kity_path_152" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline2" fill="none" stroke="none"
+                      d="M1233.5,124.5h381a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-381a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+                <g id="node_text2" fill="black">
+                    <text id="kity_text_79" text-rendering="inherit" font-size="12" dy=".8em" y="127.70000004768372"
+                          x="1238.5">1.支持项目工程文件，使用规范结构对项目的文件结构进行保存及管理
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node5">
+                <g id="node_expander2" style="cursor: pointer;" display="none">
+                    <path id="kity_path_154" fill="white" stroke="gray"
+                          d="M1228.5,187.5A6,6,0,1,1,1216.5,187.5A6,6,0,1,1,1228.5,187.5"></path>
+                    <path id="kity_path_155" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline3" fill="none" stroke="none"
+                      d="M1233.5,176.5h202a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-202a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+                <g id="node_text3" fill="black">
+                    <text id="kity_text_81" text-rendering="inherit" font-size="12" dy=".8em" y="179.70000004768372"
+                          x="1238.5">2 项目代码文件的添加，删除，新建
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node6">
+                <g id="node_expander3" style="cursor: pointer;" display="none">
+                    <path id="kity_path_157" fill="white" stroke="gray"
+                          d="M1228.5,239.5A6,6,0,1,1,1216.5,239.5A6,6,0,1,1,1228.5,239.5"></path>
+                    <path id="kity_path_158" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline4" fill="none" stroke="none"
+                      d="M1233.5,228.5h370a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-370a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+                <g id="node_text4" fill="black">
+                    <text id="kity_text_83" text-rendering="inherit" font-size="12" dy=".8em" y="231.70000004768372"
+                          x="1238.5">3 记录项目代码文件的编辑状态，项目编译运行时虚拟机的环境设定
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node7">
+                <g id="node_expander4" style="cursor: pointer;" display="none">
+                    <path id="kity_path_160" fill="white" stroke="gray"
+                          d="M1228.5,291.5A6,6,0,1,1,1216.5,291.5A6,6,0,1,1,1228.5,291.5"></path>
+                    <path id="kity_path_161" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline5" fill="none" stroke="none"
+                      d="M1233.5,280.5h252a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-252a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+                <g id="node_text5" fill="black">
+                    <text id="kity_text_85" text-rendering="inherit" font-size="12" dy=".8em" y="283.7000000476837"
+                          x="1238.5">4 代码进行debug时对加入的断点信息的保存
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node8">
+                <g id="node_expander10" style="cursor: pointer;">
+                    <path id="kity_path_178" fill="white" stroke="gray"
+                          d="M928.5,343.5A6,6,0,1,1,916.5,343.5A6,6,0,1,1,928.5,343.5"></path>
+                    <path id="kity_path_179" fill="none" stroke="gray" d="M918,343.5L927,343.5"></path>
+                </g>
+                <path id="node_outline11" fill="none" stroke="none"
+                      d="M933.5,332.5h84a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-84a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text11" fill="black">
+                    <text id="kity_text_97" text-rendering="inherit" font-size="12" dy=".8em" y="335.7000000476837"
+                          x="938.5">文本编辑处理
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node9">
+                <g id="node_expander6" style="cursor: pointer;" display="none">
+                    <path id="kity_path_166" fill="white" stroke="gray"
+                          d="M968.5,395.5A6,6,0,1,1,956.5,395.5A6,6,0,1,1,968.5,395.5"></path>
+                    <path id="kity_path_167" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline7" fill="none" stroke="none"
+                      d="M973.5,384.5h263a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-263a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text7" fill="black">
+                    <text id="kity_text_89" text-rendering="inherit" font-size="12" dy=".8em" y="387.7000000476837"
+                          x="978.5">5 基本的文件编辑功能 保存 新建 另存为 重命名
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node10">
+                <g id="node_expander7" style="cursor: pointer;" display="none">
+                    <path id="kity_path_169" fill="white" stroke="gray"
+                          d="M968.5,447.5A6,6,0,1,1,956.5,447.5A6,6,0,1,1,968.5,447.5"></path>
+                    <path id="kity_path_170" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline8" fill="none" stroke="none"
+                      d="M973.5,436.5h169a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-169a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text8" fill="black">
+                    <text id="kity_text_91" text-rendering="inherit" font-size="12" dy=".8em" y="439.7000000476837"
+                          x="978.5">6 基于正则表达式的查找 替换
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node11">
+                <g id="node_expander8" style="cursor: pointer;" display="none">
+                    <path id="kity_path_172" fill="white" stroke="gray"
+                          d="M968.5,499.5A6,6,0,1,1,956.5,499.5A6,6,0,1,1,968.5,499.5"></path>
+                    <path id="kity_path_173" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline9" fill="none" stroke="none"
+                      d="M973.5,488.5h173a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-173a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text9" fill="black">
+                    <text id="kity_text_93" text-rendering="inherit" font-size="12" dy=".8em" y="491.7000000476837"
+                          x="978.5">7 维护编辑状态 支持撤销 重做
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node12">
+                <g id="node_expander9" style="cursor: pointer;" display="none">
+                    <path id="kity_path_175" fill="white" stroke="gray"
+                          d="M968.5,551.5A6,6,0,1,1,956.5,551.5A6,6,0,1,1,968.5,551.5"></path>
+                    <path id="kity_path_176" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline10" fill="none" stroke="none"
+                      d="M973.5,540.5h539a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-539a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text10" fill="black">
+                    <text id="kity_text_95" text-rendering="inherit" font-size="12" dy=".8em" y="543.7000000476837"
+                          x="978.5">8 对整个代码文件维护一个结构化的信息，即行、列号管理 （debug 编译时便于指定到具体位置）*
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node13">
+                <g id="node_expander17" style="cursor: pointer;">
+                    <path id="kity_path_199" fill="white" stroke="gray"
+                          d="M668.5,603.5A6,6,0,1,1,656.5,603.5A6,6,0,1,1,668.5,603.5"></path>
+                    <path id="kity_path_200" fill="none" stroke="gray" d="M658,603.5L667,603.5"></path>
+                </g>
+                <path id="node_outline18" fill="none" stroke="none"
+                      d="M673.5,592.5h84a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-84a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text18" fill="black">
+                    <text id="kity_text_111" text-rendering="inherit" font-size="12" dy=".8em" y="595.7000000476837"
+                          x="678.5">代码编辑处理
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node14">
+                <g id="node_expander11" style="cursor: pointer;" display="none">
+                    <path id="kity_path_181" fill="white" stroke="gray"
+                          d="M708.5,655.5A6,6,0,1,1,696.5,655.5A6,6,0,1,1,708.5,655.5"></path>
+                    <path id="kity_path_182" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline12" fill="none" stroke="none"
+                      d="M713.5,644.5h224a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-224a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text12" fill="black">
+                    <text id="kity_text_99" text-rendering="inherit" font-size="12" dy=".8em" y="647.7000000476837"
+                          x="718.5">9 根据语法的间断 维护一个 token 列表&#xa0;
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node15">
+                <g id="node_expander12" style="cursor: pointer;" display="none">
+                    <path id="kity_path_184" fill="white" stroke="gray"
+                          d="M708.5,707.5A6,6,0,1,1,696.5,707.5A6,6,0,1,1,708.5,707.5"></path>
+                    <path id="kity_path_185" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline13" fill="none" stroke="none"
+                      d="M713.5,696.5h332a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-332a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text13" fill="black">
+                    <text id="kity_text_101" text-rendering="inherit" font-size="12" dy=".8em" y="699.7000000476837"
+                          x="718.5">10 基于按类别进行匹配 将token通过改颜色的方式语法高亮&#xa0;
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node16">
+                <g id="node_expander13" style="cursor: pointer;">
+                    <path id="kity_path_187" fill="white" stroke="gray"
+                          d="M708.5,759.5A6,6,0,1,1,696.5,759.5A6,6,0,1,1,708.5,759.5"></path>
+                    <path id="kity_path_188" fill="none" stroke="gray" d="M698,759.5L707,759.5"></path>
+                </g>
+                <path id="node_outline14" fill="none" stroke="none"
+                      d="M713.5,748.5h425a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-425a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text14" fill="black">
+                    <text id="kity_text_103" text-rendering="inherit" font-size="12" dy=".8em" y="751.7000000476837"
+                          x="718.5">11 根据用户输入以及预留关键字 对尚未输入完全的token 生成补全候选列表 *
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node17">
+                <g id="node_expander16" style="cursor: pointer;">
+                    <path id="kity_path_196" fill="white" stroke="gray"
+                          d="M708.5,863.5A6,6,0,1,1,696.5,863.5A6,6,0,1,1,708.5,863.5"></path>
+                    <path id="kity_path_197" fill="none" stroke="gray" d="M698,863.5L707,863.5"></path>
+                </g>
+                <path id="node_outline17" fill="none" stroke="none"
+                      d="M713.5,852.5h296a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-296a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text17" fill="black">
+                    <text id="kity_text_109" text-rendering="inherit" font-size="12" dy=".8em" y="855.7000000476837"
+                          x="718.5">12 根据简单的语义规则 进行短上下文的语法错误标注
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node18">
+                <g id="node_expander14" style="cursor: pointer;" display="none">
+                    <path id="kity_path_190" fill="white" stroke="gray"
+                          d="M748.5,915.5A6,6,0,1,1,736.5,915.5A6,6,0,1,1,748.5,915.5"></path>
+                    <path id="kity_path_191" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline15" fill="none" stroke="none"
+                      d="M753.5,904.5h260a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-260a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text15" fill="black">
+                    <text id="kity_text_105" text-rendering="inherit" font-size="12" dy=".8em" y="907.7000000476837"
+                          x="758.5">13 根据语法错误提出具体的错误原因 修改建议
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node19">
+                <g id="node_expander15" style="cursor: pointer;" display="none">
+                    <path id="kity_path_193" fill="white" stroke="gray"
+                          d="M748.5,967.5A6,6,0,1,1,736.5,967.5A6,6,0,1,1,748.5,967.5"></path>
+                    <path id="kity_path_194" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline16" fill="none" stroke="none"
+                      d="M753.5,956.5h112a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-112a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text16" fill="black">
+                    <text id="kity_text_107" text-rendering="inherit" font-size="12" dy=".8em" y="959.7000000476837"
+                          x="758.5">14 扩大判别的距离
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node20">
+                <g id="node_expander21" style="cursor: pointer;">
+                    <path id="kity_path_211" fill="white" stroke="gray"
+                          d="M242.5502529144287,1134.5502529144287A6,6,0,1,1,230.5502529144287,1134.5502529144287A6,6,0,1,1,242.5502529144287,1134.5502529144287"></path>
+                    <path id="kity_path_212" fill="none" stroke="gray"
+                          d="M232.0502529144287,1134.5502529144287L241.0502529144287,1134.5502529144287"></path>
+                </g>
+                <path id="node_outline22" fill="rgb(238, 243, 246)" stroke="rgb(115, 161, 191)"
+                      d="M244.5,1139.5h92a3,3,0,0,1,3,3v20a3,3,0,0,1,-3,3h-92a3,3,0,0,1,-3,-3v-20a3,3,0,0,1,3,-3z"
+                      stroke-width="1"></path>
+                <g id="node_text22" fill="black">
+                    <text id="kity_text_119" text-rendering="inherit" font-size="14" dy=".8em" y="1143.4000000953674"
+                          x="261.5">运行调试
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node21">
+                <g id="node_expander19" style="cursor: pointer;">
+                    <path id="kity_path_205" fill="white" stroke="gray"
+                          d="M1000.5,1887.5A6,6,0,1,1,988.5,1887.5A6,6,0,1,1,1000.5,1887.5"></path>
+                    <path id="kity_path_206" fill="none" stroke="gray" d="M990,1887.5L999,1887.5"></path>
+                </g>
+                <path id="node_outline20" fill="none" stroke="none"
+                      d="M1005.5,1876.5h119a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-119a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text20" fill="black">
+                    <text id="kity_text_115" text-rendering="inherit" font-size="12" dy=".8em" y="1879.7000000476837"
+                          x="1010.5">与虚拟机连接、交互
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node22">
+                <g id="node_expander20" style="cursor: pointer;">
+                    <path id="kity_path_208" fill="white" stroke="gray"
+                          d="M1104.5,1991.5A6,6,0,1,1,1092.5,1991.5A6,6,0,1,1,1104.5,1991.5"></path>
+                    <path id="kity_path_209" fill="none" stroke="gray" d="M1094,1991.5L1103,1991.5"></path>
+                </g>
+                <path id="node_outline21" fill="none" stroke="none"
+                      d="M1109.5,1980.5h124a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-124a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text21" fill="black">
+                    <text id="kity_text_117" text-rendering="inherit" font-size="12" dy=".8em" y="1983.7000000476837"
+                          x="1114.5">解析输出 格式化存储
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node23">
+                <g id="node_expander24" style="cursor: pointer;">
+                    <path id="kity_path_220" fill="white" stroke="gray"
+                          d="M1660.5502529144287,1044.4497470855713A6,6,0,1,1,1648.5502529144287,1044.4497470855713A6,6,0,1,1,1660.5502529144287,1044.4497470855713"></path>
+                    <path id="kity_path_221" fill="none" stroke="gray"
+                          d="M1650.0502529144287,1044.4497470855713L1659.0502529144287,1044.4497470855713"></path>
+                </g>
+                <path id="node_outline25" fill="rgb(238, 243, 246)" stroke="rgb(115, 161, 191)"
+                      d="M1662.5,1013.5h104a3,3,0,0,1,3,3v20a3,3,0,0,1,-3,3h-104a3,3,0,0,1,-3,-3v-20a3,3,0,0,1,3,-3z"
+                      stroke-width="1"></path>
+                <g id="node_text25" fill="black">
+                    <text id="kity_text_125" text-rendering="inherit" font-size="14" dy=".8em" y="1017.4000000953674"
+                          x="1679.5">前端、交互
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node24">
+                <g id="node_expander22" style="cursor: pointer;">
+                    <path id="kity_path_214" fill="white" stroke="gray"
+                          d="M2683.5,31.5A6,6,0,1,1,2671.5,31.5A6,6,0,1,1,2683.5,31.5"></path>
+                    <path id="kity_path_215" fill="none" stroke="gray" d="M2673,31.5L2682,31.5"></path>
+                </g>
+                <path id="node_outline23" fill="none" stroke="none"
+                      d="M2688.5,20.5h60a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-60a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text23" fill="black">
+                    <text id="kity_text_121" text-rendering="inherit" font-size="12" dy=".8em" y="23.700000047683716"
+                          x="2693.5">交互逻辑
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node25">
+                <g id="node_expander23" style="cursor: pointer;">
+                    <path id="kity_path_217" fill="white" stroke="gray"
+                          d="M2423.5,291.5A6,6,0,1,1,2411.5,291.5A6,6,0,1,1,2423.5,291.5"></path>
+                    <path id="kity_path_218" fill="none" stroke="gray" d="M2413,291.5L2422,291.5"></path>
+                </g>
+                <path id="node_outline24" fill="none" stroke="none"
+                      d="M2428.5,280.5h35a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-35a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text24" fill="black">
+                    <text id="kity_text_123" text-rendering="inherit" font-size="12" dy=".8em" y="283.7000000476837"
+                          x="2433.5">界面
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node27">
+                <g id="node_expander26" style="cursor: pointer;" display="none">
+                    <path id="kity_path_236" fill="white" stroke="gray"
+                          d="M748.5,811.5A6,6,0,1,1,736.5,811.5A6,6,0,1,1,748.5,811.5"></path>
+                    <path id="kity_path_237" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline27" fill="none" stroke="none"
+                      d="M753.5,800.5h437a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-437a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text27" fill="black">
+                    <text id="kity_text_233" text-rendering="inherit" font-size="12" dy=".8em" y="803.7000000476837"
+                          x="758.5">15 对每个候选项的种类进行标注 并且能根据上下文语义正确性对候选进行排序 *
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node28">
+                <g id="node_expander27" style="cursor: pointer;" display="none">
+                    <path id="kity_path_244" fill="white" stroke="gray"
+                          d="M1040.5,1263.5A6,6,0,1,1,1028.5,1263.5A6,6,0,1,1,1040.5,1263.5"></path>
+                    <path id="kity_path_245" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline28" fill="none" stroke="none"
+                      d="M1045.5,1252.5h271a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-271a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text28" fill="black">
+                    <text id="kity_text_241" text-rendering="inherit" font-size="12" dy=".8em" y="1255.7000000476837"
+                          x="1050.5">17&#xa0; 向系统其它模块提供封装良好的输入输出接口
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node29">
+                <g id="node_expander28" style="cursor: pointer;" display="none">
+                    <path id="kity_path_252" fill="white" stroke="gray"
+                          d="M1040.5,1211.5A6,6,0,1,1,1028.5,1211.5A6,6,0,1,1,1040.5,1211.5"></path>
+                    <path id="kity_path_253" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline29" fill="none" stroke="none"
+                      d="M1045.5,1200.5h500a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-500a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text29" fill="black">
+                    <text id="kity_text_249" text-rendering="inherit" font-size="12" dy=".8em" y="1203.7000000476837"
+                          x="1050.5">16 连接qemu dosbox等虚拟环境&#xa0;基于进程pipe对虚拟环境的输出进行实时监听 输入的传递
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node30">
+                <g id="node_expander29" style="cursor: pointer;" display="none">
+                    <path id="kity_path_260" fill="white" stroke="gray"
+                          d="M1040.5,1315.5A6,6,0,1,1,1028.5,1315.5A6,6,0,1,1,1040.5,1315.5"></path>
+                    <path id="kity_path_261" fill="none" stroke="gray" d="M1030,1315.5L1039,1315.5"></path>
+                </g>
+                <path id="node_outline30" fill="none" stroke="none"
+                      d="M1045.5,1304.5h354a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-354a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text30" fill="black">
+                    <text id="kity_text_257" text-rendering="inherit" font-size="12" dy=".8em" y="1307.7000000476837"
+                          x="1050.5">18 根据项目文件结构 配置信息 在虚拟机环境进行编译 链接 运行
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node36">
+                <g id="node_expander35" style="cursor: pointer;">
+                    <path id="kity_path_308" fill="white" stroke="gray"
+                          d="M1040.5,1523.5A6,6,0,1,1,1028.5,1523.5A6,6,0,1,1,1040.5,1523.5"></path>
+                    <path id="kity_path_309" fill="none" stroke="gray" d="M1030,1523.5L1039,1523.5"></path>
+                </g>
+                <path id="node_outline36" fill="none" stroke="none"
+                      d="M1045.5,1512.5h427a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-427a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text36" fill="black">
+                    <text id="kity_text_305" text-rendering="inherit" font-size="12" dy=".8em" y="1515.7000000476837"
+                          x="1050.5">19 与汇编debug程序的交互，将用户的界面交互操作转换为对于的debug指令
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node37">
+                <g id="node_expander36" style="cursor: pointer;">
+                    <path id="kity_path_316" fill="white" stroke="gray"
+                          d="M1040.5,1783.5A6,6,0,1,1,1028.5,1783.5A6,6,0,1,1,1040.5,1783.5"></path>
+                    <path id="kity_path_317" fill="none" stroke="gray" d="M1030,1783.5L1039,1783.5"></path>
+                </g>
+                <path id="node_outline37" fill="none" stroke="none"
+                      d="M1045.5,1772.5h433a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-433a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text37" fill="black">
+                    <text id="kity_text_313" text-rendering="inherit" font-size="12" dy=".8em" y="1775.7000000476837"
+                          x="1050.5">20 通过封装与debug交互操作 实时更新、显示机器运行时的寄存器 内存的数据
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node38">
+                <g id="node_expander37" style="cursor: pointer;" display="none">
+                    <path id="kity_path_324" fill="white" stroke="gray"
+                          d="M1080.5,1367.5A6,6,0,1,1,1068.5,1367.5A6,6,0,1,1,1080.5,1367.5"></path>
+                    <path id="kity_path_325" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline38" fill="none" stroke="none"
+                      d="M1085.5,1356.5h246a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-246a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text38" fill="black">
+                    <text id="kity_text_321" text-rendering="inherit" font-size="12" dy=".8em" y="1359.7000000476837"
+                          x="1090.5">19.1 将用户添加的断点 添加到debug程序中
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node39" opacity="1">
+                <g id="node_expander38" style="cursor: pointer;" display="none">
+                    <path id="kity_path_332" fill="white" stroke="gray"
+                          d="M1040.5,1835.5A6,6,0,1,1,1028.5,1835.5A6,6,0,1,1,1040.5,1835.5"></path>
+                    <path id="kity_path_333" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline39" fill="none" stroke="none"
+                      d="M1045.5,1824.5h535a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-535a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text39" fill="black">
+                    <text id="kity_text_329" text-rendering="inherit" font-size="12" dy=".8em" y="1827.7000000476837"
+                          x="1050.5">21 根据装载后的程序情况 将内存中的指令位置与编辑器内代码的在文件中的行列位置建立对应关系
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node40">
+                <g id="node_expander39" style="cursor: pointer;" display="none">
+                    <path id="kity_path_340" fill="white" stroke="gray"
+                          d="M1080.5,1419.5A6,6,0,1,1,1068.5,1419.5A6,6,0,1,1,1080.5,1419.5"></path>
+                    <path id="kity_path_341" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline40" fill="none" stroke="none"
+                      d="M1085.5,1408.5h234a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-234a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text40" fill="black">
+                    <text id="kity_text_337" text-rendering="inherit" font-size="12" dy=".8em" y="1411.7000000476837"
+                          x="1090.5">19.2 接受用户的单步执行 继续暂停等操作
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node41">
+                <g id="node_expander40" style="cursor: pointer;" display="none">
+                    <path id="kity_path_348" fill="white" stroke="gray"
+                          d="M1080.5,1471.5A6,6,0,1,1,1068.5,1471.5A6,6,0,1,1,1080.5,1471.5"></path>
+                    <path id="kity_path_349" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline41" fill="none" stroke="none"
+                      d="M1085.5,1460.5h302a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-302a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text41" fill="black">
+                    <text id="kity_text_345" text-rendering="inherit" font-size="12" dy=".8em" y="1463.7000000476837"
+                          x="1090.5">19.3 将当前执行的指令与代码文件中具体行数进行对应
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node42">
+                <g id="node_expander41" style="cursor: pointer;" display="none">
+                    <path id="kity_path_356" fill="white" stroke="gray"
+                          d="M1080.5,1575.5A6,6,0,1,1,1068.5,1575.5A6,6,0,1,1,1080.5,1575.5"></path>
+                    <path id="kity_path_357" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline42" fill="none" stroke="none"
+                      d="M1085.5,1564.5h255a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-255a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text42" fill="black">
+                    <text id="kity_text_353" text-rendering="inherit" font-size="12" dy=".8em" y="1567.7000000476837"
+                          x="1090.5">20.1 根据运行状态实时获取机器内部数据状态
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node43">
+                <g id="node_expander42" style="cursor: pointer;">
+                    <path id="kity_path_364" fill="white" stroke="gray"
+                          d="M1080.5,1731.5A6,6,0,1,1,1068.5,1731.5A6,6,0,1,1,1080.5,1731.5"></path>
+                    <path id="kity_path_365" fill="none" stroke="gray" d="M1070,1731.5L1079,1731.5"></path>
+                </g>
+                <path id="node_outline43" fill="none" stroke="none"
+                      d="M1085.5,1720.5h222a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-222a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text43" fill="black">
+                    <text id="kity_text_361" text-rendering="inherit" font-size="12" dy=".8em" y="1723.7000000476837"
+                          x="1090.5">20.2 根据用户指定 显示内存区间的信息
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node44">
+                <g id="node_expander43" style="cursor: pointer;" display="none">
+                    <path id="kity_path_372" fill="white" stroke="gray"
+                          d="M1120.5,1627.5A6,6,0,1,1,1108.5,1627.5A6,6,0,1,1,1120.5,1627.5"></path>
+                    <path id="kity_path_373" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline44" fill="none" stroke="none"
+                      d="M1125.5,1616.5h132a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-132a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text44" fill="black">
+                    <text id="kity_text_369" text-rendering="inherit" font-size="12" dy=".8em" y="1619.7000000476837"
+                          x="1130.5">20.2.1 根据指针寄存器
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node45">
+                <g id="node_expander44" style="cursor: pointer;" display="none">
+                    <path id="kity_path_380" fill="white" stroke="gray"
+                          d="M1120.5,1679.5A6,6,0,1,1,1108.5,1679.5A6,6,0,1,1,1120.5,1679.5"></path>
+                    <path id="kity_path_381" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline45" fill="none" stroke="none"
+                      d="M1125.5,1668.5h120a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-120a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text45" fill="black">
+                    <text id="kity_text_377" text-rendering="inherit" font-size="12" dy=".8em" y="1671.7000000476837"
+                          x="1130.5">20.2.2 用户输入数字
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node46" opacity="1">
+                <g id="node_expander45" style="cursor: pointer;" display="none">
+                    <path id="kity_path_388" fill="white" stroke="gray"
+                          d="M1144.5,1939.5A6,6,0,1,1,1132.5,1939.5A6,6,0,1,1,1144.5,1939.5"></path>
+                    <path id="kity_path_389" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline46" fill="none" stroke="none"
+                      d="M1149.5,1928.5h338a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-338a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text46" fill="black">
+                    <text id="kity_text_385" text-rendering="inherit" font-size="12" dy=".8em" y="1931.7000000476837"
+                          x="1154.5">27 根据输入的debug指令 解析debug的数据输出 结构化管理
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node47">
+                <g id="node_expander46" style="cursor: pointer;">
+                    <path id="kity_path_396" fill="white" stroke="gray"
+                          d="M2463.5,343.5A6,6,0,1,1,2451.5,343.5A6,6,0,1,1,2463.5,343.5"></path>
+                    <path id="kity_path_397" fill="none" stroke="gray" d="M2453,343.5L2462,343.5"></path>
+                </g>
+                <path id="node_outline47" fill="none" stroke="none"
+                      d="M2468.5,332.5h128a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-128a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text47" fill="black">
+                    <text id="kity_text_393" text-rendering="inherit" font-size="12" dy=".8em" y="335.7000000476837"
+                          x="2473.5">22 项目文件管理 编辑
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node48">
+                <g id="node_expander47" style="cursor: pointer;" display="none">
+                    <path id="kity_path_404" fill="white" stroke="gray"
+                          d="M2503.5,395.5A6,6,0,1,1,2491.5,395.5A6,6,0,1,1,2503.5,395.5"></path>
+                    <path id="kity_path_405" fill="none" stroke="gray" d="M2493,395.5L2502,395.5"></path>
+                </g>
+                <path id="node_outline48" fill="none" stroke="none"
+                      d="M2508.5,384.5h335a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-335a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text48" fill="black">
+                    <text id="kity_text_401" text-rendering="inherit" font-size="12" dy=".8em" y="387.7000000476837"
+                          x="2513.5">22.1 新建 另存为 保存 删除等 若干menu dialog button。。
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node50">
+                <g id="node_expander49" style="cursor: pointer;">
+                    <path id="kity_path_420" fill="white" stroke="gray"
+                          d="M2463.5,551.5A6,6,0,1,1,2451.5,551.5A6,6,0,1,1,2463.5,551.5"></path>
+                    <path id="kity_path_421" fill="none" stroke="gray" d="M2453,551.5L2462,551.5"></path>
+                </g>
+                <path id="node_outline50" fill="none" stroke="none"
+                      d="M2468.5,540.5h91a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-91a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text50" fill="black">
+                    <text id="kity_text_417" text-rendering="inherit" font-size="12" dy=".8em" y="543.7000000476837"
+                          x="2473.5">23 代码编辑区&#xa0;
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node51">
+                <g id="node_expander50" style="cursor: pointer;" display="none">
+                    <path id="kity_path_428" fill="white" stroke="gray"
+                          d="M2503.5,603.5A6,6,0,1,1,2491.5,603.5A6,6,0,1,1,2503.5,603.5"></path>
+                    <path id="kity_path_429" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline51" fill="none" stroke="none"
+                      d="M2508.5,592.5h87a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-87a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text51" fill="black">
+                    <text id="kity_text_425" text-rendering="inherit" font-size="12" dy=".8em" y="595.7000000476837"
+                          x="2513.5">23.1 行号标记
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node52">
+                <g id="node_expander51" style="cursor: pointer;" display="none">
+                    <path id="kity_path_436" fill="white" stroke="gray"
+                          d="M2503.5,655.5A6,6,0,1,1,2491.5,655.5A6,6,0,1,1,2503.5,655.5"></path>
+                    <path id="kity_path_437" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline52" fill="none" stroke="none"
+                      d="M2508.5,644.5h246a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-246a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text52" fill="black">
+                    <text id="kity_text_433" text-rendering="inherit" font-size="12" dy=".8em" y="647.7000000476837"
+                          x="2513.5">23.2 根据行列 定位token 进行字体颜色改变
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node53">
+                <g id="node_expander52" style="cursor: pointer;" display="none">
+                    <path id="kity_path_444" fill="white" stroke="gray"
+                          d="M2503.5,707.5A6,6,0,1,1,2491.5,707.5A6,6,0,1,1,2503.5,707.5"></path>
+                    <path id="kity_path_445" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline53" fill="none" stroke="none"
+                      d="M2508.5,696.5h198a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-198a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text53" fill="black">
+                    <text id="kity_text_441" text-rendering="inherit" font-size="12" dy=".8em" y="699.7000000476837"
+                          x="2513.5">23.3 根据行信息 对行位置进行高亮
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node54">
+                <g id="node_expander53" style="cursor: pointer;">
+                    <path id="kity_path_452" fill="white" stroke="gray"
+                          d="M2463.5,811.5A6,6,0,1,1,2451.5,811.5A6,6,0,1,1,2463.5,811.5"></path>
+                    <path id="kity_path_453" fill="none" stroke="gray" d="M2453,811.5L2462,811.5"></path>
+                </g>
+                <path id="node_outline54" fill="none" stroke="none"
+                      d="M2468.5,800.5h92a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-92a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text54" fill="black">
+                    <text id="kity_text_449" text-rendering="inherit" font-size="12" dy=".8em" y="803.7000000476837"
+                          x="2473.5">24 debug 运行
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node55">
+                <g id="node_expander54" style="cursor: pointer;" display="none">
+                    <path id="kity_path_460" fill="white" stroke="gray"
+                          d="M2503.5,863.5A6,6,0,1,1,2491.5,863.5A6,6,0,1,1,2503.5,863.5"></path>
+                    <path id="kity_path_461" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline55" fill="none" stroke="none"
+                      d="M2508.5,852.5h140a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-140a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text55" fill="black">
+                    <text id="kity_text_457" text-rendering="inherit" font-size="12" dy=".8em" y="855.7000000476837"
+                          x="2513.5">24.1 各种操作的button'
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node56">
+                <g id="node_expander55" style="cursor: pointer;" display="none">
+                    <path id="kity_path_468" fill="white" stroke="gray"
+                          d="M2503.5,915.5A6,6,0,1,1,2491.5,915.5A6,6,0,1,1,2503.5,915.5"></path>
+                    <path id="kity_path_469" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline56" fill="none" stroke="none"
+                      d="M2508.5,904.5h250a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-250a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text56" fill="black">
+                    <text id="kity_text_465" text-rendering="inherit" font-size="12" dy=".8em" y="907.7000000476837"
+                          x="2513.5">24.2 程序运行时 各个寄存器 内存内容的显示
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node57">
+                <g id="node_expander56" style="cursor: pointer;" display="none">
+                    <path id="kity_path_476" fill="white" stroke="gray"
+                          d="M2503.5,967.5A6,6,0,1,1,2491.5,967.5A6,6,0,1,1,2503.5,967.5"></path>
+                    <path id="kity_path_477" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline57" fill="none" stroke="none"
+                      d="M2508.5,956.5h183a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-183a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text57" fill="black">
+                    <text id="kity_text_473" text-rendering="inherit" font-size="12" dy=".8em" y="959.7000000476837"
+                          x="2513.5">24.3 运行编译时各种信息的显示
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node58">
+                <g id="node_expander57" style="cursor: pointer;" display="none">
+                    <path id="kity_path_484" fill="white" stroke="gray"
+                          d="M2503.5,447.5A6,6,0,1,1,2491.5,447.5A6,6,0,1,1,2503.5,447.5"></path>
+                    <path id="kity_path_485" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline58" fill="none" stroke="none"
+                      d="M2508.5,436.5h330a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-330a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text58" fill="black">
+                    <text id="kity_text_481" text-rendering="inherit" font-size="12" dy=".8em" y="439.7000000476837"
+                          x="2513.5">22.2 项目文件结构的显示 用户可通过点击切换当前编辑内容
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node59">
+                <g id="node_expander58" style="cursor: pointer;" display="none">
+                    <path id="kity_path_492" fill="white" stroke="gray"
+                          d="M2503.5,759.5A6,6,0,1,1,2491.5,759.5A6,6,0,1,1,2503.5,759.5"></path>
+                    <path id="kity_path_493" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline59" fill="none" stroke="none"
+                      d="M2508.5,748.5h274a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-274a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text59" fill="black">
+                    <text id="kity_text_489" text-rendering="inherit" font-size="12" dy=".8em" y="751.7000000476837"
+                          x="2513.5">23.4 撤销 重做 替换 查找 等操作的dialog button
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node60">
+                <g id="node_expander59" style="cursor: pointer;" display="none">
+                    <path id="kity_path_500" fill="white" stroke="gray"
+                          d="M2503.5,499.5A6,6,0,1,1,2491.5,499.5A6,6,0,1,1,2503.5,499.5"></path>
+                    <path id="kity_path_501" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline60" fill="none" stroke="none"
+                      d="M2508.5,488.5h77a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-77a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text60" fill="black">
+                    <text id="kity_text_497" text-rendering="inherit" font-size="12" dy=".8em" y="491.7000000476837"
+                          x="2513.5">22.3&#xa0; 标签页
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node61">
+                <g id="node_expander60" style="cursor: pointer;" display="none">
+                    <path id="kity_path_508" fill="white" stroke="gray"
+                          d="M2723.5,83.5A6,6,0,1,1,2711.5,83.5A6,6,0,1,1,2723.5,83.5"></path>
+                    <path id="kity_path_509" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline61" fill="none" stroke="none"
+                      d="M2728.5,72.5h268a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-268a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text61" fill="black">
+                    <text id="kity_text_505" text-rendering="inherit" font-size="12" dy=".8em" y="75.70000004768372"
+                          x="2733.5">25 将用户对于前端的操作转换为调用后端的接口
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node62">
+                <g id="node_expander61" style="cursor: pointer;" display="none">
+                    <path id="kity_path_516" fill="white" stroke="gray"
+                          d="M2723.5,135.5A6,6,0,1,1,2711.5,135.5A6,6,0,1,1,2723.5,135.5"></path>
+                    <path id="kity_path_517" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline62" fill="none" stroke="none"
+                      d="M2728.5,124.5h224a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-224a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text62" fill="black">
+                    <text id="kity_text_513" text-rendering="inherit" font-size="12" dy=".8em" y="127.70000004768372"
+                          x="2733.5">26 各种回调监听类 对前端显示进行更新
+                    </text>
+                </g>
+            </g>
+            <g id="minder_node65">
+                <g id="node_expander64" style="cursor: pointer;" display="none">
+                    <path id="kity_path_540" fill="white" stroke="gray"
+                          d="M2723.5,239.5A6,6,0,1,1,2711.5,239.5A6,6,0,1,1,2723.5,239.5"></path>
+                    <path id="kity_path_541" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline65" fill="none" stroke="none"
+                      d="M2728.5,228.5h365a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-365a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text65" fill="black">
+                    <text id="kity_text_537" text-rendering="inherit" font-size="12" dy=".8em" y="231.70000004768372"
+                          x="2733.5">交互逻辑根据前端 后端内容的更新不断添加 每个scrum周期都有它
+                    </text>
+                </g>
+            </g>
+            <g id="kity_g_12" display="none">
+                <path id="kity_path_13" fill="none" stroke="rgb(66, 94, 112)"
+                      d="M1149.5,1928.5h338a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-338a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="5"></path>
+            </g>
+            <g id="minder_node66">
+                <g id="node_expander65" style="cursor: pointer;" display="none">
+                    <path id="kity_path_548" fill="white" stroke="gray"
+                          d="M2723.5,187.5A6,6,0,1,1,2711.5,187.5A6,6,0,1,1,2723.5,187.5"></path>
+                    <path id="kity_path_549" fill="none" stroke="gray"></path>
+                </g>
+                <path id="node_outline66" fill="none" stroke="none"
+                      d="M2728.5,176.5h248a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-248a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"
+                      stroke-width="3"></path>
+                <g id="node_text66" fill="black">
+                    <text id="kity_text_545" text-rendering="inherit" font-size="12" dy=".8em" y="179.70000004768372"
+                          x="2733.5">28 操作正确性的验证 程序健壮性，运行效率
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
