@@ -5,12 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.controller.MainController;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../main.fxml"));
+        Parent root = loader.load();
+        MainController controller = loader.getController();
+        controller.setPrimaryStage(primaryStage);
         primaryStage.setTitle("ASMax");
         primaryStage.setScene(new Scene(root, 1850, 1080));
         primaryStage.show();
