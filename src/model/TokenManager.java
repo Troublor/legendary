@@ -1,4 +1,4 @@
-package src.controller;
+package src.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,20 @@ public class TokenManager {
         return instance;
     }
 
-    public void createToken(String label, int line_num) {
+    public List<Token> getTokenList() {
+        return token_list;
+    }
+
+    public void createToken(String label, String raw_text, int line_num) {
         if (label.length() == 0)
             return;
         TokenType type = Lexer.getInstance().getCompound(label);
-        token_list.add(new Token(label, type, id_cnter, line_num));
+        token_list.add(new Token(label, raw_text, type, id_cnter, line_num));
         id_cnter++;
     }
 
     public void createCommentSection(String content, int line_num) {
-        token_list.add(new Token(content, TokenType.COMMENT, id_cnter, line_num));
+        token_list.add(new Token(content, content, TokenType.COMMENT, id_cnter, line_num));
         id_cnter++;
     }
 
@@ -40,7 +44,7 @@ public class TokenManager {
         StringBuilder res = new StringBuilder();
         for (Token t : token_list) {
             res.append(t.toString());
-            res.append("\n-------------\n");
+            res.append("\n");
         }
         return res.toString();
     }

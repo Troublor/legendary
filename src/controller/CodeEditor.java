@@ -5,6 +5,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import src.model.Lexer;
+import src.model.SyntaxHighlighter;
+import src.model.TokenManager;
 
 import java.io.File;
 
@@ -16,6 +19,7 @@ public class CodeEditor extends HTMLEditor {
 
     private boolean start_flag;
     private boolean is_modify;
+    private String highlight_result = null;
     /**
      * 通过在FMXl上注册Controller和每个控件的fx：id
      * 然后再使用这个FXML notation能够将FXML上的各种控件连接到Controller上
@@ -24,25 +28,35 @@ public class CodeEditor extends HTMLEditor {
     private Thread printer = new Thread(() -> {
         File text_display = new File("test.html");
         while (start_flag) {
-            String text = getHtmlText();
+            String code_text = getHtmlText();
             try {
                 Thread.sleep(500);
-
-                if (text.equals(getHtmlText())) {
+                if (code_text.equals(getHtmlText())) {
                     if (is_modify) {
                         System.out.println("lexer working");
-                        Document content = Jsoup.parse(text);
+                        Document content = Jsoup.parse(code_text);
+                        System.out.println("html res");
+                        System.out.println(content.toString());
                         Elements elements = content.body().children();
                         StringBuilder rawCode = new StringBuilder();
                         for (Element e : elements) {
                             rawCode.append(e.text()).append("\n");
-                            Lexer.getInstance().generateToken(rawCode.toString());
                         }
+                        Lexer.getInstance().generateToken(rawCode.toString());
                         System.out.println("token list result");
                         System.out.println(TokenManager.getInstance().toString());
+                        System.out.println("start highlighting");
+                        String res = SyntaxHighlighter.getInstance().startHighlighting();
+                        CodeEditor editor = this;
+                        System.out.println("highlighting result");
+                        System.out.println(res);
+//                        todo 这里不能更改？？
+//                        Platform.runLater(() -> editor.setHtmlText(res));
+
+                    } else {
+                        continue;
                     }
                     is_modify = false;
-                    continue;
                 } else {
                     System.out.println("standby for editing stop");
                     is_modify = true;
@@ -54,7 +68,6 @@ public class CodeEditor extends HTMLEditor {
 //                write_in.write(text);
 //                write_in.flush();
 //                write_in.close();
-                Thread.sleep(500);
             } catch (Exception ee) {
                 ee.printStackTrace();
             }
