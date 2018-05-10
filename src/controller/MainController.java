@@ -8,26 +8,24 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 
 public class MainController {
     private Stage primaryStage;
+    //Controls
+    @FXML
+    private TreeView<String> projectTreeView;
+    @FXML
+    private Label projectNameLabel;
+    @FXML
+    private CodeEditor codeEditor;
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
-
-    //Controls
-    @FXML
-    private TreeView<String> projectTreeView;
-
-    @FXML
-    private Label projectNameLabel;
 
     @FXML
     public void openFolderButtonOnClicked(MouseEvent mouseEvent) {
@@ -61,5 +59,10 @@ public class MainController {
             rootItem.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../../img/file.png"))));
         }
         return rootItem;
+    }
+
+
+    public void stop() {
+        codeEditor.stop();
     }
 }
