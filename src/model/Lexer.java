@@ -27,7 +27,7 @@ public class Lexer {
                 "ax,al,ah,bx,bl,bh,cx,cl,ch,dx,dl,dh,cs,ss,ds,ei,si,di,".split(",")
         ));
         reserve_table.put(TokenType.FAKE_INSTRUCTION, Arrays.asList(
-                "equ,org,end,assume,db,dd".split(",")
+                "equ,org,end,assume,db,dd,segment".split(",")
         ));
 
 
@@ -100,7 +100,7 @@ public class Lexer {
                     return type;
                 for (TokenType remain_type : reserve_table.keySet()) {
                     for (String s : reserve_table.get(remain_type)) {
-                        s = s.toLowerCase();
+                        label = label.toLowerCase();
                         if (s.equals(label))
                             return remain_type;
                     }

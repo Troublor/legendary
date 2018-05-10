@@ -21,8 +21,8 @@ public class SyntaxHighlighter {
         TOKEN_COLOR_MAP.put(TokenType.ERROR_TOKEN, "#990000");
         TOKEN_COLOR_MAP.put(TokenType.INSTRUCTION, "#1a3399");
         TOKEN_COLOR_MAP.put(TokenType.CONSTANT, "#999933");
-        TOKEN_COLOR_MAP.put(TokenType.REGISTER, "#cc8099");
-        TOKEN_COLOR_MAP.put(TokenType.COMMENT, "#4d8080");
+        TOKEN_COLOR_MAP.put(TokenType.REGISTER, "#663366");
+        TOKEN_COLOR_MAP.put(TokenType.COMMENT, "#999999");
         TOKEN_COLOR_MAP.put(TokenType.BORDER, "#000000");
         TOKEN_COLOR_MAP.put(TokenType.FAKE_INSTRUCTION, "#b3b31a");
     }
