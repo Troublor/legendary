@@ -10,13 +10,18 @@ public class Token {
     private int ID;
     private int line_num;
 
+    //语法分析结果
+    private boolean error;
+    private String error_msg;
+
     public Token(String label, String raw_text, TokenType tokenType, int ID, int line_num) {
         this.line_num = line_num;
         this.label = label;
         this.raw_text = raw_text;
         this.ID = ID;
         token_type = tokenType;
-
+        error = false;
+        error_msg = "";
     }
 
     public String getLabel() {
@@ -37,6 +42,14 @@ public class Token {
 
     public String getRawText() {
         return raw_text;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public String getError_msg() {
+        return error_msg;
     }
 
     @Override
