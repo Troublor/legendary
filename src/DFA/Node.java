@@ -1,4 +1,5 @@
-package src.DFA;
+package src.dfa;
 
-public class Node {
+public abstract class Node {
+    private String name;
 }
