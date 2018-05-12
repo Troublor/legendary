@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -39,12 +40,26 @@ public class SelectProjectController {
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
             if (controller.getResult() != null) {
-                System.out.println("打开工程");
+                this.openMainPage(controller.getResult());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void openMainPage(String projectPath){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+            Parent root = loader.load();
+            MainController controller = loader.getController();
+            controller.setPrimaryStage(primaryStage);
+            controller.initializeProject(projectPath);
+            primaryStage.setTitle("ASMax");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
 }

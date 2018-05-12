@@ -31,18 +31,25 @@ public class MainController {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * 根据root path初始化
+     */
+    public void initializeProject(String path) {
+        this.applicationData.setRootPath(path);
+        File directory = new File(applicationData.getRootPath());
+        TreeItem<String> root = this.iterateFolder(directory);
+        root.setExpanded(true);
+        this.projectTreeView.setRoot(root);
+        this.projectNameLabel.setText(directory.getName());
+    }
+
     @FXML
     public void openFolderButtonOnClicked(MouseEvent mouseEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("打开项目");
         File directory = directoryChooser.showDialog(primaryStage);
         if (directory != null) {
-            TreeItem<String> root = this.iterateFolder(directory);
-            root.setExpanded(true);
-            this.projectTreeView.setRoot(root);
-            this.projectNameLabel.setText(directory.getName());
-            //设置项目信息
-            applicationData.setRootPath(directory.getAbsolutePath());
+            this.initializeProject(directory.getPath());
         }
 
     }
