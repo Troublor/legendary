@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:controller="controller.SelectProjectController" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectProjectController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="370.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="440.0" minWidth="10.0" prefWidth="230.0" />
@@ -47,7 +47,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#CreateProjectButtonOnAction" text="创建一个新的项目" />
-                  <Button mnemonicParsing="false" text="打开一个现有项目" />
+                  <Button mnemonicParsing="false" onAction="#openProjectButtonOnAction" text="打开一个现有项目" />
                </children>
                <VBox.margin>
                   <Insets top="30.0" />

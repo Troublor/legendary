@@ -6,10 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sun.applet.Main;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SelectProjectController {
@@ -55,11 +57,23 @@ public class SelectProjectController {
             controller.setPrimaryStage(primaryStage);
             controller.initializeProject(projectPath);
             primaryStage.setTitle("ASMax");
+            primaryStage.setX(0);
+            primaryStage.setY(0);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    @FXML
+    public void openProjectButtonOnAction(ActionEvent actionEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("打开项目");
+        File directory = directoryChooser.showDialog(primaryStage);
+        if (directory != null) {
+            this.openMainPage(directory.getPath());
+        }
     }
 }
