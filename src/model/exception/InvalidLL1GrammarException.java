@@ -1,4 +1,4 @@
-package src.model.exception;
+package model.exception;
 
 public class InvalidLL1GrammarException extends Exception{
     private String message;

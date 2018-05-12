@@ -1,4 +1,4 @@
-package src.model;
+package model;
 
 public enum TokenType {
     INSTRUCTION, REGISTER, CONSTANT, REMAIN_SETTLE,

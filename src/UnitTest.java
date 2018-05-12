@@ -1,8 +1,5 @@
-package src;
-
-
-import src.model.Lexer;
-import src.model.TokenManager;
+import model.Lexer;
+import model.TokenManager;
 
 public class UnitTest {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package src.model.exception;
+package model.exception;
 
 /**
  * 非法标号/非法字符异常

@@ -1,3 +1,7 @@
+package model;
+
+import dfa.DFA;
+
 import java.util.Map;
 import java.util.Stack;
 
@@ -8,7 +12,10 @@ public class Parser {
         return ourInstance;
     }
 
+    private DFA dfa;
+
     private Parser() {
+
     }
 
     /**

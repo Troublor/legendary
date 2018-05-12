@@ -1,4 +1,4 @@
-package src.controller;
+package custom.control;
 
 import javafx.concurrent.Task;
 import javafx.scene.web.HTMLEditor;
@@ -6,9 +6,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import src.model.Lexer;
-import src.model.SyntaxHighlighter;
-import src.model.TokenManager;
+import model.Lexer;
+import model.SyntaxHighlighter;
+import model.TokenManager;
 
 public class CodeEditor extends HTMLEditor {
 /*
