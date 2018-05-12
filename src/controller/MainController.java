@@ -49,6 +49,7 @@ public class MainController {
 
     /**
      * 遍历显示文件夹
+     *
      * @param path 文件夹
      * @return TreeView的节点
      */
@@ -80,9 +81,14 @@ public class MainController {
         codeEditor.stop();
     }
 
+    /**
+     * 双击一个文件时打开
+     *
+     * @param mouseEvent 鼠标点击事件
+     */
     public void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
-        if (mouseEvent.getClickCount() == 2) {
-            TreeItem<String> item = projectTreeView.getSelectionModel().getSelectedItem();
+        TreeItem<String> item = projectTreeView.getSelectionModel().getSelectedItem();
+        if (mouseEvent.getClickCount() == 2 && item.isLeaf()) {
             String fileName = item.getValue();
             CodeEditor codeEditor = new CodeEditor();
 
@@ -97,7 +103,7 @@ public class MainController {
                 }
                 codeEditor.setHtmlText(stringBuilder.toString());
             } catch (Exception e) {
-                this.sendMessageDialog(e.getMessage());
+                this.sendMessageDialog("发生错误", e.getMessage());
             }
             Tab newTab = new Tab(fileName);
             newTab.setClosable(true);
@@ -107,7 +113,16 @@ public class MainController {
         }
     }
 
-    private void sendMessageDialog(String msg) {
-
+    /**
+     * 弹出提示框
+     *
+     * @param title 标题
+     * @param msg   信息
+     */
+    private void sendMessageDialog(String title, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title); //设置标题，不设置默认标题为本地语言的information
+        alert.setHeaderText(msg); //设置头标题，默认标题为本地语言的information
+        alert.showAndWait(); //显示弹窗，同时后续代码等挂起
     }
 }
