@@ -1,7 +1,9 @@
 package custom.control;
 
 import javafx.concurrent.Task;
+import javafx.scene.Parent;
 import javafx.scene.web.HTMLEditor;
+import model.Parser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -43,6 +45,7 @@ public class CodeEditor extends HTMLEditor {
                                 rawCode.append(e.text()).append("\n");
                             }
                             Lexer.getInstance().generateToken(rawCode.toString());
+                            Parser.getInstance().parse();
                             System.out.println("token list result");
                             System.out.println(TokenManager.getInstance().toString());
                             System.out.println("start highlighting");
