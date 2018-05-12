@@ -1,4 +1,4 @@
-package src.dfa;
+package dfa;
 
 public class Transformation {
     private Node destination;

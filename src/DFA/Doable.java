@@ -1,6 +1,6 @@
-package src.dfa;
+package dfa;
 
 @FunctionalInterface
 public interface Doable {
-    void doIt(Node current);
+    void doIt(Node destNode, Object input);
 }

@@ -1,4 +1,4 @@
-package src.dfa;
+package dfa;
 
 public class InvalidTransformationException extends Exception {
     public InvalidTransformationException(){

@@ -1,17 +1,17 @@
-package src.dfa;
+package dfa;
 
 public class NoSuchTransformationException extends Exception {
     private Node node;
 
-    private Input input;
+    private Object input;
 
-    public NoSuchTransformationException(Node node, Input input) {
+    public NoSuchTransformationException(Node node, Object input) {
         super();
         this.node = node;
         this.input = input;
     }
 
-    public NoSuchTransformationException(Node node, Input input, String msg) {
+    public NoSuchTransformationException(Node node, Object input, String msg) {
         super(msg);
         this.node = node;
         this.input = input;

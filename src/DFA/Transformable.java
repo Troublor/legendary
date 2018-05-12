@@ -1,6 +1,6 @@
-package src.dfa;
+package dfa;
 
 @FunctionalInterface
 public interface Transformable {
-    boolean transform(Node from, Input input);
+    boolean transform(Node from, Object input);
 }
