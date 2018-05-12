@@ -19,7 +19,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectProjectPage.fxml"));
         Parent root = loader.load();
         SelectProjectController controller = loader.getController();
-//        controller.setPrimaryStage(primaryStage);
+        controller.setPrimaryStage(primaryStage);
         primaryStage.setTitle("ASMax");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

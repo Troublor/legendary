@@ -6,61 +6,43 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="controller.CreateProjectController"
-      maxHeight="-Infinity"
-      maxWidth="-Infinity"
-      minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="300.0"
-      prefWidth="400.0"
-      spacing="10.0"
-      xmlns="http://javafx.com/javafx/8.0.141"
-      xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label text="创建新的项目">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <Separator prefWidth="200.0"/>
-        <HBox alignment="CENTER_LEFT">
-            <children>
-                <Label text="项目名称："/>
-                <TextField fx:id="projectNameTextField"
-                           HBox.hgrow="ALWAYS"/>
-            </children>
-        </HBox>
-        <HBox alignment="CENTER_LEFT">
-            <children>
-                <Label text="项目路径："/>
-                <TextField fx:id="projectPathTextField"
-                           HBox.hgrow="ALWAYS"/>
-                <Button mnemonicParsing="false"
-                        onAction="#selectPathButtonOnAction"
-                        text="..."/>
-            </children>
-        </HBox>
-        <HBox alignment="BOTTOM_RIGHT"
-              prefHeight="100.0"
-              prefWidth="200.0"
-              spacing="10.0"
-              VBox.vgrow="ALWAYS">
-            <children>
-                <Button alignment="TOP_LEFT"
-                        mnemonicParsing="false"
-                        text="创建"/>
-                <Button mnemonicParsing="false"
-                        text="取消"/>
-            </children>
-        </HBox>
-    </children>
-    <padding>
-        <Insets bottom="20.0"
-                left="30.0"
-                right="30.0"
-                top="20.0"/>
-    </padding>
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateProjectController">
+   <children>
+      <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <Label text="创建新的项目">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="项目名称：" />
+                  <TextField fx:id="projectNameTextField" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="项目路径：" />
+                  <TextField fx:id="projectPathTextField" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#selectPathButtonOnAction" text="..." />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#createButtonOnAction" text="创建" />
+                  <Button mnemonicParsing="false" onAction="#cancelButtonOnAction" text="取消" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</Pane>
