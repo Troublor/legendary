@@ -2,5 +2,5 @@ package dfa;
 
 @FunctionalInterface
 public interface Doable {
-    void doIt(Node destNode, Object input);
+    void doIt(dfa.Node destNode, Object input);
 }

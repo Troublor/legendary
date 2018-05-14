@@ -6,7 +6,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class DFA {
-    private Map<Node, Collection<Transformation>> transformTable;
+    private Map<dfa.Node, Collection<Transformation>> transformTable;
 
     /**
      * 开始节点

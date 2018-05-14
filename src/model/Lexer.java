@@ -67,6 +67,8 @@ public class Lexer {
 //          note : Pattern类match的时候是类似迭代的 每次match，find之后的结果都不一样
 
             Collections.sort(token_range_list);
+//            根据token 识别出来的位置 提取每个toke文字及其周围的空余符号进行高亮
+//           从而保证原格式不变
             for (int each_token_range = 0; each_token_range < token_range_list.size(); each_token_range++) {
                 TokenRange curr = token_range_list.get(each_token_range);
                 int raw_text_index;
@@ -78,7 +80,6 @@ public class Lexer {
                 } else {
                     raw_text_index = each_line.length();
                 }
-
                 String label = each_line.substring(curr.start_pos, curr.end_pos);
                 String raw_text = each_line.substring(curr.start_pos, raw_text_index);
                 TokenManager.getInstance()
