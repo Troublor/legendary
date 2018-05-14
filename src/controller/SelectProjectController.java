@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sun.applet.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class SelectProjectController {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SelectProjectController.class.getResource("../CreateProjectDialog.fxml"));
+            loader.setLocation(SelectProjectController.class.getResource("../layout/CreateProjectDialog.fxml"));
             Pane page = loader.load();
             // Create the dialog Stage.
 
@@ -51,7 +50,7 @@ public class SelectProjectController {
 
     private void openMainPage(String projectPath){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../layout/MainPage.fxml"));
             Parent root = loader.load();
             MainController controller = loader.getController();
             controller.setPrimaryStage(primaryStage);

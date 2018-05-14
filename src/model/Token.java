@@ -53,7 +53,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return String.format("label: %8s  TokenType: %14s  ID: %4d  line num: %4d  raw text: '%s'",
-                label, token_type, ID, line_num, raw_text);
+        return String.format("label: %8s  TokenType: %14s  ID: %4d  line num: %4d  error_status: %s  raw text: '%s' ",
+                label, token_type, ID, line_num, error, raw_text);
     }
 }
