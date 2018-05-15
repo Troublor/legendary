@@ -22,22 +22,22 @@ public class NewItemController {
     public void createButtonOnAction(ActionEvent actionEvent) {
         String fileName = nameTextField.getText();
         if (!fileName.toLowerCase().endsWith(this.fileType)) {
-            fileName = fileType + this.fileType;
+            fileName = fileName + this.fileType;
         }
         File file = new File(currPath + File.separator + fileName);
         if (file.exists()) {
             this.sendMessageDialog("创建失败", "存在同名文件");
+            this.success = false;
         } else {
-            if (file.mkdirs()) {
-                try {
-                    if (file.createNewFile()) {
-                        primaryStage.close();
-                    }
-                } catch (IOException e) {
-                    this.sendMessageDialog("创建失败", "未知错误");
+            try {
+                if (file.createNewFile()) {
+                    this.success = true;
+                    this.primaryStage.close();
                 }
+            } catch (IOException e) {
+                this.sendMessageDialog("创建失败", "未知错误");
+                this.success = false;
             }
-            this.sendMessageDialog("创建失败", "未知错误");
         }
     }
 
@@ -53,9 +53,19 @@ public class NewItemController {
 
     private String fileType;
 
+    private boolean success = false;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
     public String getFileName() {
         return this.nameTextField.getText().toLowerCase().endsWith(this.fileType)
                 ? this.nameTextField.getText() : this.nameTextField.getText() + this.fileType;
+    }
+
+    public String getFilePathWithName() {
+        return this.currPath + File.separator + this.getFileName();
     }
 
     public void setFileType(String fileType) {

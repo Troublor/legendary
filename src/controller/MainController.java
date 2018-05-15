@@ -18,6 +18,8 @@ import model.ApplicationData;
 import model.ProjectFile;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController {
     //Controls
@@ -30,24 +32,8 @@ public class MainController {
     @FXML
     private TabPane editTabPane;
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
-    /**
-     * 根据root path初始化
-     */
-    public void initializeProject(String path) {
-        this.applicationData.setRootPath(path);
-        ProjectFile directory = new ProjectFile(applicationData.getRootPath());
-        TreeItem<ProjectFile> root = this.iterateFolder(directory);
-        root.setExpanded(true);
-        this.projectTreeView.setRoot(root);
-        this.projectNameLabel.setText(directory.getName());
-    }
-
     @FXML
-    public void openFolderButtonOnClicked(MouseEvent mouseEvent) {
+    private void openFolderButtonOnClicked(MouseEvent mouseEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("打开项目");
         File directory = directoryChooser.showDialog(primaryStage);
@@ -62,31 +48,12 @@ public class MainController {
      * @param mouseEvent 鼠标点击事件
      */
     @FXML
-    public void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
-        /*TreeItem<String> item = projectTreeView.getSelectionModel().getSelectedItem();
+    private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
+        TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
         if (mouseEvent.getClickCount() == 2 && item.isLeaf()) {
-            String fileName = item.getValue();
-            CodeEditor codeEditor = new CodeEditor();
-
-            File file = new File(applicationData.getRootPath() + File.separator + fileName);
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String temp;
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((temp = reader.readLine()) != null) {
-                    stringBuilder.append("<p>");
-                    stringBuilder.append(temp);
-                    stringBuilder.append("</p>");
-                }
-                codeEditor.setHtmlText(stringBuilder.toString());
-            } catch (Exception e) {
-                this.sendMessageDialog("发生错误", e.getMessage());
-            }
-            Tab newTab = new Tab(fileName);
-            newTab.setClosable(true);
-            newTab.setContent(codeEditor);
-            editTabPane.getTabs().add(newTab);
-            editTabPane.getSelectionModel().select(newTab);
-        }*/
+            ProjectFile file = item.getValue();
+            this.openFile(file);
+        }
     }
 
     /**
@@ -95,7 +62,7 @@ public class MainController {
      * @param actionEvent 事件
      */
     @FXML
-    public void newFileButtonOnAction(ActionEvent actionEvent) {
+    private void newFileButtonOnAction(ActionEvent actionEvent) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -110,11 +77,20 @@ public class MainController {
             dialogStage.setScene(scene);
             NewItemController controller = loader.getController();
             controller.setPrimaryStage(dialogStage);
-//            controller.setCurrPath();
+            TreeItem<ProjectFile> folderTreeItem = this.getCurrentFolderTreeItem();
+            controller.setCurrPath(folderTreeItem.getValue().getPath());
             controller.setFileType(".asm");
             controller.setTitleLabel("新建ASM文件");
             dialogStage.showAndWait();
-            String fileName = controller.getFileName();
+            if (!controller.isSuccess()) {
+                return;
+            }
+            String fileName = controller.getFilePathWithName();
+            ProjectFile newFile = new ProjectFile(fileName);
+            TreeItem<ProjectFile> item = new TreeItem<>(newFile);
+            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/file.png"))));
+            folderTreeItem.getChildren().add(item);
+            this.openFile(newFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,6 +103,49 @@ public class MainController {
 
     private ApplicationData applicationData = new ApplicationData();
 
+
+    void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    /**
+     * 根据root path初始化
+     */
+    void initializeProject(String path) {
+        this.applicationData.setRootPath(path);
+        ProjectFile directory = new ProjectFile(applicationData.getRootPath());
+        TreeItem<ProjectFile> root = this.iterateFolder(directory);
+        root.setExpanded(true);
+        this.projectTreeView.setRoot(root);
+        this.projectNameLabel.setText(directory.getName());
+    }
+
+    /**
+     * 打开一个文件
+     *
+     * @param file 文件
+     */
+    private void openFile(ProjectFile file) {
+        CodeEditor codeEditor = new CodeEditor();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String temp;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((temp = reader.readLine()) != null) {
+                stringBuilder.append("<p>");
+                stringBuilder.append(temp);
+                stringBuilder.append("</p>");
+            }
+            codeEditor.setHtmlText(stringBuilder.toString());
+        } catch (Exception e) {
+            this.sendMessageDialog("发生错误", e.getMessage());
+        }
+        Tab newTab = new Tab(file.getName());
+        newTab.setClosable(true);
+        newTab.setContent(codeEditor);
+        editTabPane.getTabs().add(newTab);
+        editTabPane.getSelectionModel().select(newTab);
+    }
+
     /**
      * 遍历显示文件夹
      *
@@ -137,7 +156,7 @@ public class MainController {
         TreeItem<ProjectFile> rootItem = new TreeItem<>(path);
         if (path.isDirectory()) {
             rootItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../img/folder.png"))));
-            ProjectFile[] files = path.listFiles();
+            List<ProjectFile> files = path.listProjectFiles();
             if (files != null) {
                 for (ProjectFile file : files) {
                     TreeItem<ProjectFile> item;
@@ -173,8 +192,19 @@ public class MainController {
         alert.showAndWait(); //显示弹窗，同时后续代码等挂起
     }
 
-    private void getCurrentFolder() {
-//        TreeItem<String> item = this.projectTreeView.getSelectionModel().getSelectedItem();
-
+    /**
+     * 获取当前所在的文件夹路径
+     *
+     * @return String
+     */
+    private TreeItem<ProjectFile> getCurrentFolderTreeItem() {
+        TreeItem<ProjectFile> selectedItem = this.projectTreeView.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            return projectTreeView.getRoot();
+        }
+        if (selectedItem.isLeaf()) {
+            return selectedItem.getParent();
+        }
+        return selectedItem;
     }
 }

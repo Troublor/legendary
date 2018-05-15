@@ -14,8 +14,7 @@ public class ProjectFile extends File {
         return this.getName();
     }
 
-    @Override
-    public ProjectFile[] listFiles() {
+    public List<ProjectFile> listProjectFiles() {
         File[] former = super.listFiles();
         if (former == null) {
             return null;
@@ -23,8 +22,8 @@ public class ProjectFile extends File {
         List<ProjectFile> files = new ArrayList<>();
         for (File file :
                 former) {
-            files.add((ProjectFile) file);
+            files.add(new ProjectFile(file.getPath()));
         }
-        return (ProjectFile[])files.toArray();
+        return files;
     }
 }
