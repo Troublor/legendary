@@ -51,7 +51,7 @@ public class MainController {
     @FXML
     private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
         TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
-        if (mouseEvent.getClickCount() == 2 && item.isLeaf()) {
+        if (mouseEvent.getClickCount() == 2 && item.getValue().isFile()) {
             ProjectFile file = item.getValue();
             this.openFile(file);
         }
@@ -218,7 +218,7 @@ public class MainController {
         if (selectedItem == null) {
             return projectTreeView.getRoot();
         }
-        if (selectedItem.isLeaf()) {
+        if (selectedItem.getValue().isFile()) {
             return selectedItem.getParent();
         }
         return selectedItem;
