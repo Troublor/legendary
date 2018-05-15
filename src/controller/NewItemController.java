@@ -11,7 +11,7 @@ import model.ProjectFile;
 import java.io.File;
 import java.io.IOException;
 
-public class NewItemController {
+public class NewItemController extends Controller {
     //controls
     @FXML
     private Label titleLabel;
@@ -66,8 +66,6 @@ public class NewItemController {
     }
 
     //self
-    private Stage primaryStage;
-
     private String currPath;
 
     private String fileType = "";
@@ -103,10 +101,6 @@ public class NewItemController {
 
     public void setTitleLabel(String title) {
         titleLabel.setText(title);
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
     }
 
     /**

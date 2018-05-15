@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RenameController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <Label text="重命名">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <TextField fx:id="nameTextField" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#confirmButtonOnAction" text="确认" />
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="取消" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

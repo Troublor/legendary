@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MainController {
+public class MainController extends Controller {
     //Controls
     @FXML
     private TreeView<ProjectFile> projectTreeView;
@@ -172,15 +172,7 @@ public class MainController {
 
 
     //self resources
-
-    private Stage primaryStage;
-
     private ApplicationData applicationData = new ApplicationData();
-
-
-    void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
 
     /**
      * 根据root path初始化

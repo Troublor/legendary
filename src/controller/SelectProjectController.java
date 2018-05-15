@@ -13,13 +13,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-public class SelectProjectController {
-    private Stage primaryStage;
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
+public class SelectProjectController extends Controller {
+    //controls
     @FXML
     public void CreateProjectButtonOnAction(ActionEvent actionEvent) {
         try {
@@ -48,6 +43,17 @@ public class SelectProjectController {
         }
     }
 
+    @FXML
+    public void openProjectButtonOnAction(ActionEvent actionEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("打开项目");
+        File directory = directoryChooser.showDialog(primaryStage);
+        if (directory != null) {
+            this.openMainPage(directory.getPath());
+        }
+    }
+
+    //self
     private void openMainPage(String projectPath){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../layout/MainPage.fxml"));
@@ -64,15 +70,5 @@ public class SelectProjectController {
             e.printStackTrace();
         }
 
-    }
-
-    @FXML
-    public void openProjectButtonOnAction(ActionEvent actionEvent) {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("打开项目");
-        File directory = directoryChooser.showDialog(primaryStage);
-        if (directory != null) {
-            this.openMainPage(directory.getPath());
-        }
     }
 }

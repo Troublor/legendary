@@ -14,19 +14,8 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.io.IOException;
 
-public class CreateProjectController extends TitledPane {
-    private Stage primaryStage;
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
-    private String result = null;
-
-    public String getResult() {
-        return result;
-    }
-
+public class CreateProjectController extends Controller {
+    //controls
     @FXML
     private TextField projectNameTextField;
 
@@ -41,7 +30,7 @@ public class CreateProjectController extends TitledPane {
         if (directory != null) {
             if (directory.getName().equals(projectNameTextField.getText())) {
                 projectPathTextField.setText(directory.getPath());
-            }else {
+            } else {
                 projectPathTextField.setText(directory.getPath() + File.separator + projectNameTextField.getText());
             }
         }
@@ -51,7 +40,7 @@ public class CreateProjectController extends TitledPane {
     public void createButtonOnAction(ActionEvent actionEvent) {
         String projectPath = projectPathTextField.getText();
         if (!projectPath.endsWith(projectNameTextField.getText())) {
-            projectPath += File.separator+projectNameTextField.getText();
+            projectPath += File.separator + projectNameTextField.getText();
         }
         File directory = new File(projectPath);
         if (!directory.exists()) {
@@ -67,5 +56,12 @@ public class CreateProjectController extends TitledPane {
     @FXML
     public void cancelButtonOnAction(ActionEvent actionEvent) {
         primaryStage.close();
+    }
+
+    //self
+    private String result = null;
+
+    public String getResult() {
+        return result;
     }
 }
