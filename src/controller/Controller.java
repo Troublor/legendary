@@ -2,7 +2,7 @@ package controller;
 
 import javafx.stage.Stage;
 
-public class Controller {
+public abstract class Controller {
     protected Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {

@@ -11,7 +11,7 @@ import model.ProjectFile;
 import java.io.File;
 import java.io.IOException;
 
-public class NewItemController extends Controller {
+public class NewItemController extends DialogController {
     //controls
     @FXML
     private Label titleLabel;
@@ -20,7 +20,7 @@ public class NewItemController extends Controller {
     private TextField nameTextField;
 
     @FXML
-    public void createButtonOnAction(ActionEvent actionEvent) {
+    public void confirmButtonOnAction(ActionEvent actionEvent) {
         if (this.mode == Mode.FILE) {
             String fileName = this.nameTextField.getText();
             if (!fileName.toLowerCase().endsWith(this.fileType)) {
@@ -29,16 +29,13 @@ public class NewItemController extends Controller {
             ProjectFile file = new ProjectFile(this.currPath + ProjectFile.separator + fileName);
             if (file.exists()) {
                 this.sendMessageDialog("创建失败", "存在同名文件");
-                this.success = false;
             } else {
                 try {
                     if (file.createNewFile()) {
-                        this.success = true;
-                        this.primaryStage.close();
+                        super.confirmButtonOnAction(actionEvent);
                     }
                 } catch (IOException e) {
                     this.sendMessageDialog("创建失败", "未知错误");
-                    this.success = false;
                 }
             }
         } else if (this.mode == Mode.FOLDER) {
@@ -46,14 +43,11 @@ public class NewItemController extends Controller {
             ProjectFile folder = new ProjectFile(this.currPath + ProjectFile.separator + folderName);
             if (folder.exists()) {
                 this.sendMessageDialog("创建失败", "存在同名文件夹");
-                this.success = false;
             } else {
                 if (!folder.mkdirs()) {
                     this.sendMessageDialog("创建失败", "未知错误");
-                    this.success = false;
                 } else {
-                    this.success = true;
-                    this.primaryStage.close();
+                    super.confirmButtonOnAction(actionEvent);
                 }
             }
         }
@@ -62,7 +56,7 @@ public class NewItemController extends Controller {
 
     @FXML
     public void cancelButtonOnAction(ActionEvent actionEvent) {
-        primaryStage.close();
+        super.cancelButtonOnAction(actionEvent);
     }
 
     //self
@@ -72,14 +66,8 @@ public class NewItemController extends Controller {
 
     private Mode mode;
 
-    private boolean success = false;
-
     public void setMode(Mode mode) {
         this.mode = mode;
-    }
-
-    public boolean isSuccess() {
-        return success;
     }
 
     public String getFileName() {
@@ -101,19 +89,6 @@ public class NewItemController extends Controller {
 
     public void setTitleLabel(String title) {
         titleLabel.setText(title);
-    }
-
-    /**
-     * 弹出提示框
-     *
-     * @param title 标题
-     * @param msg   信息
-     */
-    private void sendMessageDialog(String title, String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title); //设置标题，不设置默认标题为本地语言的information
-        alert.setHeaderText(msg); //设置头标题，默认标题为本地语言的information
-        alert.showAndWait(); //显示弹窗，同时后续代码等挂起
     }
 
     public enum Mode {

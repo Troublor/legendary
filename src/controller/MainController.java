@@ -84,7 +84,7 @@ public class MainController extends Controller {
             controller.setFileType(".asm");
             controller.setTitleLabel("新建ASM文件");
             dialogStage.showAndWait();
-            if (!controller.isSuccess()) {
+            if (!controller.isConfirmed()) {
                 return;
             }
             folderTreeItem.setExpanded(true);
@@ -148,7 +148,7 @@ public class MainController extends Controller {
             controller.setCurrPath(folderTreeItem.getValue().getPath());
             controller.setTitleLabel("新建文件夹");
             dialogStage.showAndWait();
-            if (!controller.isSuccess()) {
+            if (!controller.isConfirmed()) {
                 return;
             }
             folderTreeItem.setExpanded(true);

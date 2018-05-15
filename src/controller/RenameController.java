@@ -5,13 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RenameController extends Controller{
+public class RenameController extends DialogController{
     //controls
     @FXML
     private TextField nameTextField;
 
     @FXML
     public void confirmButtonOnAction(ActionEvent actionEvent) {
+
     }
 
     @FXML
@@ -19,5 +20,4 @@ public class RenameController extends Controller{
     }
 
     //self
-    private Stage primaryStage;
 }

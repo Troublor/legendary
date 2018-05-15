@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.io.IOException;
 
-public class CreateProjectController extends Controller {
+public class CreateProjectController extends DialogController {
     //controls
     @FXML
     private TextField projectNameTextField;
@@ -37,7 +37,7 @@ public class CreateProjectController extends Controller {
     }
 
     @FXML
-    public void createButtonOnAction(ActionEvent actionEvent) {
+    public void confirmButtonOnAction(ActionEvent actionEvent) {
         String projectPath = projectPathTextField.getText();
         if (!projectPath.endsWith(projectNameTextField.getText())) {
             projectPath += File.separator + projectNameTextField.getText();
@@ -50,12 +50,12 @@ public class CreateProjectController extends Controller {
             }
         }
         result = projectPath;
-        primaryStage.hide();
+        super.confirmButtonOnAction(actionEvent);
     }
 
     @FXML
-    public void cancelButtonOnAction(ActionEvent actionEvent) {
-        primaryStage.close();
+    public void cancelButtonOnAction(ActionEvent actionEvent){
+        super.cancelButtonOnAction(actionEvent);
     }
 
     //self
