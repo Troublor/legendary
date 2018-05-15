@@ -20,6 +20,7 @@ import model.ProjectFile;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MainController {
     //Controls
@@ -85,14 +86,29 @@ public class MainController {
             if (!controller.isSuccess()) {
                 return;
             }
-            String fileName = controller.getFilePathWithName();
-            ProjectFile newFile = new ProjectFile(fileName);
-            TreeItem<ProjectFile> item = new TreeItem<>(newFile);
-            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/file.png"))));
-            folderTreeItem.getChildren().add(item);
-            this.openFile(newFile);
+            this.initializeProject(this.applicationData.getRootPath());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void renameMenuItemOnAction(ActionEvent actionEvent) {
+        //TODO implement rename
+    }
+
+    @FXML
+    public void deleteMenuItemOnAction(ActionEvent actionEvent) {
+        TreeItem<ProjectFile> selectedItem = this.projectTreeView.getSelectionModel().getSelectedItem();
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION,selectedItem.getValue().getName());
+        confirmation.setHeaderText("是否删除? ");
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (!this.deleteRecursively(selectedItem.getValue())) {
+                this.sendMessageDialog("删除失败", "未知原因");
+            } else {
+                this.initializeProject(this.applicationData.getRootPath());
+            }
         }
     }
 
@@ -206,5 +222,20 @@ public class MainController {
             return selectedItem.getParent();
         }
         return selectedItem;
+    }
+
+    private boolean deleteRecursively(ProjectFile file) {
+        if (file.isFile()) {
+            return file.delete();
+        } else {
+            List<ProjectFile> fileList = file.listProjectFiles();
+            for (ProjectFile f :
+                    fileList) {
+                if (!deleteRecursively(f)) {
+                    return false;
+                }
+            }
+            return file.delete();
+        }
     }
 }
