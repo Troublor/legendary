@@ -63,7 +63,7 @@ public class MainController {
      * @param actionEvent 事件
      */
     @FXML
-    private void newFileButtonOnAction(ActionEvent actionEvent) {
+    private void newAsmFileOnAction(ActionEvent actionEvent) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -78,6 +78,7 @@ public class MainController {
             dialogStage.setScene(scene);
             NewItemController controller = loader.getController();
             controller.setPrimaryStage(dialogStage);
+            controller.setMode(NewItemController.Mode.FILE);
             TreeItem<ProjectFile> folderTreeItem = this.getCurrentFolderTreeItem();
             controller.setCurrPath(folderTreeItem.getValue().getPath());
             controller.setFileType(".asm");
@@ -86,7 +87,21 @@ public class MainController {
             if (!controller.isSuccess()) {
                 return;
             }
-            this.initializeProject(this.applicationData.getRootPath());
+            folderTreeItem.setExpanded(true);
+            this.openFile(new ProjectFile(controller.getFilePathWithName()));
+            //添加tree item到tree view
+            TreeItem<ProjectFile> item = new TreeItem<>(new ProjectFile(controller.getFilePathWithName()));
+            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/file.png"))));
+            int i;
+            for (i = 0; i < folderTreeItem.getChildren().size(); i++) {
+                if (folderTreeItem.getChildren().get(i).getValue().getName().compareTo(controller.getFileName()) > 0) {
+                    folderTreeItem.getChildren().add(i, item);
+                    break;
+                }
+            }
+            if (i == folderTreeItem.getChildren().size()) {
+                folderTreeItem.getChildren().add(i, item);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,15 +115,58 @@ public class MainController {
     @FXML
     public void deleteMenuItemOnAction(ActionEvent actionEvent) {
         TreeItem<ProjectFile> selectedItem = this.projectTreeView.getSelectionModel().getSelectedItem();
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION,selectedItem.getValue().getName());
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, selectedItem.getValue().getName());
         confirmation.setHeaderText("是否删除? ");
         Optional<ButtonType> result = confirmation.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             if (!this.deleteRecursively(selectedItem.getValue())) {
                 this.sendMessageDialog("删除失败", "未知原因");
             } else {
-                this.initializeProject(this.applicationData.getRootPath());
+                TreeItem<ProjectFile> parent = selectedItem.getParent();
+                parent.getChildren().remove(selectedItem);
             }
+        }
+    }
+
+    public void newFolderMenuItemOnAction(ActionEvent actionEvent) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(SelectProjectController.class.getResource("../layout/NewItemDialog.fxml"));
+            Pane page = loader.load();
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("新建");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            NewItemController controller = loader.getController();
+            controller.setPrimaryStage(dialogStage);
+            controller.setMode(NewItemController.Mode.FOLDER);
+            TreeItem<ProjectFile> folderTreeItem = this.getCurrentFolderTreeItem();
+            controller.setCurrPath(folderTreeItem.getValue().getPath());
+            controller.setTitleLabel("新建文件夹");
+            dialogStage.showAndWait();
+            if (!controller.isSuccess()) {
+                return;
+            }
+            folderTreeItem.setExpanded(true);
+            //添加tree item到tree view
+            TreeItem<ProjectFile> item = new TreeItem<>(new ProjectFile(controller.getFilePathWithName()));
+            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/folder.png"))));
+            int i;
+            for (i = 0; i < folderTreeItem.getChildren().size(); i++) {
+                if (folderTreeItem.getChildren().get(i).getValue().getName().compareTo(controller.getFileName()) > 0) {
+                    folderTreeItem.getChildren().add(i, item);
+                    break;
+                }
+            }
+            if (i == folderTreeItem.getChildren().size()) {
+                folderTreeItem.getChildren().add(i, item);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

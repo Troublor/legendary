@@ -70,7 +70,7 @@
                         </MenuBar>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                             <items>
-                                <Button mnemonicParsing="false" onAction="#newFileButtonOnAction">
+                                <Button mnemonicParsing="false" onAction="#newAsmFileOnAction">
                                     <graphic>
                                         <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -239,6 +239,12 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
+                                    <Menu mnemonicParsing="false" text="新建">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#newAsmFileOnAction" text="ASM文件" />
+                                          <MenuItem mnemonicParsing="false" onAction="#newFolderMenuItemOnAction" text="文件夹" />
+                                      </items>
+                                    </Menu>
                                     <MenuItem mnemonicParsing="false" onAction="#renameMenuItemOnAction" text="重命名" />
                                   <MenuItem mnemonicParsing="false" onAction="#deleteMenuItemOnAction" text="删除" />
                                 </items>
