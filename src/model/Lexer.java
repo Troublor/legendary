@@ -17,17 +17,18 @@ public class Lexer {
 
     private Lexer() {
         lex_patterns.put(TokenType.BORDER, Pattern.compile("([,\\:\\+\\-\\*\\/\\)\\(])"));
+//        lex_patterns.put(TokenType.CONSTANT_STRING, Pattern.compile("'[^\\n]*'"));
         lex_patterns.put(TokenType.CONSTANT, Pattern.compile("([0-9][0-9a-fA-F]*[Hh])|([01]+[Bb])|([0-9]+)"));
-        lex_patterns.put(TokenType.REMAIN_SETTLE, Pattern.compile("(\\b[a-zA-Z_]+[0-9a-zA-Z_]*)"));
-        lex_patterns.put(TokenType.ERROR_TOKEN, Pattern.compile("[^ 0-9a-zA-Z\\,\\:\\+\\-\\*\\/\\)\\(]+"));
+        lex_patterns.put(TokenType.REMAIN_SETTLE, Pattern.compile("(\\b[a-zA-Z_]+[0-9a-zA-Z_])"));
+        lex_patterns.put(TokenType.ERROR_TOKEN, Pattern.compile("[^ 0-9a-zA-Z\\,\\:\\+\\-\\*\\/\\)\\(']+"));
         reserve_table.put(TokenType.INSTRUCTION, Arrays.asList(
-                "mov,sub,add,inc,dec,jmp,add,and,or".split(",")
+                "mov,sub,add,inc,dec,jmp,add,and,or,lea,int,xlat,shr,or,and,xor,mul,div,shl,cmp,jb,ja,jbe,jae".split(",")
         ));
         reserve_table.put(TokenType.REGISTER, Arrays.asList(
-                "ax,al,ah,bx,bl,bh,cx,cl,ch,dx,dl,dh,cs,ss,ds,ei,si,di,".split(",")
+                "ax,al,ah,bx,bl,bh,cx,cl,ch,dx,dl,dh,cs,ss,ds,ei,si,di".split(",")
         ));
         reserve_table.put(TokenType.FAKE_INSTRUCTION, Arrays.asList(
-                "equ,org,end,assume,db,dd,segment".split(",")
+                "equ,org,end,assume,db,dd,segment,ends,end".split(",")
         ));
 
 
@@ -60,7 +61,7 @@ public class Lexer {
                     int start_pos = matcher.start();
                     int end_pos = matcher.end();
 
-                    token_range_list.add(new TokenRange(TokenType.REMAIN_SETTLE, start_pos, end_pos));
+                    token_range_list.add(new TokenRange(type, start_pos, end_pos));
                 }
             }
 

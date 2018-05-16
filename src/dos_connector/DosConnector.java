@@ -2,14 +2,17 @@ package dos_connector;
 
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /*
 
   DosConnector:
@@ -52,8 +55,9 @@ import java.util.regex.*;
 
   一些说明：
   为什么不使用返回值直接返回 DOS 接下来返回的数据，而要这么麻烦地用回调函数进行数据处理？
-  假设现在使用 debug step 5步，假设用户程序在第三步时使用系统调用，从标准输入读取数据，那么这时用户程序会阻塞至读到用户输入未知，
-  那么此时 dc.step(5)实际只能返回3步的寄存器信息，剩下2步的信息就被放在 socket 缓存区无人认领了
+  假设现在使用 debug step 5步，假设用户程序在第三步时使用系统调用，从标准输入读取数据，
+  那么这时用户程序会阻塞至读到用户输入未知，那么此时 dc.step(5)实际只能返回3步的寄存器信息，
+  剩下2步的信息就被放在 socket 缓存区无人认领了
 
   我也想过将剩下的2步信息交给下一次操作，比如下一次 dc.step() 来返回。
   但是这太不合理了：实际在第3步用户在标准输入中输入数据后，用户程序就能跑完这5步，用户不用在 UI 上进行任何操作，寄存器窗口页就应该被刷新到完成5步后的状态
