@@ -3,14 +3,16 @@ package custom.control;
 import javafx.concurrent.Task;
 import javafx.scene.Parent;
 import javafx.scene.web.HTMLEditor;
-import model.Parser;
+import model.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import model.Lexer;
-import model.SyntaxHighlighter;
-import model.TokenManager;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class CodeEditor extends HTMLEditor {
 /*
@@ -21,6 +23,10 @@ public class CodeEditor extends HTMLEditor {
     private boolean start_flag;
     private boolean is_modify;
     private UIUpdater uiUpdater;
+
+    //显示的文件
+    private ProjectFile file;
+
     /**
      * 通过在FMXl上注册Controller和每个控件的fx：id
      * 然后再使用这个FXML notation能够将FXML上的各种控件连接到Controller上
@@ -35,6 +41,8 @@ public class CodeEditor extends HTMLEditor {
                 if (code_text.equals(getHtmlText())) {
                     if (is_modify) {
                         synchronized (this) {
+                            System.out.println("saving");
+                            this.saveFile();
                             System.out.println("lexer working");
                             Document content = Jsoup.parse(code_text);
                             System.out.println("html res");
@@ -76,13 +84,47 @@ public class CodeEditor extends HTMLEditor {
         }
     });
 
-    public CodeEditor() {
+    public CodeEditor(ProjectFile file) {
         start_flag = true;
         is_modify = false;
         uiUpdater = new UIUpdater(this);
+        this.file = file;
+        this.displayFile();
         uiUpdater.setOnSucceeded(event -> uiUpdater.editor.setHtmlText(uiUpdater.result));
 
         printer.start();
+    }
+
+    /**
+     * 显示文件内容在HtmlEditor中
+     */
+    private void displayFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String temp;
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((temp = reader.readLine()) != null) {
+                stringBuilder.append("<p>");
+                stringBuilder.append(temp);
+                stringBuilder.append("</p>");
+            }
+            this.setHtmlText(stringBuilder.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            String rawHtml = this.getHtmlText();
+            Document doc = Jsoup.parse(rawHtml);
+            for (Element e :
+                    doc.getElementsByTag("p")) {
+                writer.write(e.text());
+            }
+            writer.flush(); // 把缓存区内容压入文件
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

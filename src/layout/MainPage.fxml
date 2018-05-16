@@ -253,22 +253,7 @@
                             </children>
                         </VBox>
                         <TabPane fx:id="editTabPane" minWidth="100.0">
-                            <tabs>
-                                <Tab text="Untitled Tab 1">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <CodeEditor fx:id="codeEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="60.0" layoutY="88.0" prefHeight="944.0" prefWidth="1448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab text="Untitled Tab 2">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                    </content>
-                                </Tab>
-                            </tabs>
+
                         </TabPane>
                     </items>
                 </SplitPane>

@@ -221,19 +221,7 @@ public class MainController extends Controller {
      * @param file 文件
      */
     private void openFile(ProjectFile file) {
-        CodeEditor codeEditor = new CodeEditor();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String temp;
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((temp = reader.readLine()) != null) {
-                stringBuilder.append("<p>");
-                stringBuilder.append(temp);
-                stringBuilder.append("</p>");
-            }
-            codeEditor.setHtmlText(stringBuilder.toString());
-        } catch (Exception e) {
-            this.sendMessageDialog("发生错误", e.getMessage());
-        }
+        CodeEditor codeEditor = new CodeEditor(file);
         Tab newTab = new Tab(file.getName());
         newTab.setClosable(true);
         newTab.setContent(codeEditor);
