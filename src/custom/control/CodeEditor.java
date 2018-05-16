@@ -113,7 +113,7 @@ public class CodeEditor extends HTMLEditor {
         }
     }
 
-    private void saveFile() {
+    public void saveFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             String rawHtml = this.getHtmlText();
             Document doc = Jsoup.parse(rawHtml);

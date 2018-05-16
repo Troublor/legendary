@@ -1,6 +1,7 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import custom.control.CodeEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,8 +32,6 @@ public class MainController extends Controller {
     private TreeView<ProjectFile> projectTreeView;
     @FXML
     private Label projectNameLabel;
-    @FXML
-    private CodeEditor codeEditor;
     @FXML
     private TabPane editTabPane;
 
@@ -199,6 +198,16 @@ public class MainController extends Controller {
         }
     }
 
+    @FXML
+    public void saveButtonOnAction(ActionEvent actionEvent) {
+        List<Tab> tabList = editTabPane.getTabs();
+        for (Tab tab :
+                tabList) {
+            CodeEditor codeEditor = (CodeEditor) tab.getContent();
+            codeEditor.saveFile();
+        }
+    }
+
 
     //self resources
     private ApplicationData applicationData = new ApplicationData();
@@ -225,6 +234,11 @@ public class MainController extends Controller {
         Tab newTab = new Tab(file.getName());
         newTab.setClosable(true);
         newTab.setContent(codeEditor);
+        newTab.setOnCloseRequest(event -> {
+            Tab tab = (Tab) event.getSource();
+            CodeEditor editor = (CodeEditor) tab.getContent();
+            editor.stop();
+        });
         editTabPane.getTabs().add(newTab);
         editTabPane.getSelectionModel().select(newTab);
     }
@@ -258,9 +272,9 @@ public class MainController extends Controller {
         return rootItem;
     }
 
-    public void stop() {
-        codeEditor.stop();
-    }
+//    public void stop() {
+//        codeEditor.stop();
+//    }
 
     /**
      * 弹出提示框

@@ -1,3 +1,4 @@
+import controller.Controller;
 import controller.MainController;
 import controller.SelectProjectController;
 import javafx.application.Application;
@@ -7,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    MainController controller;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,10 +21,5 @@ public class Main extends Application {
         primaryStage.setTitle("ASMax");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-    }
-
-    @Override
-    public void stop() {
-        controller.stop();
     }
 }
