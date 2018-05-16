@@ -16,11 +16,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ApplicationData;
 import model.ProjectFile;
+import sun.dc.pr.PRError;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainController extends Controller {
     //Controls
@@ -90,18 +93,8 @@ public class MainController extends Controller {
             folderTreeItem.setExpanded(true);
             this.openFile(new ProjectFile(controller.getFilePathWithName()));
             //添加tree item到tree view
-            TreeItem<ProjectFile> item = new TreeItem<>(new ProjectFile(controller.getFilePathWithName()));
-            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/file.png"))));
-            int i;
-            for (i = 0; i < folderTreeItem.getChildren().size(); i++) {
-                if (folderTreeItem.getChildren().get(i).getValue().getName().compareTo(controller.getFileName()) > 0) {
-                    folderTreeItem.getChildren().add(i, item);
-                    break;
-                }
-            }
-            if (i == folderTreeItem.getChildren().size()) {
-                folderTreeItem.getChildren().add(i, item);
-            }
+            ProjectFile newFile = new ProjectFile(controller.getFilePathWithName());
+            this.addProjectFileToTreeView(folderTreeItem, newFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,7 +102,53 @@ public class MainController extends Controller {
 
     @FXML
     public void renameMenuItemOnAction(ActionEvent actionEvent) {
-        //TODO implement rename
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(SelectProjectController.class.getResource("../layout/RenameDialog.fxml"));
+            Pane page = loader.load();
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("重命名");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            RenameController controller = loader.getController();
+            controller.setPrimaryStage(dialogStage);
+            TreeItem<ProjectFile> selectedItem = this.projectTreeView.getSelectionModel().getSelectedItem();
+            ProjectFile file = selectedItem.getValue();
+            ProjectFile renamedProjectFile;
+            if (file.isFile()) {
+                String fullName = file.getName();
+                String suffix = fullName.substring(fullName.lastIndexOf("."));
+                String name = fullName.substring(0, fullName.lastIndexOf("."));
+                controller.setName(name);
+                dialogStage.showAndWait();
+                if (!controller.isConfirmed()) {
+                    return;
+                }
+                String newName = controller.getName();
+                renamedProjectFile = new ProjectFile(file.getParentFile().getPath() + ProjectFile.separator + newName + suffix);
+            } else {
+                controller.setName(file.getName());
+                dialogStage.showAndWait();
+                if (!controller.isConfirmed()) {
+                    return;
+                }
+                String newName = controller.getName();
+                renamedProjectFile = new ProjectFile(file.getParentFile().getPath() + ProjectFile.separator + newName);
+            }
+            if (!file.renameTo(renamedProjectFile)) {
+                this.sendMessageDialog("重命名失败", "未知错误");
+                return;
+            }
+            TreeItem<ProjectFile> parent = selectedItem.getParent();
+            parent.getChildren().remove(selectedItem);
+            this.addProjectFileToTreeView(parent, renamedProjectFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -153,18 +192,8 @@ public class MainController extends Controller {
             }
             folderTreeItem.setExpanded(true);
             //添加tree item到tree view
-            TreeItem<ProjectFile> item = new TreeItem<>(new ProjectFile(controller.getFilePathWithName()));
-            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/folder.png"))));
-            int i;
-            for (i = 0; i < folderTreeItem.getChildren().size(); i++) {
-                if (folderTreeItem.getChildren().get(i).getValue().getName().compareTo(controller.getFileName()) > 0) {
-                    folderTreeItem.getChildren().add(i, item);
-                    break;
-                }
-            }
-            if (i == folderTreeItem.getChildren().size()) {
-                folderTreeItem.getChildren().add(i, item);
-            }
+            ProjectFile newFolder = new ProjectFile(controller.getFilePathWithName());
+            this.addProjectFileToTreeView(folderTreeItem, newFolder);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -286,6 +315,25 @@ public class MainController extends Controller {
                 }
             }
             return file.delete();
+        }
+    }
+
+    private void addProjectFileToTreeView(TreeItem<ProjectFile> folderTreeItem, ProjectFile file) {
+        TreeItem<ProjectFile> item = new TreeItem<>(file);
+        if (file.isDirectory()) {
+            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/folder.png"))));
+        } else {
+            item.setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("../img/file.png"))));
+        }
+        int i;
+        for (i = 0; i < folderTreeItem.getChildren().size(); i++) {
+            if (folderTreeItem.getChildren().get(i).getValue().getName().compareTo(file.getName()) > 0) {
+                folderTreeItem.getChildren().add(i, item);
+                break;
+            }
+        }
+        if (i == folderTreeItem.getChildren().size()) {
+            folderTreeItem.getChildren().add(i, item);
         }
     }
 }

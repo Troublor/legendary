@@ -12,12 +12,20 @@ public class RenameController extends DialogController{
 
     @FXML
     public void confirmButtonOnAction(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    public void cancelButtonOnAction(ActionEvent actionEvent) {
+        String name = this.nameTextField.getText();
+        if (name.isEmpty()) {
+            super.sendMessageDialog("错误", "名称不能为空");
+            return;
+        }
+        super.confirmButtonOnAction(actionEvent);
     }
 
     //self
+    public void setName(String formerName) {
+        this.nameTextField.setText(formerName);
+    }
+
+    public String getName() {
+        return this.nameTextField.getText();
+    }
 }

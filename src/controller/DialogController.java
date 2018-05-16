@@ -11,11 +11,13 @@ public abstract class DialogController extends Controller {
         return isConfirmed;
     }
 
+    @FXML
     public void confirmButtonOnAction(ActionEvent actionEvent) {
         this.isConfirmed = true;
         super.primaryStage.close();
     }
 
+    @FXML
     public void cancelButtonOnAction(ActionEvent actionEvent) {
         this.isConfirmed = false;
         super.primaryStage.close();

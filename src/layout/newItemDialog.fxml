@@ -28,7 +28,7 @@
                 </HBox>
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#createButtonOnAction" text="创建" />
+                        <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#confirmButtonOnAction" text="创建" />
                         <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="取消" />
                     </children>
                 </HBox>
