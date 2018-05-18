@@ -20,184 +20,250 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<AnchorPane prefHeight="1080.0" prefWidth="1850.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane prefHeight="1080.0"
+            prefWidth="1850.0"
+            xmlns="http://javafx.com/javafx/8.0.141"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.MainController">
     <children>
-        <BorderPane prefHeight="1080.0" prefWidth="1850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane prefHeight="1080.0"
+                    prefWidth="1850.0"
+                    AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
             <top>
                 <VBox BorderPane.alignment="CENTER">
                     <children>
                         <MenuBar>
                             <menus>
-                                <Menu mnemonicParsing="false" text="文件">
+                                <Menu mnemonicParsing="false"
+                                      text="文件">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Close" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Close"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="编辑">
+                                <Menu mnemonicParsing="false"
+                                      text="编辑">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Delete" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Delete"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="窗口">
+                                <Menu mnemonicParsing="false"
+                                      text="窗口">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="About" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="About"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="运行">
+                                <Menu mnemonicParsing="false"
+                                      text="运行">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Action 1"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="代码">
+                                <Menu mnemonicParsing="false"
+                                      text="代码">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Action 1"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="工具">
+                                <Menu mnemonicParsing="false"
+                                      text="工具">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Action 1"/>
                                     </items>
                                 </Menu>
-                                <Menu mnemonicParsing="false" text="帮助">
+                                <Menu mnemonicParsing="false"
+                                      text="帮助">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false"
+                                                  text="Action 1"/>
                                     </items>
                                 </Menu>
                             </menus>
                         </MenuBar>
-                        <ToolBar prefHeight="40.0" prefWidth="200.0">
+                        <ToolBar prefHeight="40.0"
+                                 prefWidth="200.0">
                             <items>
-                                <Button mnemonicParsing="false" onAction="#newAsmFileOnAction">
+                                <Button mnemonicParsing="false"
+                                        onAction="#newAsmFileOnAction">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/new_file.png" />
+                                                <Image url="@../img/new_file.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="openFolderButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#openFolderButtonOnClicked">
+                                <Button fx:id="openFolderButton"
+                                        layoutX="10.0"
+                                        layoutY="10.0"
+                                        mnemonicParsing="false"
+                                        onMouseClicked="#openFolderButtonOnClicked">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/open_folder.png" />
+                                                <Image url="@../img/open_folder.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#saveButtonOnAction">
+                                <Button mnemonicParsing="false"
+                                        onAction="#saveButtonOnAction">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/save.png" />
+                                                <Image url="@../img/save.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Separator orientation="VERTICAL" />
+                                <Separator orientation="VERTICAL"/>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/undo.png" />
+                                                <Image url="@../img/undo.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true"
+                                                   rotate="180.0">
                                             <image>
-                                                <Image url="@../img/undo.png" />
+                                                <Image url="@../img/undo.png"/>
                                             </image>
                                             <rotationAxis>
-                                                <Point3D y="1.0" />
+                                                <Point3D y="1.0"/>
                                             </rotationAxis>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Separator orientation="VERTICAL" />
+                                <Separator orientation="VERTICAL"/>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/copy.png" />
+                                                <Image url="@../img/copy.png"/>
                                             </image>
                                             <rotationAxis>
-                                                <Point3D y="1.0" />
-                                            </rotationAxis>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false">
-                                    <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/cut.png" />
-                                            </image>
-                                            <rotationAxis>
-                                                <Point3D y="1.0" />
-                                            </rotationAxis>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Button mnemonicParsing="false">
-                                    <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/paste.png" />
-                                            </image>
-                                            <rotationAxis>
-                                                <Point3D y="1.0" />
-                                            </rotationAxis>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
-                                <Separator orientation="VERTICAL" />
-                                <ComboBox prefWidth="150.0" />
-                                <Button mnemonicParsing="false">
-                                    <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/run.png" />
-                                            </image>
-                                            <rotationAxis>
-                                                <Point3D y="1.0" />
+                                                <Point3D y="1.0"/>
                                             </rotationAxis>
                                         </ImageView>
                                     </graphic>
                                 </Button>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/debug.png" />
+                                                <Image url="@../img/cut.png"/>
                                             </image>
                                             <rotationAxis>
-                                                <Point3D y="1.0" />
+                                                <Point3D y="1.0"/>
                                             </rotationAxis>
                                         </ImageView>
                                     </graphic>
                                 </Button>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/stop.png" />
+                                                <Image url="@../img/paste.png"/>
                                             </image>
                                             <rotationAxis>
-                                                <Point3D y="1.0" />
+                                                <Point3D y="1.0"/>
                                             </rotationAxis>
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Separator orientation="VERTICAL" />
+                                <Separator orientation="VERTICAL"/>
+                                <ComboBox prefWidth="150.0"/>
                                 <Button mnemonicParsing="false">
                                     <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/setting.png" />
+                                                <Image url="@../img/run.png"/>
+                                            </image>
+                                            <rotationAxis>
+                                                <Point3D y="1.0"/>
+                                            </rotationAxis>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/debug.png"/>
+                                            </image>
+                                            <rotationAxis>
+                                                <Point3D y="1.0"/>
+                                            </rotationAxis>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button mnemonicParsing="false">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/stop.png"/>
+                                            </image>
+                                            <rotationAxis>
+                                                <Point3D y="1.0"/>
+                                            </rotationAxis>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Separator orientation="VERTICAL"/>
+                                <Button mnemonicParsing="false">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0"
+                                                   fitWidth="20.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/setting.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -208,66 +274,110 @@
                 </VBox>
             </top>
             <bottom>
-                <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <ToolBar prefHeight="40.0"
+                         prefWidth="200.0"
+                         BorderPane.alignment="CENTER">
                     <items>
-                        <Button mnemonicParsing="false" onAction="#terminalButtonOnAction" prefWidth="100.0" text="终端" />
-                        <Button mnemonicParsing="false" onAction="#outputButtonOnAction" prefWidth="100.0" text="输出" />
-                        <Button mnemonicParsing="false" onAction="#debugButtonOnAction" prefWidth="100.0" text="调试" />
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="运行栈" />
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="Git" />
+                        <Button mnemonicParsing="false"
+                                onAction="#terminalButtonOnAction"
+                                prefWidth="100.0"
+                                text="终端"/>
+                        <Button mnemonicParsing="false"
+                                onAction="#outputButtonOnAction"
+                                prefWidth="100.0"
+                                text="输出"/>
+                        <Button mnemonicParsing="false"
+                                onAction="#debugButtonOnAction"
+                                prefWidth="100.0"
+                                text="调试"/>
+                        <Button mnemonicParsing="false"
+                                prefWidth="100.0"
+                                text="运行栈"/>
+                        <Button mnemonicParsing="false"
+                                prefWidth="100.0"
+                                text="Git"/>
                     </items>
                 </ToolBar>
             </bottom>
             <center>
-                <SplitPane fx:id="toolTileSplitPane" orientation="VERTICAL" BorderPane.alignment="CENTER">
+                <SplitPane fx:id="toolTileSplitPane"
+                           orientation="VERTICAL"
+                           BorderPane.alignment="CENTER">
                     <items>
-                  <SplitPane fx:id="projectSplitPane" dividerPositions="0.2" prefHeight="200.0" prefWidth="200.0">
-                     <items>
-                              <VBox snapToPixel="false">
-                                  <children>
-                                      <HBox>
-                                          <children>
-                                              <Label text="项目：" />
-                                              <Label fx:id="projectNameLabel" />
-                                          </children>
-                                          <padding>
-                                              <Insets bottom="5.0" left="10.0" top="5.0" />
-                                          </padding>
-                                      </HBox>
-                                      <Separator />
-                                      <TreeView fx:id="projectTreeView" onMouseClicked="#TreeViewOnDoubleClicked" VBox.vgrow="ALWAYS">
-                                 <contextMenu>
-                                    <ContextMenu>
-                                      <items>
-                                          <Menu mnemonicParsing="false" text="新建">
-                                            <items>
-                                              <MenuItem mnemonicParsing="false" onAction="#newAsmFileOnAction" text="ASM文件" />
-                                                <MenuItem mnemonicParsing="false" onAction="#newFolderMenuItemOnAction" text="文件夹" />
-                                            </items>
-                                          </Menu>
-                                          <MenuItem mnemonicParsing="false" onAction="#renameMenuItemOnAction" text="重命名" />
-                                        <MenuItem mnemonicParsing="false" onAction="#deleteMenuItemOnAction" text="删除" />
-                                      </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                              </TreeView>
-                                  </children>
-                              </VBox>
-                              <TabPane fx:id="editTabPane" minWidth="100.0">
+                        <SplitPane fx:id="projectSplitPane"
+                                   dividerPositions="0.2"
+                                   prefHeight="200.0"
+                                   prefWidth="200.0">
+                            <items>
+                                <VBox snapToPixel="false">
+                                    <children>
+                                        <HBox>
+                                            <children>
+                                                <Label text="项目："/>
+                                                <Label fx:id="projectNameLabel"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="5.0"
+                                                        left="10.0"
+                                                        top="5.0"/>
+                                            </padding>
+                                        </HBox>
+                                        <Separator/>
+                                        <TreeView fx:id="projectTreeView"
+                                                  onMouseClicked="#TreeViewOnDoubleClicked"
+                                                  VBox.vgrow="ALWAYS">
+                                            <contextMenu>
+                                                <ContextMenu>
+                                                    <items>
+                                                        <Menu mnemonicParsing="false"
+                                                              text="新建">
+                                                            <items>
+                                                                <MenuItem mnemonicParsing="false"
+                                                                          onAction="#newAsmFileOnAction"
+                                                                          text="ASM文件"/>
+                                                                <MenuItem mnemonicParsing="false"
+                                                                          onAction="#newFolderMenuItemOnAction"
+                                                                          text="文件夹"/>
+                                                            </items>
+                                                        </Menu>
+                                                        <MenuItem mnemonicParsing="false"
+                                                                  onAction="#renameMenuItemOnAction"
+                                                                  text="重命名"/>
+                                                        <MenuItem mnemonicParsing="false"
+                                                                  onAction="#deleteMenuItemOnAction"
+                                                                  text="删除"/>
+                                                    </items>
+                                                </ContextMenu>
+                                            </contextMenu>
+                                        </TreeView>
+                                    </children>
+                                </VBox>
+                                <TabPane fx:id="editTabPane"
+                                         minWidth="100.0">
 
-                        </TabPane>
-                     </items>
-                  </SplitPane>
+                                </TabPane>
+                            </items>
+                        </SplitPane>
                     </items>
                 </SplitPane>
             </center>
             <left>
-                <VBox maxWidth="34.0" minWidth="30.0" prefHeight="960.0" prefWidth="34.0" BorderPane.alignment="CENTER">
+                <VBox maxWidth="34.0"
+                      minWidth="30.0"
+                      prefHeight="960.0"
+                      prefWidth="34.0"
+                      BorderPane.alignment="CENTER">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#projectButtonOnAction" prefHeight="80.0" text="项目" textAlignment="JUSTIFY" wrapText="true" />
+                        <Button alignment="CENTER"
+                                mnemonicParsing="false"
+                                onAction="#projectButtonOnAction"
+                                prefHeight="80.0"
+                                text="项目"
+                                textAlignment="JUSTIFY"
+                                wrapText="true"/>
                     </children>
                     <padding>
-                        <Insets top="40.0" />
+                        <Insets top="40.0"/>
                     </padding>
                 </VBox>
             </left>

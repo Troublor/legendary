@@ -230,7 +230,7 @@ public class MainController extends Controller {
     @FXML
     public void terminalButtonOnAction(ActionEvent actionEvent) {
         if (this.terminalPaneBackUp == null) {
-            this.terminalPaneBackUp = new Pane();
+            this.terminalPaneBackUp = new TerminalToolTileController();
         }
         if (this.toolTileSplitPane.getItems().size() == 1) {
             this.toolTileSplitPane.getItems().add(this.terminalPaneBackUp);
