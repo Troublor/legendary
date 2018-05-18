@@ -64,6 +64,9 @@ public class DosConnector implements Runnable{
     private Gson gson = new Gson();
     private Process dos_process;
     private  Socket dos_client;
+    private DosASMProcessFunction asm_func;
+    private DosTraceProcessFunction trace_func;
+    private DosStdProcessFunction std_func;
 
     /**
      * 在后台进程启动 dos,使用 socket 进行数据交换
@@ -98,6 +101,13 @@ public class DosConnector implements Runnable{
     }
 
     static Pattern command_pat = Pattern.compile(".*?(\\{.*?\\})");
+
+    /**
+     * 对 buffer 检查 DOS 返回的运行结果，将每段运行结果分离，
+     * 分离每段运行结果的依据是：每段运行结果是 {、} 包围的 json串
+     * @param buffer
+     * @return 运行结果的数组
+     */
     private ArrayList<String> checkBuffer(ByteBuffer buffer) {
         String buf_string = new String(buffer.array(),0,  buffer.position());
         Matcher m = command_pat.matcher(buf_string);
@@ -111,10 +121,41 @@ public class DosConnector implements Runnable{
         return result;
     }
 
+    /**
+     * 解析 DOS 运行结果的函数
+     */
+
+    private DosASMOutput resolveASM(String json_string) {
+        return gson.fromJson(json_string, DosASMOutput.class);
+    }
+
+    private DosTraceOutput resolveTrace(String json_string) {
+        return gson.fromJson(json_string, DosTraceOutput.class);
+    }
+
+    private DosStdResult resolveStd(String json_string) {
+        return gson.fromJson(json_string, DosStdResult.class);
+    }
 
     /*
-        以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
-         */
+    注册处理 DOS 运行返回结果的方法
+    注册的方法会在每次 DOS 返回运行结果时被调用
+     */
+    public void registerTraceFunc(DosTraceProcessFunction f) {
+        this.trace_func = f;
+    }
+
+    public void registerASMFunc(DosASMProcessFunction f) {
+        this.asm_func = f;
+    }
+    public void registerStdFunc(DosStdProcessFunction f) {
+        this.std_func = f;
+    }
+
+
+    /*
+    以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
+    */
     public void startDebug(String exe_file) {
         assert  exe_file != null;
         String[] args = {exe_file};
@@ -195,6 +236,28 @@ public class DosConnector implements Runnable{
                 buffer.put(b, 0, n);
                 ArrayList<String> outputs = checkBuffer(buffer);
                 // todo callbacks
+                for (String output :
+                        outputs) {
+                    if (output.contains("{\"stdout\":")) {
+                        if (this.std_func != null) {
+                            DosStdResult dos_result = resolveStd(output);
+                            this.std_func.processStdOutput(dos_result.stdout);
+                        }
+                    }
+                    else if (output.contains("\"AX\":") && output.contains("\"IP\":") &&
+                            output.contains("\"flags\":")) {
+                        if (this.trace_func != null) {
+                            DosTraceOutput dos_result = resolveTrace(output);
+                            this.trace_func.processDosOutput(dos_result);
+                        }
+                    }
+                    else {
+                        if (this.asm_func != null) {
+                            DosASMOutput dos_result = resolveASM(output);
+                            this.asm_func.processDosOutput(dos_result);
+                        }
+                    }
+                }
                 System.out.println(outputs);
                 buffer.clear();
             }
@@ -229,12 +292,12 @@ public class DosConnector implements Runnable{
                 InputStream in_from_dos = dc.dos_client.getInputStream();
                 byte[] b = new byte[8192];
                 while (true) {
-                    int n = in_from_dos.read(b);
-                    buffer.put(b, 0, n);
-                    ArrayList<String> outputs = dc.checkBuffer(buffer);
-                    // todo callbacks
-                    System.out.println(outputs);
-                    buffer.clear();
+//                    int n = in_from_dos.read(b);
+//                    buffer.put(b, 0, n);
+//                    ArrayList<String> outputs = dc.checkBuffer(buffer);
+//                    // todo callbacks
+//                    System.out.println(outputs);
+//                    buffer.clear();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -266,4 +329,8 @@ class CommandJson {
         this.command = command;
         this.args = args;
     }
+}
+
+class DosStdResult {
+    public String stdout;
 }
