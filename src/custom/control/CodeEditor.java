@@ -1,7 +1,7 @@
 package custom.control;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.scene.Parent;
 import javafx.scene.web.HTMLEditor;
 import model.*;
 import org.jsoup.Jsoup;
@@ -57,12 +57,20 @@ public class CodeEditor extends HTMLEditor {
                             System.out.println("token list result");
                             System.out.println(TokenManager.getInstance().toString());
                             System.out.println("start highlighting");
-                            String highlight_res = SyntaxHighlighter.getInstance().startHighlighting();
+                            code_text = SyntaxHighlighter.getInstance().startHighlighting();
                             System.out.println("highlighting result");
-                            System.out.println(highlight_res);
+                            System.out.println(code_text);
+                            final String highlight_res = code_text;
 
-                            uiUpdater.setResult(highlight_res);
-                            uiUpdater.call();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setHtmlText(highlight_res);
+                                }
+                            });
+
+//                            uiUpdater.setResult(code_text);
+//                            uiUpdater.call();
                         }
                     } else {
                         continue;
@@ -119,7 +127,7 @@ public class CodeEditor extends HTMLEditor {
             Document doc = Jsoup.parse(rawHtml);
             for (Element e :
                     doc.getElementsByTag("p")) {
-                writer.write(e.text());
+                writer.write(e.text() + "\n");
             }
             writer.flush(); // 把缓存区内容压入文件
         } catch (Exception e) {
