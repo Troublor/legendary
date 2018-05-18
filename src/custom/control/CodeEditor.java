@@ -2,6 +2,8 @@ package custom.control;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.HTMLEditor;
 import model.*;
 import org.jsoup.Jsoup;
@@ -99,7 +101,11 @@ public class CodeEditor extends HTMLEditor {
         this.file = file;
         this.displayFile();
         uiUpdater.setOnSucceeded(event -> uiUpdater.editor.setHtmlText(uiUpdater.result));
-
+        GridPane gridPane = (GridPane)this.getChildren().get(0);
+        ToolBar toolBar = (ToolBar)gridPane.getChildren().get(0);
+//        toolBar.setVisible(false);
+        toolBar = (ToolBar)gridPane.getChildren().get(1);
+//        toolBar.setVisible(false);
         printer.start();
     }
 
