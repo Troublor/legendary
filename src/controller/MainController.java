@@ -1,8 +1,9 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import custom.control.CodeEditor;
+import custom.control.OutputToolTileController;
+import custom.control.TerminalToolTileController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,21 +14,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.ApplicationData;
 import model.ProjectFile;
-import sun.dc.pr.PRError;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainController extends Controller {
     //Controls
@@ -246,7 +241,7 @@ public class MainController extends Controller {
     @FXML
     public void outputButtonOnAction(ActionEvent actionEvent) {
         if (this.outputPaneBackUp == null) {
-            this.outputPaneBackUp = new Pane();
+            this.outputPaneBackUp = new OutputToolTileController();
         }
         if (this.toolTileSplitPane.getItems().size() == 1) {
             this.toolTileSplitPane.getItems().add(1, this.outputPaneBackUp);

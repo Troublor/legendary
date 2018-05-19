@@ -1,4 +1,4 @@
-package controller;
+package custom.control;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,12 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class TerminalToolTileController extends VBox {
+public class ToolTileController extends VBox {
     @FXML
-    private Label titleLabel;
+    protected Label titleLabel;
 
-    public TerminalToolTileController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../layout/ToolTileControl.fxml"));
+    public ToolTileController() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ToolTileControl.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -20,6 +20,5 @@ public class TerminalToolTileController extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        titleLabel.setText("终端");
     }
 }
