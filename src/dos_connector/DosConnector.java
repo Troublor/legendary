@@ -1,7 +1,6 @@
 package dos_connector;
 
 import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,13 +84,20 @@ public class DosConnector implements Runnable{
          */
 
         initDOS(command_port);
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        }catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         dos_client = new Socket();
-        dos_client.connect(new InetSocketAddress("localhost", command_port), 2);
+        dos_client.connect(new InetSocketAddress("localhost", command_port), 5);
+        byte [] temp = new byte[100];
+        int n = dos_client.getInputStream().read(temp);
+        String result = new String(temp, 0, n);
+        if (! result.matches(".*?<start>.*")) {
+            throw new IOException("not connected");
+        }
+
         System.out.println("connected");
     }
     private void initDOS(int command_port) throws IOException{
@@ -184,6 +190,8 @@ public class DosConnector implements Runnable{
         String[] args = {obj_file};
         this.sendCommand("link", args);
     }
+
+
     private void sendCommand(String command, String[] args) {
         CommandJson cmd = new CommandJson(command, args);
         String cmd_json = this.gson.toJson(cmd);
@@ -296,12 +304,12 @@ public class DosConnector implements Runnable{
                 InputStream in_from_dos = dc.dos_client.getInputStream();
                 byte[] b = new byte[8192];
                 while (true) {
-//                    int n = in_from_dos.read(b);
-//                    buffer.put(b, 0, n);
-//                    ArrayList<String> outputs = dc.checkBuffer(buffer);
-//                    // todo callbacks
-//                    System.out.println(outputs);
-//                    buffer.clear();
+                    int n = in_from_dos.read(b);
+                    buffer.put(b, 0, n);
+                    ArrayList<String> outputs = dc.checkBuffer(buffer);
+                    // todo callbacks
+                    System.out.println(outputs);
+                    buffer.clear();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -320,6 +328,9 @@ public class DosConnector implements Runnable{
         System.out.println(gson.toJson(cmd));
 //        test_pat();
         test_dos();
+//        System.out.println("safdf<start>df".matches(".*?<start>.*"));
+//        System.out.println(Pattern.matches(".*?(<start>)", "safdf<start>df"));
+
     }
 
 
