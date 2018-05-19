@@ -1,3 +1,12 @@
+安装：
+1. 先安装 qemu, python
+2. Python 安装依赖库 pexpect
+3. `cd`  到 当前 `DosOnAir`  文件夹下 运行 `setup_dos` 脚本
+出现 `dos.disk`, 安装完成
+
+
+
+
 # Overview
 `DosOnAir` is a project focusing on making leaning (16 bits real mode)assembly language easier.
 
