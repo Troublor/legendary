@@ -6,12 +6,15 @@ import custom.control.CodeEditor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,6 +37,10 @@ public class MainController extends Controller {
     private Label projectNameLabel;
     @FXML
     private TabPane editTabPane;
+    @FXML
+    private SplitPane projectSplitPane;
+    @FXML
+    private SplitPane toolTileSplitPane;
 
     @FXML
     private void openFolderButtonOnClicked(MouseEvent mouseEvent) {
@@ -208,9 +215,74 @@ public class MainController extends Controller {
         }
     }
 
+    @FXML
+    public void projectButtonOnAction(ActionEvent actionEvent) {
+        if (this.projectPaneBackUp == null) {
+            this.projectPaneBackUp = this.projectSplitPane.getItems().get(0);
+            this.projectSplitPane.getItems().remove(this.projectPaneBackUp);
+        } else {
+            this.projectSplitPane.getItems().add(0, this.projectPaneBackUp);
+            this.projectSplitPane.setDividerPosition(0, 0.2);
+            this.projectPaneBackUp = null;
+        }
+    }
+
+    @FXML
+    public void terminalButtonOnAction(ActionEvent actionEvent) {
+        if (this.terminalPaneBackUp == null) {
+            this.terminalPaneBackUp = new TerminalToolTileController();
+        }
+        if (this.toolTileSplitPane.getItems().size() == 1) {
+            this.toolTileSplitPane.getItems().add(this.terminalPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        } else if (this.toolTileSplitPane.getItems().get(1) == this.terminalPaneBackUp) {
+            this.toolTileSplitPane.getItems().remove(this.terminalPaneBackUp);
+        } else {
+            this.toolTileSplitPane.getItems().set(1, this.terminalPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        }
+    }
+
+    @FXML
+    public void outputButtonOnAction(ActionEvent actionEvent) {
+        if (this.outputPaneBackUp == null) {
+            this.outputPaneBackUp = new Pane();
+        }
+        if (this.toolTileSplitPane.getItems().size() == 1) {
+            this.toolTileSplitPane.getItems().add(1, this.outputPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        } else if (this.toolTileSplitPane.getItems().get(1) == this.outputPaneBackUp) {
+            this.toolTileSplitPane.getItems().remove(this.outputPaneBackUp);
+        } else {
+            this.toolTileSplitPane.getItems().set(1, this.outputPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        }
+    }
+
+    @FXML
+    public void debugButtonOnAction(ActionEvent actionEvent) {
+        if (this.debugPaneBackUp == null) {
+            this.debugPaneBackUp = new Pane();
+        }
+        if (this.toolTileSplitPane.getItems().size() == 1) {
+            this.toolTileSplitPane.getItems().add(1, this.debugPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        } else if (this.toolTileSplitPane.getItems().get(1) == this.debugPaneBackUp) {
+            this.toolTileSplitPane.getItems().remove(this.debugPaneBackUp);
+        } else {
+            this.toolTileSplitPane.getItems().set(1, this.debugPaneBackUp);
+            this.toolTileSplitPane.setDividerPosition(0, 0.8);
+        }
+    }
+
 
     //self resources
     private ApplicationData applicationData = new ApplicationData();
+
+    private Node projectPaneBackUp;
+    private Node terminalPaneBackUp;
+    private Node outputPaneBackUp;
+    private Node debugPaneBackUp;
 
     /**
      * 根据root path初始化
