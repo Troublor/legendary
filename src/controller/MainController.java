@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.istack.internal.NotNull;
 import custom.control.CodeEditor;
+import custom.control.DebugToolTileController;
 import custom.control.OutputToolTileController;
 import custom.control.TerminalToolTileController;
 import javafx.event.ActionEvent;
@@ -257,7 +258,7 @@ public class MainController extends Controller {
     @FXML
     public void debugButtonOnAction(ActionEvent actionEvent) {
         if (this.debugPaneBackUp == null) {
-            this.debugPaneBackUp = new Pane();
+            this.debugPaneBackUp = new DebugToolTileController();
         }
         if (this.toolTileSplitPane.getItems().size() == 1) {
             this.toolTileSplitPane.getItems().add(1, this.debugPaneBackUp);
