@@ -2,7 +2,10 @@ package dos_connector;
 
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
@@ -75,6 +78,8 @@ public class DosConnector implements Runnable{
     private Path dos_path = Paths.get("", "DosOnAir").toAbsolutePath();
     private Path qemu_path = Paths.get("", "DosOnAir", "qemu-system-i386-ubuntu").toAbsolutePath();
 
+    static Pattern command_pat = Pattern.compile(".*?(\\{.*?\\})");
+
     /**
      * 在后台进程启动 dos,使用 socket 进行数据交换
      * dos 作为服务端，DosConnector 作为请求端
@@ -104,34 +109,88 @@ public class DosConnector implements Runnable{
                 */
                 dos_client.connect(new InetSocketAddress("localhost", command_port), 1000);
                 connected = true;
-            }catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("can not connect to dos");
                 if (this.dos_process.isAlive()) {
                     System.out.println("dos alive");
-                }
-                else {
+                } else {
                     System.out.println("dos not alive");
                     InputStream is = this.dos_process.getErrorStream();
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader br = new BufferedReader(isr);
                     String line;
 
-                    while((line = br.readLine()) != null ) {
+                    while ((line = br.readLine()) != null) {
                         System.err.println(line);
                         System.err.flush();
                     }
                 }
             }
         }
-        byte [] temp = new byte[100];
+        byte[] temp = new byte[100];
         int n = dos_client.getInputStream().read(temp);
         String result = new String(temp, 0, n);
-        if (! result.matches(".*?<start>.*")) {
+        if (!result.matches(".*?<start>.*")) {
             throw new IOException("not connected");
         }
 
         System.out.println("connected");
     }
+
+    public static void test_dos() {
+        try {
+            DosConnector dc = new DosConnector(12222);
+            dc.startDebug("sample.exe");
+            dc.step(3);
+//            dc.startListen();
+            try {
+                ByteBuffer buffer = ByteBuffer.allocate(8192);
+                InputStream input_from_dos = dc.dos_client.getInputStream();
+                byte[] b = new byte[8192];
+                while (true) {
+                    int n = input_from_dos.read(b);
+                    buffer.put(b, 0, n);
+                    ArrayList<String> outputs = dc.checkBuffer(buffer);
+                    // todo callbacks
+                    System.out.println(outputs);
+                    buffer.clear();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args) {
+//        Gson gson = new Gson();
+//        CommandJson cmd = gson.fromJson("{\"command\":\"test\",\"args\":[\"test_args\"]}", CommandJson.class);
+//        CommandJson cmd = new CommandJson("test", null);
+//        System.out.println(gson.toJson(cmd));
+//        test_pat();
+        test_dos();
+//        System.out.   println("safdf<start>df".matches(".*?<start>.*"));
+//        System.out.println(Pattern.matches(".*?(<start>)", "safdf<start>df"));
+//        Path dos_path = Paths.get("", "DosOnAir");
+//        System.out.println(dos_path.toAbsolutePath().toString());
+
+//        System.out.println(dos_path.toString());
+
+    }
+
+    public static void buffer_test() {
+        ByteBuffer buffer = ByteBuffer.allocate(1000);
+        byte[] bs = {1, 2, 3, 4};
+        byte[] bss = new byte[6];
+        buffer.put(bs);
+        buffer.flip();
+        buffer.get(bss);
+        System.out.println(Arrays.toString(bss));
+    }
+
     private void initDOS(int command_port) throws IOException{
         /*
         运行 dos-on-air 脚本来开机 dos
@@ -150,30 +209,9 @@ public class DosConnector implements Runnable{
         String command = String.format("python3 %s localhost %d %s --qemupath %s",
                 dos_on_air_path.toString(), command_port, this.dos_path.toString(), this.qemu_path.toString());
         System.out.println(command);
-        this.dos_process = r.exec(command , null, dos_path.toFile());
+        this.dos_process = r.exec(command, null, dos_path.toFile());
         System.out.println("dos process: " + this.dos_process.toString());
 
-    }
-
-    static Pattern command_pat = Pattern.compile(".*?(\\{.*?\\})");
-
-    /**
-     * 对 buffer 检查 DOS 返回的运行结果，将每段运行结果分离，
-     * 分离每段运行结果的依据是：每段运行结果是 {、} 包围的 json串
-     * @param buffer
-     * @return 运行结果的数组
-     */
-    private ArrayList<String> checkBuffer(ByteBuffer buffer) {
-        String buf_string = new String(buffer.array(),0,  buffer.position());
-        Matcher m = command_pat.matcher(buf_string);
-        ArrayList<String> result = new ArrayList<>();
-        while (m.find()) {
-            result.add(m.group(1));
-            buf_string =  buf_string.substring(m.end(), buf_string.length());
-            m = command_pat.matcher(buf_string);
-        }
-        buffer.clear();
-        return result;
     }
 
     /**
@@ -203,19 +241,6 @@ public class DosConnector implements Runnable{
     public void registerASMFunc(DosASMProcessFunction f) {
         this.asm_func = f;
     }
-    public void registerStdFunc(DosStdProcessFunction f) {
-        this.std_func = f;
-    }
-
-
-    /*
-    以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
-    */
-    public void startDebug(String exe_file) {
-        assert  exe_file != null;
-        String[] args = {exe_file};
-        this.sendCommand("debug", args);
-    }
     public void step(int n) {
         String[] args = {String.valueOf(n)};
         this.sendCommand("step", args);
@@ -231,13 +256,30 @@ public class DosConnector implements Runnable{
         String[] args = {asm_file};
         this.sendCommand("masm", args);
     }
+
     public void link(String obj_file) {
         String[] args = {obj_file};
         this.sendCommand("link", args);
     }
-    public void std_input(String input) {
-        String[] args = {input};
-        this.sendCommand("std_input", args);
+
+    /**
+     * 对 buffer 检查 DOS 返回的运行结果，将每段运行结果分离，
+     * 分离每段运行结果的依据是：每段运行结果是 {、} 包围的 json串
+     *
+     * @param buffer
+     * @return 运行结果的数组
+     */
+    private ArrayList<String> checkBuffer(ByteBuffer buffer) {
+        String buf_string = new String(buffer.array(), 0, buffer.position());
+        Matcher m = command_pat.matcher(buf_string);
+        ArrayList<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group(1));
+            buf_string = buf_string.substring(m.end(), buf_string.length());
+            m = command_pat.matcher(buf_string);
+        }
+        buffer.clear();
+        return result;
     }
 
 
@@ -286,6 +328,29 @@ public class DosConnector implements Runnable{
         }
     }
 
+    public void registerStdFunc(DosStdProcessFunction f) {
+        this.std_func = f;
+    }
+
+    /*
+    以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
+    */
+    public void startDebug(String exe_file) {
+        assert exe_file != null;
+        String[] args = {exe_file};
+        this.sendCommand("debug", args);
+    }
+
+    public void startListen() {
+        System.out.println("start listening to dos");
+        new Thread(this, "dos_listener").start();
+    }
+
+    public void std_input(String input) {
+        String[] args = {input};
+        this.sendCommand("std_input", args);
+    }
+
     @Override
     public void run() {
         try {
@@ -304,15 +369,13 @@ public class DosConnector implements Runnable{
                             DosStdResult dos_result = resolveStd(output);
                             this.std_func.processStdOutput(dos_result.stdout);
                         }
-                    }
-                    else if (output.contains("\"AX\":") && output.contains("\"IP\":") &&
+                    } else if (output.contains("\"AX\":") && output.contains("\"IP\":") &&
                             output.contains("\"flags\":")) {
                         if (this.trace_func != null) {
                             DosTraceOutput dos_result = resolveTrace(output);
                             this.trace_func.processDosOutput(dos_result);
                         }
-                    }
-                    else {
+                    } else {
                         if (this.asm_func != null) {
                             DosASMOutput dos_result = resolveASM(output);
                             this.asm_func.processDosOutput(dos_result);
@@ -326,64 +389,6 @@ public class DosConnector implements Runnable{
             e.printStackTrace();
             return;
         }
-    }
-    public void startListen() {
-        System.out.println("start listening to dos");
-        new Thread(this, "dos_listener").start();
-    }
-
-    public static void buffer_test() {
-        ByteBuffer buffer = ByteBuffer.allocate(1000);
-        byte[] bs = {1, 2, 3, 4};
-        byte[] bss = new byte[6];
-        buffer.put(bs);
-        buffer.flip();
-        buffer.get(bss);
-        System.out.println(Arrays.toString(bss));
-    }
-
-    public static void test_dos() {
-        try {
-            DosConnector dc = new DosConnector(12222);
-            dc.startDebug("sample.exe");
-            dc.step(3);
-//            dc.startListen();
-            try {
-                ByteBuffer buffer = ByteBuffer.allocate(8192);
-                InputStream input_from_dos = dc.dos_client.getInputStream();
-                byte[] b = new byte[8192];
-                while (true) {
-                    int n = input_from_dos.read(b);
-                    buffer.put(b, 0, n);
-                    ArrayList<String> outputs = dc.checkBuffer(buffer);
-                    // todo callbacks
-                    System.out.println(outputs);
-                    buffer.clear();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void main(String[] args) {
-//        Gson gson = new Gson();
-//        CommandJson cmd = gson.fromJson("{\"command\":\"test\",\"args\":[\"test_args\"]}", CommandJson.class);
-//        CommandJson cmd = new CommandJson("test", null);
-//        System.out.println(gson.toJson(cmd));
-//        test_pat();
-        test_dos();
-//        System.out.   println("safdf<start>df".matches(".*?<start>.*"));
-//        System.out.println(Pattern.matches(".*?(<start>)", "safdf<start>df"));
-//        Path dos_path = Paths.get("", "DosOnAir");
-//        System.out.println(dos_path.toAbsolutePath().toString());
-
-//        System.out.println(dos_path.toString());
-
     }
 
 

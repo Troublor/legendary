@@ -41,7 +41,7 @@ public class Lexer {
 
     public void generateToken(String raw_code) {
         TokenManager.getInstance().reset();
-        String[] code_lines = raw_code.split("[\\n]");
+        String[] code_lines = raw_code.split("\\n");
         //reval each line
         for (int line_num = 0; line_num < code_lines.length; line_num++) {
             String each_line = code_lines[line_num];

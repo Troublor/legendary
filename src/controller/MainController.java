@@ -20,7 +20,8 @@ import javafx.stage.Stage;
 import model.ApplicationData;
 import model.ProjectFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -210,6 +211,15 @@ public class MainController extends Controller {
         }
     }
 
+    private Node projectPaneBackUp;
+    private Node terminalPaneBackUp;
+    private Node outputPaneBackUp;
+    private Node debugPaneBackUp;
+
+
+    //self resources
+    private ApplicationData applicationData = new ApplicationData();
+
     @FXML
     public void projectButtonOnAction(ActionEvent actionEvent) {
         if (this.projectPaneBackUp == null) {
@@ -269,15 +279,6 @@ public class MainController extends Controller {
             this.toolTileSplitPane.setDividerPosition(0, 0.8);
         }
     }
-
-
-    //self resources
-    private ApplicationData applicationData = new ApplicationData();
-
-    private Node projectPaneBackUp;
-    private Node terminalPaneBackUp;
-    private Node outputPaneBackUp;
-    private Node debugPaneBackUp;
 
     /**
      * 根据root path初始化

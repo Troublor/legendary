@@ -6,8 +6,10 @@ import sys
 
 subprocess.run("qemu-img create -f qcow dos.disk 128M".split())
 # 从磁盘启动，格式化C 盘
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
-    qemu.expect_exact('A:\>') # 开机
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
+    qemu.expect_exact('A:\>')  # 开机
     # 建立 C 盘
     qemu.send('fdisk\r')
     qemu.expect_exact('Enter choice')
@@ -38,7 +40,9 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
     qemu.close()
 
 # 配置
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
     qemu.expect(pexpect.TIMEOUT, timeout=8)
     configs = [
         'C:',
@@ -69,7 +73,9 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
     qemu.close()
 
 # 以后就可以从C盘启动了
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:dosfiles -boot order=c -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:dosfiles -boot order=c -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
     try:
         qemu.expect_exact('C:\>', timeout=10)
         # print('can\'t launch with C:\\, please try again', file=sys.stderr)
@@ -82,6 +88,3 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
         qemu.close()
     except pexpect.TIMEOUT as e:
         print(str(qemu), file=sys.stderr)
-
-
-
