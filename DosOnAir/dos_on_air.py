@@ -8,6 +8,7 @@ import socket
 
 
 import sys
+import traceback
 
 from pty_process import PtyProcess
 
@@ -57,12 +58,14 @@ class DosOnAir:
         flags=re.DOTALL | re.VERBOSE
     )
 
-    def __init__(self, dos_files:str, dos_disk:str, delay=0.05, cwd=None) -> None:
+    # todo 没办法关闭回显，原因可能是回显是 dos 在控制
+    def __init__(self, dos_files:str, dos_disk:str, delay=0.05, qemu_path=None, cwd=None) -> None:
         super().__init__()
         self.cwd = cwd or os.getcwd()
+        self.qemu_path = qemu_path or "qemu-system-i386"
         self.dos_files = os.path.join(self.cwd, dos_files)
         self.dos_disk = os.path.join(self.cwd, dos_disk)
-        command = "qemu-system-i386 -hda {} -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:{} -boot order=c -nographic".format(self.dos_disk, self.dos_files)
+        command = "{} -hda {} -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:{} -boot order=c -nographic".format(self.qemu_path, self.dos_disk, self.dos_files)
         self.dos = PtyProcess.spawn(command.split())
         self.fd = self.dos.fd
         self.delay = delay
@@ -142,6 +145,8 @@ class DosOnAir:
         # 从 buffer 中找出所有的 trace 信息和 asm 信息，并把结果放到 self.command_out 中
         # 并将这些信息从 buffer 中删除
         while True:
+            #  在 DOS 返回字符串中匹配 trace,asm pattern
+            # 如果没有匹配，将输出放置在 self.std_out 中
             trace_match = re.search(self.trace_pat, self.dos.buff)
             asm_match = re.search(self.asm_pat, self.dos.buff)
             span = None
@@ -158,7 +163,7 @@ class DosOnAir:
                 self.command_out.append(trace_dict)
             if span:
                 self.dos.buff = self.dos.buff[0:span[0]] + self.dos.buff[span[1]:]
-        self.std_out = self.dos.buff[:]
+        self.std_out = process_from_stdout(self.dos.buff[:])
         #todo 很多意外字符
         # Program terminated 表示 dos 一个程序在 debug.exe 中正常结束
         if self.std_out.find('Program terminated') != -1:
@@ -177,6 +182,7 @@ class DosOnAir:
             data = data.decode()
         commands = re.findall('{.*?}', data)
         if not commands:
+            # todo 这里调试用，以后返回错误
             data = data.replace('\n', '\r')
             self.dos.send_one_by_one(data)
             return
@@ -226,8 +232,12 @@ class DosOnAir:
     def close(self):
         self.dos.close()
 
+def process_from_stdout(output:str):
+    result = output.replace('\r\r\n', '\n')
+    return result
 
-def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str):
+
+def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str, qemu_path):
     """
     command json format:
     debug: {"command": "debug", "args":["exe_file"]}
@@ -241,38 +251,41 @@ def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str):
     :param cwd:
     :return:
     """
-    vir = DosOnAir(dos_files, dos_disk, cwd=cwd)
+    vir = DosOnAir(dos_files, dos_disk, cwd=cwd, qemu_path=qemu_path)
     print('dos started')
     os.write(command_fd, b'<start>')
-    while True:
-        # todo bug! 不挂起一小段时间的话 开机会阻塞一下， select 的 bug?
-        r, w, x = select.select([vir.fd, command_fd], [], [], None)
-        time.sleep(0.1)
-        if command_fd in r:
-            data = os.read(command_fd, 1000)
-            vir.check_commands(data)
+    try:
+        while True:
+            # todo bug! 不挂起一小段时间的话 开机会阻塞一下， select 的 bug?
+            r, w, x = select.select([vir.fd, command_fd], [], [], None)
+            time.sleep(0.1)
+            if command_fd in r:
+                data = os.read(command_fd, 1000)
+                vir.check_commands(data)
 
-        elif vir.fd in r:
-            # todo bug! 开机第一个提示符总是读不出来 'C:\>', 加上 挂起 0.05 秒后可以解决
-            vir.dos.read()
-            vir.check_output()
-            # 传输 数据
-            if vir.command_out:
-                pprint.pprint(vir.command_out)  #debug
-                for command in vir.command_out:
-                    os.write(command_fd, json.dumps(command).encode())
-                vir.command_out = []
-            if vir.std_out:
-                result = dict(stdout=vir.std_out)
-                print(result) #debug
-                os.write(command_fd, json.dumps(result).encode())
-                vir.std_out = ''
-        else:
-            pass
-            # data = command_conn.recv(1000)
-            # data = data.replace(b'\n', b'\r')
-            # # os.write(process.fd, data)
-            # write_one_by_one(process.fd, data)
+            elif vir.fd in r:
+                # todo bug! 开机第一个提示符总是读不出来 'C:\>', 加上 挂起 0.05 秒后可以解决
+                vir.dos.read()
+                vir.check_output()
+                # 传输 数据
+                if vir.command_out:
+                    pprint.pprint(vir.command_out)  #debug
+                    for command in vir.command_out:
+                        os.write(command_fd, json.dumps(command).encode())
+                    vir.command_out = []
+                if vir.std_out:
+                    result = dict(stdout=vir.std_out)
+                    print(result) #debug
+                    os.write(command_fd, json.dumps(result).encode())
+                    vir.std_out = ''
+            else:
+                pass
+                # data = command_conn.recv(1000)
+                # data = data.replace(b'\n', b'\r')
+                # # os.write(process.fd, data)
+                # write_one_by_one(process.fd, data)
+    finally:
+        vir.close()
 
 import argparse
 if __name__ == '__main__':
@@ -280,10 +293,14 @@ if __name__ == '__main__':
     parser.add_argument('host', type=str)
     parser.add_argument('command_port', type=int, help='command port')
     parser.add_argument('cwd', type=str, help='director where dos files located (including dos.disk)')
+    parser.add_argument('--qemupath', help='set qemu path, if not set, the program will find qemu in $PATH')
     args = parser.parse_args()
+    print(args)
 
     host = args.host
     dir = args.cwd
+    qemu_path = args.qemupath
+
     command_sock = socket.socket()
     command_sock.bind((host, args.command_port))
     print("waiting for connecting...")
@@ -291,8 +308,11 @@ if __name__ == '__main__':
     command_conn, command_addr = command_sock.accept()
     print("connected with a client: {}".format(command_addr))
     try:
-        dos_loop(command_conn.fileno(), 'dosfiles', 'dos.disk', dir)
+        dos_loop(command_conn.fileno(), 'dosfiles', 'dos.disk', dir, qemu_path)
     finally:
+        traces = traceback.format_exc()
+        command_conn.send(traces.encode())
+        traceback.print_exc()
         command_conn.close()
         command_sock.close()
 
