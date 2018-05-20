@@ -1,9 +1,8 @@
 package dos_connector;
 
 import com.google.gson.Gson;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
@@ -51,7 +50,7 @@ import java.util.regex.Pattern;
   dc.startListen()
   这个方法会启动一个线程对与 DOS 连接的 soket 进行轮询，当读取到数据时，会调用回调函数
 
-  # todo 实际需要两个回调函数，一个处理 dc.step() 这种debug程序返回的寄存器数据
+  # todo 实际需要3个回调函数，一个处理 dc.step() 这种debug程序返回的寄存器数据
   # todo 另一个处理用户程序本身在标准输出进行的输出
 
   一些说明：
@@ -89,13 +88,41 @@ public class DosConnector implements Runnable{
          */
 
         initDOS(command_port);
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        }catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         dos_client = new Socket();
-        dos_client.connect(new InetSocketAddress("localhost", command_port), 5);
+        try {
+            TimeUnit.SECONDS.sleep(4);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Boolean connected = false;
+        while (!connected && this.dos_process.isAlive()) {
+            System.out.println("connecting to dos");
+            try {
+                /*   todo 神奇 debug 正常，运行就像 break 没被执行到
+                dos_client.connect(new InetSocketAddress("localhost", command_port), 1000);
+                break;
+                */
+                dos_client.connect(new InetSocketAddress("localhost", command_port), 1000);
+                connected = true;
+            }catch (IOException e) {
+                System.out.println("can not connect to dos");
+                if (this.dos_process.isAlive()) {
+                    System.out.println("dos alive");
+                }
+                else {
+                    System.out.println("dos not alive");
+                    InputStream is = this.dos_process.getErrorStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+
+                    while((line = br.readLine()) != null ) {
+                        System.err.println(line);
+                        System.err.flush();
+                    }
+                }
+            }
+        }
         byte [] temp = new byte[100];
         int n = dos_client.getInputStream().read(temp);
         String result = new String(temp, 0, n);
@@ -111,11 +138,21 @@ public class DosConnector implements Runnable{
          */
         Runtime r = Runtime.getRuntime();
         // todo remove this
-//        File dos_path = new File("/Users/gexinjie/codes/dos-on-air");
-//        this.dos_process = r.exec(String.format("python3 dos_on_air.py localhost %d /Users/gexinjie/codes/dos-on-air", command_port) , null, dos_path);
 
-        String command = String.format("python3 dos_on_air.py localhost %d %s --qemupath %s",
-                command_port, this.dos_path.toString(), this.qemu_path.toString());
+
+        Path dos_on_air_path = Paths.get(this.dos_path.toString(), "dos_on_air.py");
+        /* 个人 debug 用 */
+//        File dos_path = new File("/Users/gexinjie/codes/dos-on-air");
+//        String command = String.format("python3 %s localhost %d /Users/gexinjie/codes/dos-on-air", dos_on_air_path.toString(), command_port);
+//        System.out.println(command);
+//        this.dos_process = r.exec(command , null, dos_path);
+        /* Ubuntu 用 */
+        String command = String.format("python3 %s localhost %d %s --qemupath %s",
+                dos_on_air_path.toString(), command_port, this.dos_path.toString(), this.qemu_path.toString());
+        System.out.println(command);
+        this.dos_process = r.exec(command , null, dos_path.toFile());
+        System.out.println("dos process: " + this.dos_process.toString());
+
     }
 
     static Pattern command_pat = Pattern.compile(".*?(\\{.*?\\})");
@@ -307,7 +344,7 @@ public class DosConnector implements Runnable{
 
     public static void test_dos() {
         try {
-            DosConnector dc = new DosConnector(12342);
+            DosConnector dc = new DosConnector(12222);
             dc.startDebug("sample.exe");
             dc.step(3);
 //            dc.startListen();
