@@ -170,6 +170,9 @@ public class CodeEditor extends HTMLEditor {
         tmpFile.delete();
     }
 
+    public ProjectFile getFile() {
+        return file;
+    }
 
     synchronized public void stop() {
         start_flag = false;

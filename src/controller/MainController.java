@@ -1,6 +1,7 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import custom.control.CodeEditor;
 import custom.control.DebugToolTileController;
 import custom.control.OutputToolTileController;
@@ -307,6 +308,13 @@ public class MainController extends Controller {
      */
     private void openFile(ProjectFile file) {
         CodeEditor codeEditor = new CodeEditor(file);
+        for (Tab tab : editTabPane.getTabs()) {
+            CodeEditor editor = (CodeEditor) tab.getContent();
+            if (editor.getFile() == file) {
+                editTabPane.getSelectionModel().select(tab);
+                return;
+            }
+        }
         Tab newTab = new Tab(file.getName());
         newTab.setClosable(true);
         newTab.setContent(codeEditor);
