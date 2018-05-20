@@ -1,9 +1,7 @@
 package custom.control;
 
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
 import javafx.concurrent.Task;
-import javafx.scene.Cursor;
 import javafx.scene.web.HTMLEditor;
 import model.*;
 import org.jsoup.Jsoup;
@@ -62,17 +60,12 @@ public class CodeEditor extends HTMLEditor {
                             code_text = SyntaxHighlighter.getInstance().startHighlighting();
                             System.out.println("highlighting result");
                             System.out.println(code_text);
-//                          todo memorize cursor position
-                            ObjectProperty<Cursor> o = cursorProperty();
-
                             final String highlight_res = code_text;
 
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
                                     setHtmlText(highlight_res);
-//                                    setCursor(cursor);
-                                    setFocused(true);
                                 }
                             });
 

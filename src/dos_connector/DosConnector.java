@@ -2,12 +2,12 @@ package dos_connector;
 
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -50,7 +50,7 @@ import java.util.regex.Pattern;
   dc.startListen()
   这个方法会启动一个线程对与 DOS 连接的 soket 进行轮询，当读取到数据时，会调用回调函数
 
-  # todo 实际需要两个回调函数，一个处理 dc.step() 这种debug程序返回的寄存器数据
+  # todo 实际需要3个回调函数，一个处理 dc.step() 这种debug程序返回的寄存器数据
   # todo 另一个处理用户程序本身在标准输出进行的输出
 
   一些说明：
@@ -68,6 +68,12 @@ public class DosConnector implements Runnable{
     private Gson gson = new Gson();
     private Process dos_process;
     private  Socket dos_client;
+    private DosASMProcessFunction asm_func;
+    private DosTraceProcessFunction trace_func;
+    private DosStdProcessFunction std_func;
+
+    private Path dos_path = Paths.get("", "DosOnAir").toAbsolutePath();
+    private Path qemu_path = Paths.get("", "DosOnAir", "qemu-system-i386-ubuntu").toAbsolutePath();
 
     /**
      * 在后台进程启动 dos,使用 socket 进行数据交换
@@ -82,13 +88,48 @@ public class DosConnector implements Runnable{
          */
 
         initDOS(command_port);
+        dos_client = new Socket();
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(4);
         }catch (InterruptedException e) {
             e.printStackTrace();
         }
-        dos_client = new Socket();
-        dos_client.connect(new InetSocketAddress("localhost", command_port), 2);
+        Boolean connected = false;
+        while (!connected && this.dos_process.isAlive()) {
+            System.out.println("connecting to dos");
+            try {
+                /*   todo 神奇 debug 正常，运行就像 break 没被执行到
+                dos_client.connect(new InetSocketAddress("localhost", command_port), 1000);
+                break;
+                */
+                dos_client.connect(new InetSocketAddress("localhost", command_port), 1000);
+                connected = true;
+            }catch (IOException e) {
+                System.out.println("can not connect to dos");
+                if (this.dos_process.isAlive()) {
+                    System.out.println("dos alive");
+                }
+                else {
+                    System.out.println("dos not alive");
+                    InputStream is = this.dos_process.getErrorStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+
+                    while((line = br.readLine()) != null ) {
+                        System.err.println(line);
+                        System.err.flush();
+                    }
+                }
+            }
+        }
+        byte [] temp = new byte[100];
+        int n = dos_client.getInputStream().read(temp);
+        String result = new String(temp, 0, n);
+        if (! result.matches(".*?<start>.*")) {
+            throw new IOException("not connected");
+        }
+
         System.out.println("connected");
     }
     private void initDOS(int command_port) throws IOException{
@@ -97,11 +138,31 @@ public class DosConnector implements Runnable{
          */
         Runtime r = Runtime.getRuntime();
         // todo remove this
-        File dos_path = new File("/Users/gexinjie/codes/dos-on-air");
-        this.dos_process = r.exec(String.format("python3 dos_on_air.py localhost %d /Users/gexinjie/codes/dos-on-air", command_port) , null, dos_path);
+
+
+        Path dos_on_air_path = Paths.get(this.dos_path.toString(), "dos_on_air.py");
+        /* 个人 debug 用 */
+//        File dos_path = new File("/Users/gexinjie/codes/dos-on-air");
+//        String command = String.format("python3 %s localhost %d /Users/gexinjie/codes/dos-on-air", dos_on_air_path.toString(), command_port);
+//        System.out.println(command);
+//        this.dos_process = r.exec(command , null, dos_path);
+        /* Ubuntu 用 */
+        String command = String.format("python3 %s localhost %d %s --qemupath %s",
+                dos_on_air_path.toString(), command_port, this.dos_path.toString(), this.qemu_path.toString());
+        System.out.println(command);
+        this.dos_process = r.exec(command , null, dos_path.toFile());
+        System.out.println("dos process: " + this.dos_process.toString());
+
     }
 
     static Pattern command_pat = Pattern.compile(".*?(\\{.*?\\})");
+
+    /**
+     * 对 buffer 检查 DOS 返回的运行结果，将每段运行结果分离，
+     * 分离每段运行结果的依据是：每段运行结果是 {、} 包围的 json串
+     * @param buffer
+     * @return 运行结果的数组
+     */
     private ArrayList<String> checkBuffer(ByteBuffer buffer) {
         String buf_string = new String(buffer.array(),0,  buffer.position());
         Matcher m = command_pat.matcher(buf_string);
@@ -115,10 +176,41 @@ public class DosConnector implements Runnable{
         return result;
     }
 
+    /**
+     * 解析 DOS 运行结果的函数
+     */
+
+    private DosASMOutput resolveASM(String json_string) {
+        return gson.fromJson(json_string, DosASMOutput.class);
+    }
+
+    private DosTraceOutput resolveTrace(String json_string) {
+        return gson.fromJson(json_string, DosTraceOutput.class);
+    }
+
+    private DosStdResult resolveStd(String json_string) {
+        return gson.fromJson(json_string, DosStdResult.class);
+    }
 
     /*
-        以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
-         */
+    注册处理 DOS 运行返回结果的方法
+    注册的方法会在每次 DOS 返回运行结果时被调用
+     */
+    public void registerTraceFunc(DosTraceProcessFunction f) {
+        this.trace_func = f;
+    }
+
+    public void registerASMFunc(DosASMProcessFunction f) {
+        this.asm_func = f;
+    }
+    public void registerStdFunc(DosStdProcessFunction f) {
+        this.std_func = f;
+    }
+
+
+    /*
+    以下方法可以对dos 发送相应指令。都没有返回值，所有dos 状态都需要通过回调函数获得
+    */
     public void startDebug(String exe_file) {
         assert  exe_file != null;
         String[] args = {exe_file};
@@ -143,6 +235,12 @@ public class DosConnector implements Runnable{
         String[] args = {obj_file};
         this.sendCommand("link", args);
     }
+    public void std_input(String input) {
+        String[] args = {input};
+        this.sendCommand("std_input", args);
+    }
+
+
     private void sendCommand(String command, String[] args) {
         CommandJson cmd = new CommandJson(command, args);
         String cmd_json = this.gson.toJson(cmd);
@@ -199,6 +297,28 @@ public class DosConnector implements Runnable{
                 buffer.put(b, 0, n);
                 ArrayList<String> outputs = checkBuffer(buffer);
                 // todo callbacks
+                for (String output :
+                        outputs) {
+                    if (output.contains("{\"stdout\":")) {
+                        if (this.std_func != null) {
+                            DosStdResult dos_result = resolveStd(output);
+                            this.std_func.processStdOutput(dos_result.stdout);
+                        }
+                    }
+                    else if (output.contains("\"AX\":") && output.contains("\"IP\":") &&
+                            output.contains("\"flags\":")) {
+                        if (this.trace_func != null) {
+                            DosTraceOutput dos_result = resolveTrace(output);
+                            this.trace_func.processDosOutput(dos_result);
+                        }
+                    }
+                    else {
+                        if (this.asm_func != null) {
+                            DosASMOutput dos_result = resolveASM(output);
+                            this.asm_func.processDosOutput(dos_result);
+                        }
+                    }
+                }
                 System.out.println(outputs);
                 buffer.clear();
             }
@@ -224,16 +344,16 @@ public class DosConnector implements Runnable{
 
     public static void test_dos() {
         try {
-            DosConnector dc = new DosConnector(12342);
+            DosConnector dc = new DosConnector(12222);
             dc.startDebug("sample.exe");
             dc.step(3);
 //            dc.startListen();
             try {
                 ByteBuffer buffer = ByteBuffer.allocate(8192);
-                InputStream in_from_dos = dc.dos_client.getInputStream();
+                InputStream input_from_dos = dc.dos_client.getInputStream();
                 byte[] b = new byte[8192];
                 while (true) {
-                    int n = in_from_dos.read(b);
+                    int n = input_from_dos.read(b);
                     buffer.put(b, 0, n);
                     ArrayList<String> outputs = dc.checkBuffer(buffer);
                     // todo callbacks
@@ -251,12 +371,19 @@ public class DosConnector implements Runnable{
     }
 
     public static void main(String[] args) {
-        Gson gson = new Gson();
+//        Gson gson = new Gson();
 //        CommandJson cmd = gson.fromJson("{\"command\":\"test\",\"args\":[\"test_args\"]}", CommandJson.class);
-        CommandJson cmd = new CommandJson("test", null);
-        System.out.println(gson.toJson(cmd));
+//        CommandJson cmd = new CommandJson("test", null);
+//        System.out.println(gson.toJson(cmd));
 //        test_pat();
         test_dos();
+//        System.out.   println("safdf<start>df".matches(".*?<start>.*"));
+//        System.out.println(Pattern.matches(".*?(<start>)", "safdf<start>df"));
+//        Path dos_path = Paths.get("", "DosOnAir");
+//        System.out.println(dos_path.toAbsolutePath().toString());
+
+//        System.out.println(dos_path.toString());
+
     }
 
 
@@ -270,4 +397,8 @@ class CommandJson {
         this.command = command;
         this.args = args;
     }
+}
+
+class DosStdResult {
+    public String stdout;
 }

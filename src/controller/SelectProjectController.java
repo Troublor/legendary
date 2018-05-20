@@ -62,8 +62,10 @@ public class SelectProjectController extends Controller {
             controller.setPrimaryStage(primaryStage);
             controller.initializeProject(projectPath);
             primaryStage.setTitle("ASMax");
-            primaryStage.setX(0);
-            primaryStage.setY(0);
+            primaryStage.setX(50);
+            primaryStage.setY(50);
+            primaryStage.setWidth(1080);
+            primaryStage.setHeight(768);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (Exception e) {

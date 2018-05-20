@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1850.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
     <children>
         <BorderPane prefHeight="1080.0" prefWidth="1850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -210,60 +210,68 @@
             <bottom>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="终端" />
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="输出" />
-                        <Button mnemonicParsing="false" prefWidth="100.0" text="调试" />
+                        <Button mnemonicParsing="false" onAction="#terminalButtonOnAction" prefWidth="100.0" text="终端" />
+                        <Button mnemonicParsing="false" onAction="#outputButtonOnAction" prefWidth="100.0" text="输出" />
+                        <Button mnemonicParsing="false" onAction="#debugButtonOnAction" prefWidth="100.0" text="调试" />
                         <Button mnemonicParsing="false" prefWidth="100.0" text="运行栈" />
                         <Button mnemonicParsing="false" prefWidth="100.0" text="Git" />
                     </items>
                 </ToolBar>
             </bottom>
             <center>
-                <SplitPane dividerPositions="0.2" BorderPane.alignment="CENTER">
+                <SplitPane fx:id="toolTileSplitPane" orientation="VERTICAL" BorderPane.alignment="CENTER">
                     <items>
-                        <VBox snapToPixel="false">
-                            <children>
-                                <HBox>
+                        <SplitPane fx:id="projectSplitPane" dividerPositions="0.2" prefHeight="200.0" prefWidth="200.0">
+                            <items>
+                                <VBox snapToPixel="false">
                                     <children>
-                                        <Label text="项目：" />
-                                        <Label fx:id="projectNameLabel" />
+                                        <HBox>
+                                            <children>
+                                                <Label text="项目：" />
+                                                <Label fx:id="projectNameLabel" />
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="5.0" left="10.0" top="5.0" />
+                                            </padding>
+                                        </HBox>
+                                        <Separator />
+                                        <TreeView fx:id="projectTreeView" onMouseClicked="#TreeViewOnDoubleClicked" VBox.vgrow="ALWAYS">
+                                            <contextMenu>
+                                                <ContextMenu>
+                                                    <items>
+                                                        <Menu mnemonicParsing="false" text="新建">
+                                                            <items>
+                                                                <MenuItem mnemonicParsing="false" onAction="#newAsmFileOnAction" text="ASM文件" />
+                                                                <MenuItem mnemonicParsing="false" onAction="#newFolderMenuItemOnAction" text="文件夹" />
+                                                            </items>
+                                                        </Menu>
+                                                        <MenuItem mnemonicParsing="false" onAction="#renameMenuItemOnAction" text="重命名" />
+                                                        <MenuItem mnemonicParsing="false" onAction="#deleteMenuItemOnAction" text="删除" />
+                                                    </items>
+                                                </ContextMenu>
+                                            </contextMenu>
+                                        </TreeView>
                                     </children>
-                                    <padding>
-                                        <Insets bottom="5.0" left="10.0" top="5.0" />
-                                    </padding>
-                                </HBox>
-                                <Separator />
-                                <TreeView fx:id="projectTreeView" onMouseClicked="#TreeViewOnDoubleClicked" VBox.vgrow="ALWAYS">
-                           <contextMenu>
-                              <ContextMenu>
-                                <items>
-                                    <Menu mnemonicParsing="false" text="新建">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" onAction="#newAsmFileOnAction" text="ASM文件" />
-                                          <MenuItem mnemonicParsing="false" onAction="#newFolderMenuItemOnAction" text="文件夹" />
-                                      </items>
-                                    </Menu>
-                                    <MenuItem mnemonicParsing="false" onAction="#renameMenuItemOnAction" text="重命名" />
-                                  <MenuItem mnemonicParsing="false" onAction="#deleteMenuItemOnAction" text="删除" />
-                                </items>
-                              </ContextMenu>
-                           </contextMenu></TreeView>
-                            </children>
-                        </VBox>
-                        <TabPane fx:id="editTabPane" minWidth="100.0">
+                                </VBox>
+                                <TabPane fx:id="editTabPane" minWidth="100.0">
 
-                        </TabPane>
+                                </TabPane>
+                            </items>
+                        </SplitPane>
                     </items>
                 </SplitPane>
             </center>
             <left>
-                <VBox maxWidth="34.0" minWidth="30.0" prefHeight="960.0" prefWidth="34.0" BorderPane.alignment="CENTER">
+                <VBox maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" text="项目" textAlignment="JUSTIFY" wrapText="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#projectButtonOnAction" rotate="-90.0" text="项目" textAlignment="JUSTIFY" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="-10.0" right="-10.0" />
+                     </VBox.margin></Button>
                     </children>
-                    <padding>
-                        <Insets top="40.0" />
-                    </padding>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
                 </VBox>
             </left>
         </BorderPane>
