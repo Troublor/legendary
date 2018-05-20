@@ -1,5 +1,6 @@
 package custom.control;
 
+import dos_connector.DosConnector;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.ToolBar;
@@ -11,10 +12,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.file.Files;
 
 public class CodeEditor extends HTMLEditor {
 /*
@@ -43,25 +42,26 @@ public class CodeEditor extends HTMLEditor {
                 if (code_text.equals(getHtmlText())) {
                     if (is_modify) {
                         synchronized (this) {
-                            System.out.println("saving");
+//                            System.out.println("saving");
                             this.saveFile();
-                            System.out.println("lexer working");
+//                            System.out.println("lexer working");
                             Document content = Jsoup.parse(code_text);
-                            System.out.println("html res");
-                            System.out.println(content.toString());
+//                            System.out.println("html res");
+//                            System.out.println(content.toString());
                             Elements elements = content.body().children();
                             StringBuilder rawCode = new StringBuilder();
                             for (Element e : elements) {
                                 rawCode.append(e.text()).append("\n");
                             }
                             Lexer.getInstance().generateToken(rawCode.toString());
-                            Parser.getInstance().parse();
-                            System.out.println("token list result");
                             System.out.println(TokenManager.getInstance().toString());
-                            System.out.println("start highlighting");
+                            Parser.getInstance().parse();
+//                            System.out.println("token list result");
+//                            System.out.println(TokenManager.getInstance().toString());
+//                            System.out.println("start highlighting");
                             code_text = SyntaxHighlighter.getInstance().startHighlighting();
-                            System.out.println("highlighting result");
-                            System.out.println(code_text);
+//                            System.out.println("highlighting result");
+//                            System.out.println(code_text);
                             final String highlight_res = code_text;
 
                             Platform.runLater(new Runnable() {
@@ -101,10 +101,10 @@ public class CodeEditor extends HTMLEditor {
         this.file = file;
         this.displayFile();
         uiUpdater.setOnSucceeded(event -> uiUpdater.editor.setHtmlText(uiUpdater.result));
-        GridPane gridPane = (GridPane)this.getChildren().get(0);
-        ToolBar toolBar = (ToolBar)gridPane.getChildren().get(0);
+        GridPane gridPane = (GridPane) this.getChildren().get(0);
+        ToolBar toolBar = (ToolBar) gridPane.getChildren().get(0);
 //        toolBar.setVisible(false);
-        toolBar = (ToolBar)gridPane.getChildren().get(1);
+        toolBar = (ToolBar) gridPane.getChildren().get(1);
 //        toolBar.setVisible(false);
         printer.start();
     }
@@ -127,6 +127,9 @@ public class CodeEditor extends HTMLEditor {
         }
     }
 
+    /**
+     * 保存文件到磁盘
+     */
     public void saveFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             String rawHtml = this.getHtmlText();
@@ -139,6 +142,32 @@ public class CodeEditor extends HTMLEditor {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 运行代码(调用dos)
+     */
+    public void run() {
+        //把文件临时拷贝到dos目录
+        ProjectFile tmpFile = new ProjectFile("DosOnAir/dosfiles/" + this.file.getName());
+        try {
+            Files.copy(this.file.toPath(), tmpFile.toPath());
+        } catch (IOException e) {
+            System.out.println("unable to copy file to dos");
+            e.printStackTrace();
+            return;
+        }
+        try {
+            //调用dos
+            DosConnector dos = new DosConnector(12342);
+            //TODO 调用dos执行ASM
+        } catch (IOException e) {
+            System.out.println("dos connector error");
+            e.printStackTrace();
+            return;
+        }
+        //运行结束删除临时文件
+        tmpFile.delete();
     }
 
 

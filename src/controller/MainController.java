@@ -56,7 +56,7 @@ public class MainController extends Controller {
     @FXML
     private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
         TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
-        if (mouseEvent.getClickCount() == 2 && item.getValue().isFile()) {
+        if (mouseEvent.getClickCount() == 2 && mouseEvent.getSource() == projectTreeView && item.getValue().isFile()) {
             ProjectFile file = item.getValue();
             this.openFile(file);
         }
@@ -169,6 +169,7 @@ public class MainController extends Controller {
         }
     }
 
+    @FXML
     public void newFolderMenuItemOnAction(ActionEvent actionEvent) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -269,6 +270,13 @@ public class MainController extends Controller {
             this.toolTileSplitPane.getItems().set(1, this.debugPaneBackUp);
             this.toolTileSplitPane.setDividerPosition(0, 0.8);
         }
+    }
+
+    @FXML
+    public void runButtonOnAction(ActionEvent actionEvent) {
+        Tab currTab = this.editTabPane.getSelectionModel().getSelectedItem();
+        CodeEditor codeEditor = (CodeEditor)currTab.getContent();
+        codeEditor.run();
     }
 
 

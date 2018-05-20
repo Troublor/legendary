@@ -103,8 +103,8 @@
             </TableView>
             <TableView prefHeight="200.0" prefWidth="200.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="变量明" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn prefWidth="75.0" text="变量名" />
+                  <TableColumn prefWidth="75.0" text="值" />
                </columns>
             </TableView>
             <TableView prefHeight="200.0" prefWidth="200.0">

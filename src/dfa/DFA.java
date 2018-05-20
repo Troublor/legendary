@@ -1,5 +1,8 @@
 package dfa;
 
+import model.Parser;
+import model.Token;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -52,9 +55,15 @@ public class DFA {
                 //满足转换条件
                 current = transformation.getDestination();
                 transformation.getAction().doIt(current, input);
+//                System.out.println("current : "+current.getName());
+//                System.out.println("input: " + input.toString());
+//                System.out.println("-----------------------------");
                 return current == end;
             }
         }
+//        System.out.println("current : "+current.getName());
+//        System.out.println("input: " + input.toString());
+//        System.out.println("-----------------------------");
         throw new NoSuchTransformationException(current, input, "There is no matching transformation.");
     }
 
