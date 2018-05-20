@@ -103,6 +103,8 @@ public class MainController extends Controller {
         }
     }
 
+
+
     @FXML
     public void renameMenuItemOnAction(ActionEvent actionEvent) {
         try {
