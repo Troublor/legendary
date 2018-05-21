@@ -38,6 +38,7 @@ public class DFA {
         this.start = start;
         this.current = start;
         this.end = end;
+        this.mode = mode;
     }
 
     public DFA(Node start, Node end) {
@@ -72,6 +73,10 @@ public class DFA {
             for (Transformation transformation :
                     this.transformTable.get(current)) {
                 current = transformation.getDestination();
+                transformation.getAction().doIt(current, input);
+                System.out.println("guess to "+transformation.getDestination().getName());
+//                this.run(input);
+                break;
             }
         }
 
