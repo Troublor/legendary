@@ -43,19 +43,26 @@ public class SyntaxHighlighter {
                 token = tokens.get(token_iter);
             if (token != null && token.getLineNum() != curr_line || token_iter == tokens.size()) {
                 Element line = document.body().appendElement("p");
+                boolean is_err = false;
                 for (Token each_token : same_line_tokens) {
-                    line.appendElement("font")
-                            .appendText(each_token.getRawText())
-                            .attr("color", TOKEN_COLOR_MAP.get(each_token.getTokenType()));
+                    if (each_token.getTokenType() != TokenType.ENDLINE)
+                        line.appendElement("font")
+                                .appendText(each_token.getRawText())
+                                .attr("color", TOKEN_COLOR_MAP.get(each_token.getTokenType()))
+                                .attr("face", "Consolas");
+                    if (each_token.isError()) {
+                        is_err = true;
+                    }
                 }
+                if (is_err)
+                    line.attr("style", "background-color: rgb(255, 102, 102);");
                 if (token != null) {
                     curr_line = token.getLineNum();
                     same_line_tokens.clear();
                 }
             }
             if (token_iter < tokens.size()) {
-                if (token.getTokenType() != TokenType.ENDLINE)
-                    same_line_tokens.add(token);
+                same_line_tokens.add(token);
             }
 
         }
