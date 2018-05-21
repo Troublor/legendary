@@ -5,7 +5,7 @@ INT 21H
 CMP AL, '0'
 JB OTHER
 mov ax,axddd
-dfs
+mov ax,56465 ;sdfasfdasdf
 mov ax,bx
 CMP AL, '9'
 JBE NUM ; '0'~'9' IS NUMBER
