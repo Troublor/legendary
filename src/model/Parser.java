@@ -29,9 +29,10 @@ public class Parser {
         Node c = new ParseNode("constant");
         Node b3 = new ParseNode("border3");
         Node fi = new ParseNode("fake_instruction");
-        Node r = new ParseNode("register");
+        Node r1 = new ParseNode("register1");
         Node l2 = new ParseNode("label2");
         Node b2 = new ParseNode("border2");
+        Node b4 = new ParseNode("border4");
         dfa = new DFA(start, null);
         dfa.addTransform(
                 start,
@@ -143,24 +144,36 @@ public class Parser {
         );
         dfa.addTransform(
                 fi,
-                r,
+                r1,
                 (from, input) -> ((Token) input).getTokenType().equals(TokenType.REGISTER)
         );
         dfa.addTransform(
-                r,
-                l2,
-                (from, input) -> ((Token) input).getTokenType().equals(TokenType.BORDER)
-        );
-        dfa.addTransform(
-                l2,
+                r1,
                 b2,
                 (from, input) -> ((Token) input).getTokenType().equals(TokenType.BORDER)
                         && ((Token) input).getLabel().equals(":")
         );
         dfa.addTransform(
                 b2,
-                r,
-                (from, input) -> ((Token) input).getTokenType().equals(TokenType.REGISTER)
+                l2,
+                (from, input) -> ((Token) input).getTokenType().equals(TokenType.LABEL)
+
+        );
+        dfa.addTransform(
+                l2,
+                b4,
+                (from, input) -> ((Token) input).getTokenType().equals(TokenType.BORDER)
+                        && ((Token) input).getLabel().equals(",")
+        );
+        dfa.addTransform(
+                b4,
+                r1,
+                (from, input) -> ((Token)input).getTokenType().equals(TokenType.REGISTER)
+        );
+        dfa.addTransform(
+                l2,
+                start,
+                (from, input) -> ((Token) input).getTokenType().equals(TokenType.ENDLINE)
         );
     }
 
