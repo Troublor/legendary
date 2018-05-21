@@ -6,7 +6,9 @@ import sys
 
 subprocess.run("qemu-img create -f qcow dos.disk 128M".split())
 
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
     qemu.expect_exact('A:\>')
 
     qemu.send('fdisk\r')
@@ -37,8 +39,9 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
     qemu.expect_exact('Volume Serial Number')
     qemu.close()
 
-
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -fda Dos6.22.img -boot a -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
     qemu.expect(pexpect.TIMEOUT, timeout=8)
     configs = [
         'C:',
@@ -60,7 +63,9 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
 
     qemu.close()
 
-with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:dosfiles -boot order=c -nographic", logfile=sys.stdout, encoding='utf-8') as qemu:
+with pexpect.spawn(
+        "qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:dosfiles -boot order=c -nographic",
+        logfile=sys.stdout, encoding='utf-8') as qemu:
     try:
         qemu.expect_exact('C:\>', timeout=10)
 
@@ -73,6 +78,3 @@ with pexpect.spawn("qemu-system-i386 -hda dos.disk -m 16 -k en-us -rtc base=loca
         qemu.close()
     except pexpect.TIMEOUT as e:
         print(str(qemu), file=sys.stderr)
-
-
-

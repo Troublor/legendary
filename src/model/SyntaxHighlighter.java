@@ -37,7 +37,7 @@ public class SyntaxHighlighter {
         List<Token> same_line_tokens = new ArrayList<>();
         Document document = Jsoup.parse("<html dir=\"ltr\"><head></head><body contenteditable=\"true\"></body></html>");
         int curr_line = 0;
-        for (int token_iter = 0; token_iter <= tokens.size(); token_iter++) {
+        for (int token_iter = 0; token_iter <= tokens.size() && tokens.size() != 0; token_iter++) {
             Token token = null;
             if (token_iter < tokens.size())
                 token = tokens.get(token_iter);
@@ -53,8 +53,10 @@ public class SyntaxHighlighter {
                     same_line_tokens.clear();
                 }
             }
-            if (token_iter < tokens.size())
-                same_line_tokens.add(token);
+            if (token_iter < tokens.size()) {
+                if (token.getTokenType() != TokenType.ENDLINE)
+                    same_line_tokens.add(token);
+            }
 
         }
         return document.toString();

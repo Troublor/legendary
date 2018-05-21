@@ -1,16 +1,15 @@
+import errno
+import fcntl
+import os
+import pty
 import re
 import signal
-import termios
-import os
 import struct
-import fcntl
-import errno
-import pty
 import sys
-from shutil import which
-from pty import STDIN_FILENO, CHILD
-
+import termios
 import time
+from pty import STDIN_FILENO, CHILD
+from shutil import which
 
 
 class PtyProcess:
@@ -37,6 +36,7 @@ class PtyProcess:
         (?P<DS_change>DS:\w{4}=\w{2})? \s*
         ''',
         flags=re.DOTALL | re.VERBOSE)
+
     def __init__(self, pid, fd) -> None:
         super().__init__()
         self.pid = pid
@@ -53,7 +53,7 @@ class PtyProcess:
         data = os.read(self.fd, 1000)
         self.buff += data.decode()
 
-    def expect_exact(self, pattern_list:list or str):
+    def expect_exact(self, pattern_list: list or str):
         """
         注意 expect_exact 并不更新 buffer, 需要在 read()之后使用
         :param pattern_list:
@@ -66,7 +66,7 @@ class PtyProcess:
             if index != -1:
                 self.match = self.buff[index:index + len(pattern)]
                 self.before = self.buff[0:index]
-                self.buff = self.buff[index+len(pattern):]
+                self.buff = self.buff[index + len(pattern):]
                 return i
         return None
 
@@ -78,7 +78,7 @@ class PtyProcess:
             os.write(self.fd, bytes([alphabet]))
 
     @classmethod
-    def spawn(cls, argv:list, echo=False):
+    def spawn(cls, argv: list, echo=False):
         executable = which(argv[0])
         if not executable:
             raise FileNotFoundError('Command not found, executable: {}'.format(argv[0]))
@@ -117,7 +117,6 @@ def _setwinsize(fd, rows, cols):
     # Note, assume ws_xpixel and ws_ypixel are zero.
     s = struct.pack('HHHH', rows, cols, 0, 0)
     fcntl.ioctl(fd, TIOCSWINSZ, s)
-
 
 
 def _setecho(fd, state):

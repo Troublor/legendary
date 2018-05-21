@@ -1,7 +1,6 @@
 package controller;
 
 import com.sun.istack.internal.NotNull;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import custom.control.CodeEditor;
 import custom.control.DebugToolTileController;
 import custom.control.OutputToolTileController;
@@ -22,7 +21,8 @@ import javafx.stage.Stage;
 import model.ApplicationData;
 import model.ProjectFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,7 +102,6 @@ public class MainController extends Controller {
             e.printStackTrace();
         }
     }
-
 
 
     @FXML
@@ -215,6 +214,15 @@ public class MainController extends Controller {
         }
     }
 
+    private Node projectPaneBackUp;
+    private Node terminalPaneBackUp;
+    private Node outputPaneBackUp;
+    private Node debugPaneBackUp;
+
+
+    //self resources
+    private ApplicationData applicationData = new ApplicationData();
+
     @FXML
     public void projectButtonOnAction(ActionEvent actionEvent) {
         if (this.projectPaneBackUp == null) {
@@ -278,18 +286,11 @@ public class MainController extends Controller {
     @FXML
     public void runButtonOnAction(ActionEvent actionEvent) {
         Tab currTab = this.editTabPane.getSelectionModel().getSelectedItem();
-        CodeEditor codeEditor = (CodeEditor)currTab.getContent();
+        CodeEditor codeEditor = (CodeEditor) currTab.getContent();
         codeEditor.run();
     }
 
 
-    //self resources
-    private ApplicationData applicationData = new ApplicationData();
-
-    private Node projectPaneBackUp;
-    private Node terminalPaneBackUp;
-    private Node outputPaneBackUp;
-    private Node debugPaneBackUp;
 
     /**
      * 根据root path初始化
