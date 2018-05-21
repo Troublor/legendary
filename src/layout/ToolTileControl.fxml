@@ -18,7 +18,7 @@
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../img/close.png"/>
+                                        <Image url="@../../img/close.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -33,6 +33,6 @@
                 <Insets bottom="5.0" left="20.0" right="20.0" top="5.0"/>
             </padding>
         </HBox>
-        <TextArea fx:id="textArea" editable="false" wrapText="true"/>
+        <TextArea editable="false" wrapText="true"/>
     </children>
 </fx:root>
