@@ -16,4 +16,12 @@ public class NoSuchTransformationException extends Exception {
         this.node = node;
         this.input = input;
     }
+
+    public Object getInput() {
+        return input;
+    }
+
+    public Node getNode() {
+        return node;
+    }
 }

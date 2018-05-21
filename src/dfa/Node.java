@@ -6,4 +6,8 @@ public abstract class Node {
     public Node(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
 }

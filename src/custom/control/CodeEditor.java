@@ -1,6 +1,9 @@
 package custom.control;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.HTMLEditor;
 import model.*;
 import org.jsoup.Jsoup;
@@ -21,6 +24,7 @@ public class CodeEditor extends HTMLEditor {
 
     private boolean start_flag;
     private boolean is_modify;
+    private UIUpdater uiUpdater;
 
     //显示的文件
     private ProjectFile file;
@@ -31,9 +35,9 @@ public class CodeEditor extends HTMLEditor {
      * 编写各种逻辑代码进行使用
      */
     private Thread printer = new Thread(() -> {
-        String code_text = getHtmlText();
-        while (start_flag) {
 
+        while (start_flag) {
+            String code_text = getHtmlText();
             try {
                 Thread.sleep(500);
                 if (code_text.equals(getHtmlText())) {
@@ -42,7 +46,7 @@ public class CodeEditor extends HTMLEditor {
                             System.out.println("saving");
                             this.saveFile();
                             System.out.println("lexer working");
-                            Document content = Jsoup.parse(getHtmlText());
+                            Document content = Jsoup.parse(code_text);
                             System.out.println("html res");
                             System.out.println(content.toString());
                             Elements elements = content.body().children();
@@ -59,6 +63,7 @@ public class CodeEditor extends HTMLEditor {
                             System.out.println("highlighting result");
                             System.out.println(code_text);
                             final String highlight_res = code_text;
+
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
@@ -66,6 +71,8 @@ public class CodeEditor extends HTMLEditor {
                                 }
                             });
 
+//                            uiUpdater.setResult(code_text);
+//                            uiUpdater.call();
                         }
                     } else {
                         continue;
@@ -75,9 +82,6 @@ public class CodeEditor extends HTMLEditor {
                     System.out.println("standby for editing stop");
                     is_modify = true;
                 }
-                code_text = getHtmlText();
-
-
 //               output html result
 //                File text_display = new File("test.html");
 //                FileWriter write_in = new FileWriter(text_display, false);
@@ -93,9 +97,15 @@ public class CodeEditor extends HTMLEditor {
     public CodeEditor(ProjectFile file) {
         start_flag = true;
         is_modify = false;
+        uiUpdater = new UIUpdater(this);
         this.file = file;
         this.displayFile();
-
+        uiUpdater.setOnSucceeded(event -> uiUpdater.editor.setHtmlText(uiUpdater.result));
+        GridPane gridPane = (GridPane) this.getChildren().get(0);
+        ToolBar toolBar = (ToolBar) gridPane.getChildren().get(0);
+//        toolBar.setVisible(false);
+        toolBar = (ToolBar) gridPane.getChildren().get(1);
+//        toolBar.setVisible(false);
         printer.start();
     }
 
@@ -137,4 +147,25 @@ public class CodeEditor extends HTMLEditor {
 
     }
 
+    class UIUpdater extends Task<String> {
+
+        private CodeEditor editor;
+        private String result;
+
+        public UIUpdater(CodeEditor editor) {
+            super();
+            this.editor = editor;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+        @Override
+        protected String call() throws Exception {
+            updateMessage("Succeeded");
+            return result;
+        }
+
+    }
 }
