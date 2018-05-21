@@ -94,7 +94,8 @@ public class Lexer {
             if (comment_section != null) {
                 TokenManager.getInstance().createCommentSection(comment_section, line_num);
             }
-            TokenManager.getInstance().createEndLineMark(line_num);
+            if (line_num != 0)
+                TokenManager.getInstance().createEndLineMark(line_num);
         }
     }
 
