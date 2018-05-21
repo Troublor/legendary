@@ -12,7 +12,7 @@ public class ToolTileController extends VBox {
     protected Label titleLabel;
 
     public ToolTileController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ToolTileControl.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../layout/ToolTileControl.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
