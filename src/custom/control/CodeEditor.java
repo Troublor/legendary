@@ -1,9 +1,8 @@
 package custom.control;
 
+import dfa.InvalidTransformationException;
+import dos_connector.DosConnector;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.GridPane;
 import javafx.scene.web.HTMLEditor;
 import model.*;
 import org.jsoup.Jsoup;
@@ -11,10 +10,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.file.Files;
 
 public class CodeEditor extends HTMLEditor {
 /*
@@ -23,8 +20,7 @@ public class CodeEditor extends HTMLEditor {
  */
 
     private boolean start_flag;
-    private boolean is_modify;
-    private UIUpdater uiUpdater;
+    private boolean is_modifying;
 
     //显示的文件
     private ProjectFile file;
@@ -35,59 +31,25 @@ public class CodeEditor extends HTMLEditor {
      * 编写各种逻辑代码进行使用
      */
     private Thread printer = new Thread(() -> {
-
+        boolean is_highlighted = false;
         while (start_flag) {
-            String code_text = getHtmlText();
             try {
-                Thread.sleep(500);
+
+                Thread.sleep(100);
+                String code_text = getHtmlText();
+                Thread.sleep(400);
                 if (code_text.equals(getHtmlText())) {
-                    if (is_modify) {
-                        synchronized (this) {
-                            System.out.println("saving");
-                            this.saveFile();
-                            System.out.println("lexer working");
-                            Document content = Jsoup.parse(code_text);
-                            System.out.println("html res");
-                            System.out.println(content.toString());
-                            Elements elements = content.body().children();
-                            StringBuilder rawCode = new StringBuilder();
-                            for (Element e : elements) {
-                                rawCode.append(e.text()).append("\n");
-                            }
-                            Lexer.getInstance().generateToken(rawCode.toString());
-                            Parser.getInstance().parse();
-                            System.out.println("token list result");
-                            System.out.println(TokenManager.getInstance().toString());
-                            System.out.println("start highlighting");
-                            code_text = SyntaxHighlighter.getInstance().startHighlighting();
-                            System.out.println("highlighting result");
-                            System.out.println(code_text);
-                            final String highlight_res = code_text;
-
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    setHtmlText(highlight_res);
-                                }
-                            });
-
-//                            uiUpdater.setResult(code_text);
-//                            uiUpdater.call();
-                        }
-                    } else {
-                        continue;
+                    if (!is_modifying && !is_highlighted) {
+                        startHighlight();
+                        is_highlighted = true;
                     }
-                    is_modify = false;
+                    is_modifying = false;
                 } else {
+                    is_modifying = true;
+                    is_highlighted = false;
                     System.out.println("standby for editing stop");
-                    is_modify = true;
                 }
-//               output html result
-//                File text_display = new File("test.html");
-//                FileWriter write_in = new FileWriter(text_display, false);
-//                write_in.write(text);
-//                write_in.flush();
-//                write_in.close();
+
             } catch (Exception ee) {
                 ee.printStackTrace();
             }
@@ -96,17 +58,44 @@ public class CodeEditor extends HTMLEditor {
 
     public CodeEditor(ProjectFile file) {
         start_flag = true;
-        is_modify = false;
-        uiUpdater = new UIUpdater(this);
+        is_modifying = false;
         this.file = file;
         this.displayFile();
-        uiUpdater.setOnSucceeded(event -> uiUpdater.editor.setHtmlText(uiUpdater.result));
-        GridPane gridPane = (GridPane) this.getChildren().get(0);
-        ToolBar toolBar = (ToolBar) gridPane.getChildren().get(0);
-//        toolBar.setVisible(false);
-        toolBar = (ToolBar) gridPane.getChildren().get(1);
-//        toolBar.setVisible(false);
+
         printer.start();
+    }
+
+    private void startHighlight() throws InvalidTransformationException {
+        synchronized (this) {
+            System.out.println("lexer working");
+            Document content = Jsoup.parse(getHtmlText());
+            System.out.println("html res");
+            System.out.println(content.toString());
+            Elements elements = content.body().children();
+            StringBuilder rawCode = new StringBuilder();
+            if (elements.size() == 0 && !content.body().text().equals(""))
+                rawCode.append(content.body().text()).append("\n");
+            for (Element e : elements) {
+                rawCode.append(e.text()).append("\n");
+            }
+            Lexer.getInstance().generateToken(rawCode.toString());
+            Parser.getInstance().parse();
+            System.out.println("token list result");
+            System.out.println(TokenManager.getInstance().toString());
+            System.out.println("start highlighting");
+            String code_text = SyntaxHighlighter.getInstance().startHighlighting();
+            System.out.println("highlighting result");
+            System.out.println(code_text);
+            final String highlight_res = code_text;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    setHtmlText(highlight_res);
+                }
+            });
+            this.saveFile();
+            System.out.println("saving");
+        }
     }
 
     /**
@@ -115,24 +104,25 @@ public class CodeEditor extends HTMLEditor {
     private void displayFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String temp;
-            StringBuilder stringBuilder = new StringBuilder();
+            Document d = Jsoup.parse(getHtmlText());
             while ((temp = reader.readLine()) != null) {
-                stringBuilder.append("<p>");
-                stringBuilder.append(temp);
-                stringBuilder.append("</p>");
+                d.body().appendElement("p").appendText(temp);
             }
-            this.setHtmlText(stringBuilder.toString());
+
+            this.setHtmlText(d.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 保存文件到磁盘
+     */
     public void saveFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             String rawHtml = this.getHtmlText();
             Document doc = Jsoup.parse(rawHtml);
-            for (Element e :
-                    doc.getElementsByTag("p")) {
+            for (Element e : doc.getElementsByTag("p")) {
                 writer.write(e.text() + "\n");
             }
             writer.flush(); // 把缓存区内容压入文件
@@ -141,31 +131,39 @@ public class CodeEditor extends HTMLEditor {
         }
     }
 
+    /**
+     * 运行代码(调用dos)
+     */
+    public void run() {
+        //把文件临时拷贝到dos目录
+        ProjectFile tmpFile = new ProjectFile("DosOnAir/dosfiles/" + this.file.getName());
+        try {
+            Files.copy(this.file.toPath(), tmpFile.toPath());
+        } catch (IOException e) {
+            System.out.println("unable to copy file to dos");
+            e.printStackTrace();
+            return;
+        }
+        try {
+            //调用dos
+            DosConnector dos = new DosConnector(12342);
+            //TODO 调用dos执行ASM
+        } catch (IOException e) {
+            System.out.println("dos connector error");
+            e.printStackTrace();
+            return;
+        }
+        //运行结束删除临时文件
+        tmpFile.delete();
+    }
+
+    public ProjectFile getFile() {
+        return file;
+    }
 
     synchronized public void stop() {
         start_flag = false;
 
     }
 
-    class UIUpdater extends Task<String> {
-
-        private CodeEditor editor;
-        private String result;
-
-        public UIUpdater(CodeEditor editor) {
-            super();
-            this.editor = editor;
-        }
-
-        public void setResult(String result) {
-            this.result = result;
-        }
-
-        @Override
-        protected String call() throws Exception {
-            updateMessage("Succeeded");
-            return result;
-        }
-
-    }
 }

@@ -49,8 +49,19 @@ public class MainController extends Controller {
         }
     }
 
-    //self resources
-    private ApplicationData applicationData = new ApplicationData();
+    /**
+     * 双击一个文件时打开
+     *
+     * @param mouseEvent 鼠标点击事件
+     */
+    @FXML
+    private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
+        TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
+        if (mouseEvent.getClickCount() == 2 && mouseEvent.getSource() == projectTreeView && item.getValue().isFile()) {
+            ProjectFile file = item.getValue();
+            this.openFile(file);
+        }
+    }
 
     /**
      * 新建文件按钮点击事件
@@ -91,6 +102,7 @@ public class MainController extends Controller {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void renameMenuItemOnAction(ActionEvent actionEvent) {
@@ -159,7 +171,38 @@ public class MainController extends Controller {
         }
     }
 
-    private Node projectPaneBackUp;
+    @FXML
+    public void newFolderMenuItemOnAction(ActionEvent actionEvent) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(SelectProjectController.class.getResource("../layout/NewItemDialog.fxml"));
+            Pane page = loader.load();
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("新建");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            NewItemController controller = loader.getController();
+            controller.setPrimaryStage(dialogStage);
+            controller.setMode(NewItemController.Mode.FOLDER);
+            TreeItem<ProjectFile> folderTreeItem = this.getCurrentFolderTreeItem();
+            controller.setCurrPath(folderTreeItem.getValue().getPath());
+            controller.setTitleLabel("新建文件夹");
+            dialogStage.showAndWait();
+            if (!controller.isConfirmed()) {
+                return;
+            }
+            folderTreeItem.setExpanded(true);
+            //添加tree item到tree view
+            ProjectFile newFolder = new ProjectFile(controller.getFilePathWithName());
+            this.addProjectFileToTreeView(folderTreeItem, newFolder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void saveButtonOnAction(ActionEvent actionEvent) {
@@ -170,6 +213,15 @@ public class MainController extends Controller {
             codeEditor.saveFile();
         }
     }
+
+    private Node projectPaneBackUp;
+    private Node terminalPaneBackUp;
+    private Node outputPaneBackUp;
+    private Node debugPaneBackUp;
+
+
+    //self resources
+    private ApplicationData applicationData = new ApplicationData();
 
     @FXML
     public void projectButtonOnAction(ActionEvent actionEvent) {
@@ -215,57 +267,6 @@ public class MainController extends Controller {
         }
     }
 
-    private Node terminalPaneBackUp;
-    private Node outputPaneBackUp;
-    private Node debugPaneBackUp;
-
-    /**
-     * 双击一个文件时打开
-     *
-     * @param mouseEvent 鼠标点击事件
-     */
-    @FXML
-    private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
-        TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
-        if (mouseEvent.getClickCount() == 2 && mouseEvent.getSource() == projectTreeView && item.getValue().isFile()) {
-            ProjectFile file = item.getValue();
-            this.openFile(file);
-        }
-    }
-
-    @FXML
-    public void newFolderMenuItemOnAction(ActionEvent actionEvent) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SelectProjectController.class.getResource("../layout/NewItemDialog.fxml"));
-            Pane page = loader.load();
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("新建");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            NewItemController controller = loader.getController();
-            controller.setPrimaryStage(dialogStage);
-            controller.setMode(NewItemController.Mode.FOLDER);
-            TreeItem<ProjectFile> folderTreeItem = this.getCurrentFolderTreeItem();
-            controller.setCurrPath(folderTreeItem.getValue().getPath());
-            controller.setTitleLabel("新建文件夹");
-            dialogStage.showAndWait();
-            if (!controller.isConfirmed()) {
-                return;
-            }
-            folderTreeItem.setExpanded(true);
-            //添加tree item到tree view
-            ProjectFile newFolder = new ProjectFile(controller.getFilePathWithName());
-            this.addProjectFileToTreeView(folderTreeItem, newFolder);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void debugButtonOnAction(ActionEvent actionEvent) {
         if (this.debugPaneBackUp == null) {
@@ -288,6 +289,8 @@ public class MainController extends Controller {
         CodeEditor codeEditor = (CodeEditor) currTab.getContent();
         codeEditor.run();
     }
+
+
 
     /**
      * 根据root path初始化
