@@ -1,13 +1,10 @@
 import json
+import os
 import pprint
 import re
-import time
-import os
 import select
 import socket
-
-
-import sys
+import time
 import traceback
 
 from pty_process import PtyProcess
@@ -59,13 +56,14 @@ class DosOnAir:
     )
 
     # todo 没办法关闭回显，原因可能是回显是 dos 在控制
-    def __init__(self, dos_files:str, dos_disk:str, delay=0.05, qemu_path=None, cwd=None) -> None:
+    def __init__(self, dos_files: str, dos_disk: str, delay=0.05, qemu_path=None, cwd=None) -> None:
         super().__init__()
         self.cwd = cwd or os.getcwd()
         self.qemu_path = qemu_path or "qemu-system-i386"
         self.dos_files = os.path.join(self.cwd, dos_files)
         self.dos_disk = os.path.join(self.cwd, dos_disk)
-        command = "{} -hda {} -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:{} -boot order=c -nographic".format(self.qemu_path, self.dos_disk, self.dos_files)
+        command = "{} -hda {} -m 16 -k en-us -rtc base=localtime -drive file=fat:rw:{} -boot order=c -nographic".format(
+            self.qemu_path, self.dos_disk, self.dos_files)
         self.dos = PtyProcess.spawn(command.split())
         self.fd = self.dos.fd
         self.delay = delay
@@ -152,7 +150,7 @@ class DosOnAir:
             span = None
             if not trace_match and not asm_match:
                 break
-            elif not trace_match and asm_match :
+            elif not trace_match and asm_match:
                 asm_dict = asm_match.groupdict()
                 span = asm_match.span()
                 self.command_out.append(asm_dict)
@@ -164,13 +162,13 @@ class DosOnAir:
             if span:
                 self.dos.buff = self.dos.buff[0:span[0]] + self.dos.buff[span[1]:]
         self.std_out = process_from_stdout(self.dos.buff[:])
-        #todo 很多意外字符
+        # todo 很多意外字符
         # Program terminated 表示 dos 一个程序在 debug.exe 中正常结束
         if self.std_out.find('Program terminated') != -1:
             self.debug_state = False
         self.dos.buff = ""
 
-    def check_commands(self, data:str or bytes):
+    def check_commands(self, data: str or bytes):
         """
         command 结构；
         {"args": ["sample.exe"], "command": "debug"}
@@ -198,7 +196,7 @@ class DosOnAir:
         user_input = user_input.replace('\n', '\r')
         self.dos.send_one_by_one(user_input)
 
-    def import_file(self, file_path:str):
+    def import_file(self, file_path: str):
         with open(file_path) as inputf, open(os.path.join(self.dos_files, os.path.split(file_path)[1])) as outputf:
             for line in inputf:
                 if line.endswith('\n') and not line.endswith('\r'):
@@ -206,7 +204,7 @@ class DosOnAir:
                 else:
                     outputf.write(line)
 
-    def masm(self, asm_file:str):
+    def masm(self, asm_file: str):
         asm_file = os.path.split(asm_file)[1]
         if not os.path.exists(os.path.join(self.dos_files, asm_file)):
             raise FileNotFoundError(asm_file + ' not found in ', self.dos_files)
@@ -218,7 +216,7 @@ class DosOnAir:
         assert self.dos.expect_exact('D:\>') is not None
         return self.dos.before
 
-    def link(self, obj_file:str):
+    def link(self, obj_file: str):
         obj_file = os.path.split(obj_file)[1]
         if not os.path.exists(os.path.join(self.dos_files, obj_file)):
             raise FileNotFoundError(obj_file + ' not found in ', self.dos_files)
@@ -232,12 +230,13 @@ class DosOnAir:
     def close(self):
         self.dos.close()
 
-def process_from_stdout(output:str):
+
+def process_from_stdout(output: str):
     result = output.replace('\r\r\n', '\n')
     return result
 
 
-def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str, qemu_path):
+def dos_loop(command_fd, dos_files: str, dos_disk: str, cwd: str, qemu_path):
     """
     command json format:
     debug: {"command": "debug", "args":["exe_file"]}
@@ -269,13 +268,13 @@ def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str, qemu_path):
                 vir.check_output()
                 # 传输 数据
                 if vir.command_out:
-                    pprint.pprint(vir.command_out)  #debug
+                    pprint.pprint(vir.command_out)  # debug
                     for command in vir.command_out:
                         os.write(command_fd, json.dumps(command).encode())
                     vir.command_out = []
                 if vir.std_out:
                     result = dict(stdout=vir.std_out)
-                    print(result) #debug
+                    print(result)  # debug
                     os.write(command_fd, json.dumps(result).encode())
                     vir.std_out = ''
             else:
@@ -287,7 +286,9 @@ def dos_loop(command_fd, dos_files:str, dos_disk:str, cwd:str, qemu_path):
     finally:
         vir.close()
 
+
 import argparse
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='running dos in background')
     parser.add_argument('host', type=str)
@@ -315,7 +316,3 @@ if __name__ == '__main__':
         traceback.print_exc()
         command_conn.close()
         command_sock.close()
-
-
-
-

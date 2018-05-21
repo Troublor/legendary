@@ -1,8 +1,5 @@
 package dfa;
 
-import model.Parser;
-import model.Token;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
