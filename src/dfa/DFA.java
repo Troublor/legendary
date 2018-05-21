@@ -1,12 +1,14 @@
 package dfa;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class DFA {
-    private Map<dfa.Node, Collection<Transformation>> transformTable;
+    private Map<Node, Collection<Transformation>> transformTable;
 
     /**
      * 开始节点
@@ -24,11 +26,22 @@ public class DFA {
      */
     private Node current;
 
-    public DFA(Node start, Node end) {
+    /**
+     * 运行模式
+     * Mode.NORMAL是传统模式
+     * Mode.GUESS是智能猜测模式
+     */
+    private Mode mode = Mode.NORMAL;
+
+    public DFA(Node start, Node end, Mode mode) {
         transformTable = new Hashtable<>();
         this.start = start;
         this.current = start;
         this.end = end;
+    }
+
+    public DFA(Node start, Node end) {
+        this(start, end, Mode.NORMAL);
     }
 
     /**
@@ -52,15 +65,16 @@ public class DFA {
                 //满足转换条件
                 current = transformation.getDestination();
                 transformation.getAction().doIt(current, input);
-//                System.out.println("current : "+current.getName());
-//                System.out.println("input: " + input.toString());
-//                System.out.println("-----------------------------");
                 return current == end;
             }
         }
-//        System.out.println("current : "+current.getName());
-//        System.out.println("input: " + input.toString());
-//        System.out.println("-----------------------------");
+        if (this.mode == Mode.GUESS) {
+            for (Transformation transformation :
+                    this.transformTable.get(current)) {
+                current = transformation.getDestination();
+            }
+        }
+
         throw new NoSuchTransformationException(current, input, "There is no matching transformation.");
     }
 
@@ -95,5 +109,9 @@ public class DFA {
             }
         }
         this.transformTable.get(from).add(new Transformation(to, transformable, doable));
+    }
+
+    public enum Mode {
+        NORMAL, GUESS
     }
 }
