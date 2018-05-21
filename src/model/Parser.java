@@ -33,7 +33,7 @@ public class Parser {
         Node l2 = new ParseNode("label2");
         Node b2 = new ParseNode("border2");
         Node b4 = new ParseNode("border4");
-        dfa = new DFA(start, null);
+        dfa = new DFA(start, null, DFA.Mode.GUESS);
         dfa.addTransform(
                 start,
                 start,
@@ -190,10 +190,9 @@ public class Parser {
             } catch (NoSuchTransformationException e) {
                 token.setError(true);
 
-                System.out.println("parse error: unexpected token, " + ((Token) e.getInput()).getLabel() + ";" +
+                System.out.println("parse error: unexpected token " + ((Token) e.getInput()).getLabel() +
                         " at line " + (((Token) e.getInput()).getLineNum() + 1));
                 System.out.println("-----------------------------------------");
-                break;
             }
         }
     }
