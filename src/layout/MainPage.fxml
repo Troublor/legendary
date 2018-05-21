@@ -139,7 +139,6 @@
                                     </graphic>
                                 </Button>
                                 <Separator orientation="VERTICAL" />
-                                <ComboBox prefWidth="150.0" />
                                 <Button mnemonicParsing="false">
                                     <graphic>
                                         <ImageView fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

@@ -1,16 +1,11 @@
 package model;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
 import dfa.DFA;
 import dfa.InvalidTransformationException;
 import dfa.NoSuchTransformationException;
 import dfa.Node;
 
-import java.awt.*;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Stack;
 
 public class Parser {
     private static Parser ourInstance = null;
@@ -78,9 +73,8 @@ public class Parser {
                 start,
                 (from, input) -> {
                     Token token = (Token) input;
-                    ParseNode lastNode = (ParseNode) from;
                     return token.getTokenType().equals(TokenType.COMMENT)
-                            || lastNode.getToken().getLineNum() + 1 == token.getLineNum();
+                            || token.getTokenType().equals(TokenType.ENDLINE);
                 }
         );
         dfa.addTransform(
@@ -116,9 +110,8 @@ public class Parser {
                 start,
                 (from, input) -> {
                     Token token = (Token) input;
-                    ParseNode lastNode = (ParseNode) from;
                     return token.getTokenType().equals(TokenType.COMMENT)
-                            || lastNode.getToken().getLineNum() + 1 == token.getLineNum();
+                            || token.getTokenType().equals(TokenType.ENDLINE);
                 }
         );
         dfa.addTransform(
@@ -172,30 +165,36 @@ public class Parser {
     public void parse() {
         dfa.reset();
         List<Token> tokenList = TokenManager.getInstance().getTokenList();
-        for (Token token:
-             tokenList) {
+        for (Token token :
+                tokenList) {
             try {
                 dfa.run(token);
             } catch (NoSuchTransformationException e) {
-                System.out.println("parse error: "+token.toString());
+                token.setError(true);
+
+                System.out.println("parse error: unexpected token, " + ((Token) e.getInput()).getLabel() + ";" +
+                        " at line " + (((Token) e.getInput()).getLineNum() + 1));
+                System.out.println("-----------------------------------------");
                 break;
             }
         }
     }
+
+    public class ParseNode extends Node {
+        private Token token = null;
+
+        public ParseNode(String name) {
+            super(name);
+        }
+
+        public Token getToken() {
+            return token;
+        }
+
+        public void setToken(Token token) {
+            this.token = token;
+        }
+    }
 }
 
-class ParseNode extends Node {
-    private Token token = null;
 
-    public void setToken(Token token) {
-        this.token = token;
-    }
-
-    public Token getToken() {
-        return token;
-    }
-
-    public ParseNode(String name) {
-        super(name);
-    }
-}

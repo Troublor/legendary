@@ -1,6 +1,7 @@
 package custom.control;
 
 import dfa.InvalidTransformationException;
+import dos_connector.DosConnector;
 import javafx.application.Platform;
 import javafx.scene.web.HTMLEditor;
 import model.*;
@@ -9,10 +10,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.file.Files;
 
 public class CodeEditor extends HTMLEditor {
 /*
@@ -116,6 +115,9 @@ public class CodeEditor extends HTMLEditor {
         }
     }
 
+    /**
+     * 保存文件到磁盘
+     */
     public void saveFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             String rawHtml = this.getHtmlText();
@@ -129,6 +131,35 @@ public class CodeEditor extends HTMLEditor {
         }
     }
 
+    /**
+     * 运行代码(调用dos)
+     */
+    public void run() {
+        //把文件临时拷贝到dos目录
+        ProjectFile tmpFile = new ProjectFile("DosOnAir/dosfiles/" + this.file.getName());
+        try {
+            Files.copy(this.file.toPath(), tmpFile.toPath());
+        } catch (IOException e) {
+            System.out.println("unable to copy file to dos");
+            e.printStackTrace();
+            return;
+        }
+        try {
+            //调用dos
+            DosConnector dos = new DosConnector(12342);
+            //TODO 调用dos执行ASM
+        } catch (IOException e) {
+            System.out.println("dos connector error");
+            e.printStackTrace();
+            return;
+        }
+        //运行结束删除临时文件
+        tmpFile.delete();
+    }
+
+    public ProjectFile getFile() {
+        return file;
+    }
 
     synchronized public void stop() {
         start_flag = false;

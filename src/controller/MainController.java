@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.istack.internal.NotNull;
 import custom.control.CodeEditor;
+import custom.control.DebugToolTileController;
 import custom.control.OutputToolTileController;
 import custom.control.TerminalToolTileController;
 import javafx.event.ActionEvent;
@@ -56,7 +57,7 @@ public class MainController extends Controller {
     @FXML
     private void TreeViewOnDoubleClicked(MouseEvent mouseEvent) {
         TreeItem<ProjectFile> item = projectTreeView.getSelectionModel().getSelectedItem();
-        if (mouseEvent.getClickCount() == 2 && item.getValue().isFile()) {
+        if (mouseEvent.getClickCount() == 2 && mouseEvent.getSource() == projectTreeView && item.getValue().isFile()) {
             ProjectFile file = item.getValue();
             this.openFile(file);
         }
@@ -101,6 +102,7 @@ public class MainController extends Controller {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void renameMenuItemOnAction(ActionEvent actionEvent) {
@@ -169,6 +171,7 @@ public class MainController extends Controller {
         }
     }
 
+    @FXML
     public void newFolderMenuItemOnAction(ActionEvent actionEvent) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -267,7 +270,7 @@ public class MainController extends Controller {
     @FXML
     public void debugButtonOnAction(ActionEvent actionEvent) {
         if (this.debugPaneBackUp == null) {
-            this.debugPaneBackUp = new Pane();
+            this.debugPaneBackUp = new DebugToolTileController();
         }
         if (this.toolTileSplitPane.getItems().size() == 1) {
             this.toolTileSplitPane.getItems().add(1, this.debugPaneBackUp);
@@ -279,6 +282,15 @@ public class MainController extends Controller {
             this.toolTileSplitPane.setDividerPosition(0, 0.8);
         }
     }
+
+    @FXML
+    public void runButtonOnAction(ActionEvent actionEvent) {
+        Tab currTab = this.editTabPane.getSelectionModel().getSelectedItem();
+        CodeEditor codeEditor = (CodeEditor) currTab.getContent();
+        codeEditor.run();
+    }
+
+
 
     /**
      * 根据root path初始化
@@ -299,6 +311,13 @@ public class MainController extends Controller {
      */
     private void openFile(ProjectFile file) {
         CodeEditor codeEditor = new CodeEditor(file);
+        for (Tab tab : editTabPane.getTabs()) {
+            CodeEditor editor = (CodeEditor) tab.getContent();
+            if (editor.getFile() == file) {
+                editTabPane.getSelectionModel().select(tab);
+                return;
+            }
+        }
         Tab newTab = new Tab(file.getName());
         newTab.setClosable(true);
         newTab.setContent(codeEditor);
