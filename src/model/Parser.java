@@ -40,6 +40,11 @@ public class Parser {
         dfa = new DFA(start, null);
         dfa.addTransform(
                 start,
+                start,
+                (from, input) -> ((Token) input).getTokenType().equals(TokenType.ENDLINE)
+        );
+        dfa.addTransform(
+                start,
                 i,
                 (from, input) -> ((Token) input).getTokenType().equals(TokenType.INSTRUCTION)
         );
