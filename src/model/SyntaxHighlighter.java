@@ -53,8 +53,10 @@ public class SyntaxHighlighter {
                     same_line_tokens.clear();
                 }
             }
-            if (token_iter < tokens.size())
-                same_line_tokens.add(token);
+            if (token_iter < tokens.size()) {
+                if (token.getTokenType() != TokenType.ENDLINE)
+                    same_line_tokens.add(token);
+            }
 
         }
         return document.toString();

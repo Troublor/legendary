@@ -28,7 +28,10 @@ public class Lexer {
                 "ax,al,ah,bx,bl,bh,cx,cl,ch,dx,dl,dh,cs,ss,ds,ei,si,di".split(",")
         ));
         reserve_table.put(TokenType.FAKE_INSTRUCTION, Arrays.asList(
-                "equ,org,end,assume,db,dd,segment,ends,end".split(",")
+                "equ,org,end,assume,segment,ends,end".split(",")
+        ));
+        reserve_table.put(TokenType.DATA_TYPE, Arrays.asList(
+                "db,dd".split(",")
         ));
 
 
@@ -90,8 +93,8 @@ public class Lexer {
 
             if (comment_section != null) {
                 TokenManager.getInstance().createCommentSection(comment_section, line_num);
-
             }
+            TokenManager.getInstance().createEndLineMark(line_num);
         }
     }
 
