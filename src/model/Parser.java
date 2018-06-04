@@ -38,6 +38,7 @@ public class Parser {
                 start,
                 start,
                 (from, input) -> ((Token) input).getTokenType().equals(TokenType.ENDLINE)
+                        || ((Token) input).getTokenType().equals(TokenType.COMMENT)
         );
         dfa.addTransform(
                 start,
@@ -168,7 +169,7 @@ public class Parser {
         dfa.addTransform(
                 b4,
                 r1,
-                (from, input) -> ((Token)input).getTokenType().equals(TokenType.REGISTER)
+                (from, input) -> ((Token) input).getTokenType().equals(TokenType.REGISTER)
         );
         dfa.addTransform(
                 l2,
