@@ -26,6 +26,7 @@ public class SyntaxHighlighter {
         TOKEN_COLOR_MAP.put(TokenType.COMMENT, "#999999");
         TOKEN_COLOR_MAP.put(TokenType.BORDER, "#000000");
         TOKEN_COLOR_MAP.put(TokenType.FAKE_INSTRUCTION, "#b3b31a");
+        TOKEN_COLOR_MAP.put(TokenType.DATA_TYPE, "#b3b31a");
     }
 
     public static SyntaxHighlighter getInstance() {
@@ -50,6 +51,9 @@ public class SyntaxHighlighter {
                                 .appendText(each_token.getRawText())
                                 .attr("color", TOKEN_COLOR_MAP.get(each_token.getTokenType()))
                                 .attr("face", "Consolas");
+                    else if (same_line_tokens.size() == 1) {
+                        line.appendElement("br");
+                    }
                     if (each_token.isError()) {
                         is_err = true;
                     }

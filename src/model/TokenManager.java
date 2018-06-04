@@ -36,7 +36,7 @@ public class TokenManager {
     }
 
     public void createEndLineMark(int line_num) {
-        token_list.add(new Token("", "", TokenType.ENDLINE, id_cnter, line_num));
+        token_list.add(new Token(" ", " ", TokenType.ENDLINE, id_cnter, line_num));
         id_cnter++;
     }
 

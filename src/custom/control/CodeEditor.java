@@ -86,14 +86,23 @@ public class CodeEditor extends HTMLEditor {
             String code_text = SyntaxHighlighter.getInstance().startHighlighting();
             System.out.println("highlighting result");
             System.out.println(code_text);
+
+            System.gc();
             final String highlight_res = code_text;
+            final CodeEditor codeEditor = this;
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    requestFocus();
                     setHtmlText(highlight_res);
+                    System.gc();
+                    codeEditor.requestFocus();
+
                 }
             });
+            System.gc();
             this.saveFile();
+
             System.out.println("saving");
         }
     }

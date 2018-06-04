@@ -1,44 +1,20 @@
 <html dir="ltr">
 <head></head>
 <body contenteditable="true">
-<p><font color>CSEG </font><font color="#b3b31a">SEGMENT</font></p>
-<p><font color="#b3b31a">ASSUME </font><font color="#663366">CS</font><font color="#000000">:</font><font
-        color>CSEG</font></p>
-<p><font color>START</font><font color="#000000">: </font><font color="#1a3399">MOV </font><font
-        color="#663366">AH</font><font color="#000000">, </font><font color="#999933">01H</font></p>
-<p><font color="#1a3399">INT </font><font color="#999933">21H</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, '</font><font color="#999933">0'</font>
+<p></p>
+<p><font color="#1a3399" face="Consolas">mov </font><font color="#663366" face="Consolas">ax</font><font color="#000000"
+                                                                                                         face="Consolas">,</font><font
+        color face="Consolas">dsadf</font><font color face="Consolas"> </font></p>
+<p><font color="#1a3399" face="Consolas">add </font><font color="#663366" face="Consolas">ax</font><font color="#000000"
+                                                                                                         face="Consolas">,</font><font
+        color="#999933" face="Consolas">566</font><font color face="Consolas"> </font></p>
+<p><font color="#1a3399" face="Consolas">add &nbsp;&nbsp;&nbsp;</font><font color="#663366"
+                                                                            face="Consolas">ax</font><font
+        color="#000000" face="Consolas">,</font><font color="#999933" face="Consolas">566</font><font color
+                                                                                                      face="Consolas"> </font>
 </p>
-<p><font color>JB </font><font color>OTHER</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, '</font><font color="#999933">9'</font>
-</p>
-<p><font color>JBE </font><font color>NUM </font><font color="#999999">; '0'~'9' IS NUMBER</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, 'A'</font></p>
-<p><font color>JB </font><font color>OTHER</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, 'Z'</font></p>
-<p><font color>JBE </font><font color>ALPHA </font><font color="#999999">; 'A'~'Z'IS ALPHABET</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, 'a'</font></p>
-<p><font color>JB </font><font color>OTHER</font></p>
-<p><font color>CMP </font><font color="#663366">AL</font><font color="#000000">, 'z' </font><font color="#999999">;
-    'a'~'z'</font></p>
-<p><font color>JBE </font><font color>ALPHA</font></p>
-<p><font color="#1a3399">JMP </font><font color>OTHER</font></p>
-<p><font color>NUM</font><font color="#000000">: </font><font color="#1a3399">MOV </font><font color="#663366">DL</font><font
-        color="#000000">, 'D'</font></p>
-<p><font color="#1a3399">JMP </font><font color>OUTPUT</font></p>
-<p><font color>ALPHA</font><font color="#000000">: </font><font color="#1a3399">MOV </font><font
-        color="#663366">DL</font><font color="#000000">, 'L'</font></p>
-<p><font color="#1a3399">JMP </font><font color>OUTPUT</font></p>
-<p><font color>OTHER</font><font color="#000000">: </font><font color="#1a3399">MOV </font><font
-        color="#663366">DL</font><font color="#000000">, 'O'</font></p>
-<p><font color="#1a3399">JMP </font><font color>OUTPUT</font></p>
-<p><font color>OUTPUT</font><font color="#000000">: </font><font color="#1a3399">MOV </font><font
-        color="#663366">AH</font><font color="#000000">, </font><font color="#999933">02H</font></p>
-<p><font color="#1a3399">INT </font><font color="#999933">21H</font></p>
-<p><font color="#1a3399">MOV </font><font color="#663366">AH</font><font color="#000000">, </font><font color="#999933">4CH</font>
-</p>
-<p><font color="#1a3399">INT </font><font color="#999933">21H</font></p>
-<p><font color>CSEG </font><font color="#b3b31a">ENDS</font></p>
-<p><font color="#b3b31a">END </font><font color>START</font></p>
+<p><font color="#1a3399" face="Consolas">add </font><font color="#663366" face="Consolas">ax</font><font color="#000000"
+                                                                                                         face="Consolas">,</font><font
+        color="#663366" face="Consolas">bx</font><font color face="Consolas"> </font></p>
 </body>
 </html>
