@@ -1,25 +1,29 @@
 CSEG SEGMENT
-ASSUME CS:CSEG
-START: MOV AH, 01H
+START:
+MOV AH, 01H ;ASSUME CS:CSEG
 INT 21H
-CMP AL, '0'
+add ax,51h
+CMP AL, 0
 JB OTHER
 mov ax,axddd
 mov ax,56465 ;sdfasfdasdf
 mov ax,bx
 CMP AL, '9'
 JBE NUM ; '0'~'9' IS NUMBER
-CMP AL, 'A'
+CMP AL, 455
+OTHER:
 JB OTHER
-CMP AL, 'Z'
+CMP AL, BL
 add ax, 455
 JBE ALPHA ; 'A'~'Z'IS ALPHABET
-CMP AL, 'a';dfasdf
+CMP AL, 56;dfasdf
 JB OTHER
-CMP AL, 'z' ; 'a'~'z'
+CMP AL, 11H ; 'a'~'z'
 JBE ALPHA
 JMP OTHER
-NUM: MOV DL, 'D'
+NUM:
+MOV DL, 'D'
 JMP OUTPUT
-ALPHA: MOV DL, 'L'
-mov ax,bx
+ALPHA:
+MOV DL, 'L'
+MOV AX, BX

@@ -1,6 +1,4 @@
 
 mov ax,dsadf
-add ax,566
-sdasd
-add ax,bx
-dsda
+add ax,223;add ax,aa
+masd
